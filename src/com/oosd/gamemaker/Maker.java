@@ -1,25 +1,14 @@
 package com.oosd.gamemaker;
 
 import java.awt.Color;
-import java.awt.ComponentOrientation;
-import java.awt.Container;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-
-import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 import com.oosd.gamemaker.behavior.AutomaticMovement;
 import com.oosd.gamemaker.models.Ball;
 import com.oosd.gamemaker.models.Composite;
@@ -28,22 +17,19 @@ import com.oosd.gamemaker.models.Sprite;
 public class Maker extends JPanel implements ActionListener {
 	JPanel makerPanel = new JPanel();
 	Composite allItems;
-	
 	Sprite currentSprite;
 	int x,y,dx,dy;
 	String boundaryReaction;
 	ArrayList<String> keys = new ArrayList<String>() ;
 	ArrayList<String> manualMovement = new ArrayList<String>() ;
 	ArrayList<JTextField> textboxes = new ArrayList<JTextField>() ;
-	ArrayList<JComboBox> comboBoxes = new ArrayList<JComboBox>() ;
+	ArrayList<JComboBox<String>> comboBoxes = new ArrayList<JComboBox<String>>() ;
 	ArrayList<JButton> buttons = new ArrayList<JButton>();
 	
 	public Maker() {
 		allItems = new Composite();
 		this.setLayout(null);
 	}
-
-	
 
 	public void addLabel(String message, int x, int y) {
 		JLabel label = new JLabel(message);
@@ -91,18 +77,6 @@ public class Maker extends JPanel implements ActionListener {
 		textboxes.add(textbox);
 		this.add(textbox);
 		
-		
-//		textbox.addKeyListener(new KeyAdapter() {
-//	         public void keyPressed(KeyEvent ke) {
-//	            String value = textbox.getText();
-//	            int l = value.length();
-//	            if (ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') {
-//	            	textbox.setEditable(true);
-//	            	textbox.setText("");
-//	            } 
-//	         }
-//	      });
-		
 	}
 	
 	public void addButtonToPanel(String name, int x, int y) {
@@ -113,6 +87,7 @@ public class Maker extends JPanel implements ActionListener {
 		this.add(button);
 		buttons.add(button);
 	}
+	
 	public void addSprite() {
 		String x = textboxes.get(0).getText();
 		String y = textboxes.get(1).getText();
@@ -120,14 +95,27 @@ public class Maker extends JPanel implements ActionListener {
 		String dy = textboxes.get(3).getText();
 		Sprite newSprite;
 		int componentIndex = comboBoxes.get(0).getSelectedIndex();
+		int boundaryBehavior = comboBoxes.get(1).getSelectedIndex();
+		System.out.println(x+","+y);
 		if(componentIndex == 0) {
+			
 			newSprite = new Ball(Color.BLUE, Integer.parseInt(x), Integer.parseInt(y), 10, 10,Integer.parseInt(dx),Integer.parseInt(dy));
 			newSprite.setMovement(new AutomaticMovement());
+			if(boundaryBehavior ==0) {
+				//set boundary behavior to bounce 
+				//newSprite.setBoundaryMovement(boundaryBehavior);
+			}
+			else if(boundaryBehavior == 1) {
+				//rotate
+			}
+			else if(boundaryBehavior == 2) {
+				//vanish
+			}
 			allItems.add(newSprite);
+			
 		}
-		
-		
 	}
+	
 	public Composite getAllItems() {
 		return allItems;
 	}
@@ -138,7 +126,6 @@ public class Maker extends JPanel implements ActionListener {
 		combo.setMaximumSize(combo.getPreferredSize());
 		comboBoxes.add(combo);
 		this.add(combo);
-
 	}
 	
 	@Override

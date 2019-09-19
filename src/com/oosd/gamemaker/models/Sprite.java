@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import com.oosd.gamemaker.Playground;
+import com.oosd.gamemaker.behavior.BoundaryBehavior;
 import com.oosd.gamemaker.behavior.Movement;
 import com.oosd.gamemaker.behavior.Reaction;
 
@@ -15,10 +16,10 @@ public abstract class Sprite {
 	private boolean isGamePaused = false;
 	private int dx = 1;
 	private int dy = 1;
-	private int x,y;
+	protected int x,y;
 	protected String name;
 	protected int height, width;
-	
+	protected BoundaryBehavior boundaryBehavior;
 	public abstract void update(int x, int y);
 	public abstract void draw(Graphics2D g2d);
 	public String getName() {
@@ -63,6 +64,9 @@ public abstract class Sprite {
 		for(Movement movement : movements) {
 			movement.move(this, playground);
 		}
+	}
+	public void setBoundaryMovement(BoundaryBehavior boundaryBehavior) {
+		this.boundaryBehavior = boundaryBehavior;
 	}
 
 	

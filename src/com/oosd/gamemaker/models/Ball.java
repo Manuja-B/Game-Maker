@@ -4,10 +4,11 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
+import com.oosd.gamemaker.behavior.BoundaryBehavior;
 import com.oosd.gamemaker.behavior.Movement;
 
 public class Ball extends Sprite {
-	private int x,y;
+	//private int x,y;
 	private Color color;
 	private int countPosX = 0;
 	private int countPosY = 0;
@@ -17,6 +18,7 @@ public class Ball extends Sprite {
 	private int initialPositionX;
 	private int initialPositionY;
 	public static int counter = 0;
+	
 	
 	public Ball(Color color, int initialPositionX, int initialPositionY, int ballWidth, int ballHeight,int dx, int dy) {
 		this.color = color;
@@ -45,6 +47,7 @@ public class Ball extends Sprite {
 		g2d.fillOval(x, y, height, width);
 		
 	}
+	
 	
 
 }
