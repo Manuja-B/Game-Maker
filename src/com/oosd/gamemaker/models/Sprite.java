@@ -22,6 +22,9 @@ public abstract class Sprite {
 	protected BoundaryBehavior boundaryBehavior;
 	public abstract void update(int x, int y);
 	public abstract void draw(Graphics2D g2d);
+	
+	
+	
 	public String getName() {
 		return name;
 	}
@@ -64,9 +67,20 @@ public abstract class Sprite {
 		for(Movement movement : movements) {
 			movement.move(this, playground);
 		}
+		//boundaryBehavior.reactWithBoundary(this, playground);
 	}
 	public void setBoundaryMovement(BoundaryBehavior boundaryBehavior) {
 		this.boundaryBehavior = boundaryBehavior;
+	}
+	public abstract void undo();
+
+	public abstract void replay();
+
+	public abstract void endReplay();
+
+	public abstract void storeHistory();
+	public void pause() {
+		this.isGamePaused = !isGamePaused;
 	}
 
 	
