@@ -10,8 +10,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import com.oosd.gamemaker.behavior.AutomaticMovement;
+import com.oosd.gamemaker.behavior.ClockTick;
 import com.oosd.gamemaker.models.Ball;
 import com.oosd.gamemaker.models.Composite;
+import com.oosd.gamemaker.models.DigitalClock;
 import com.oosd.gamemaker.models.Sprite;
 
 public class Maker extends JPanel implements ActionListener {
@@ -120,8 +122,15 @@ public class Maker extends JPanel implements ActionListener {
 			else if(boundaryBehavior == 2) {
 				//vanish
 			}
+			
 			allItems.add(newSprite);
 			
+		}
+		
+		else if(componentIndex == 3) {
+			newSprite = new DigitalClock(Integer.parseInt(x), Integer.parseInt(y));
+			newSprite.setMovement(new ClockTick());
+			allItems.add(newSprite);
 		}
 	}
 	
