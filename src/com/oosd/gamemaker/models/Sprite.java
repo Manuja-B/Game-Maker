@@ -67,7 +67,7 @@ public abstract class Sprite {
 		for(Movement movement : movements) {
 			movement.move(this, playground);
 		}
-		//boundaryBehavior.reactWithBoundary(this, playground);
+		boundaryBehavior.reactWithBoundary(this, playground);
 	}
 	public void setBoundaryMovement(BoundaryBehavior boundaryBehavior) {
 		this.boundaryBehavior = boundaryBehavior;

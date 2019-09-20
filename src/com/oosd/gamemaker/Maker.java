@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import com.oosd.gamemaker.behavior.AutomaticMovement;
+import com.oosd.gamemaker.behavior.BoundaryBounce;
 import com.oosd.gamemaker.models.Ball;
 import com.oosd.gamemaker.models.Composite;
 import com.oosd.gamemaker.models.Sprite;
@@ -112,7 +113,7 @@ public class Maker extends JPanel implements ActionListener {
 			newSprite.setMovement(new AutomaticMovement());
 			if(boundaryBehavior ==0) {
 				//set boundary behavior to bounce 
-				//newSprite.setBoundaryMovement(boundaryBehavior);
+				   newSprite.setBoundaryMovement(new BoundaryBounce());
 			}
 			else if(boundaryBehavior == 1) {
 				//rotate
