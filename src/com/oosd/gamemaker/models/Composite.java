@@ -1,8 +1,9 @@
 package com.oosd.gamemaker.models;
-
+import com.oosd.gamemaker.commmands.Command;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class Composite extends Sprite {
 	List<Sprite> sprites;
@@ -13,7 +14,7 @@ public class Composite extends Sprite {
 	@Override
 	public void update(int x, int y) {
 		// TODO Auto-generated method stub
-
+			
 	}
 
 	@Override
@@ -29,6 +30,30 @@ public class Composite extends Sprite {
 	}
 	public List<Sprite> getAllSprites() {
 		return sprites;
+	}
+	public void notifyComponents(Command command) {
+		// TODO Auto-generated method stub
+		command.execute();
+	}
+	@Override
+	public void undo() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void replay() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void endReplay() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void storeHistory() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
