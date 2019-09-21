@@ -1,6 +1,7 @@
 package com.oosd.gamemaker;
 
 import java.awt.Color;
+
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
@@ -23,6 +24,8 @@ import com.oosd.gamemaker.behavior.ClockTick;
 import com.oosd.gamemaker.models.Ball;
 import com.oosd.gamemaker.models.Composite;
 import com.oosd.gamemaker.models.DigitalClock;
+
+import com.oosd.gamemaker.models.Picture;
 import com.oosd.gamemaker.models.Rectangle;
 import com.oosd.gamemaker.models.Sprite;
 
@@ -52,7 +55,7 @@ public class Maker extends JPanel implements ActionListener {
 	public void makeGame() {
 		addLabel("Add a new Component", 10, 10);
 		addLabel("Component Type", 10, 30);
-		addCombobox(new String[] { "Ball", "Paddle", "Brick", "Clock" }, 200, 30); //2
+		addCombobox(new String[] { "Ball", "Paddle", "Brick", "Clock","Image" }, 200, 30); //2
 		addLabel("Location", 10, 50);
 		addLabel("x", 180, 50); 
 		addTextBox(200,50);  
@@ -150,6 +153,10 @@ public class Maker extends JPanel implements ActionListener {
 		else if(componentIndex == 3) {
 			newSprite = new DigitalClock(Integer.parseInt(x), Integer.parseInt(y));
 			newSprite.setAutomaticMovement(new ClockTick());
+			allItems.add(newSprite);
+		}
+		else if(componentIndex == 4) {
+			newSprite = new Picture( Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(height), Integer.parseInt(width),Integer.parseInt(dx),Integer.parseInt(dy));
 			allItems.add(newSprite);
 		}
 	}
