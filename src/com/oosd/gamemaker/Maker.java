@@ -1,6 +1,7 @@
 package com.oosd.gamemaker;
 
 import java.awt.Color;
+
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
@@ -19,12 +20,15 @@ import com.oosd.gamemaker.behavior.ManualRight;
 import com.oosd.gamemaker.behavior.ManualUp;
 import com.oosd.gamemaker.behavior.Movement;
 import com.oosd.gamemaker.behavior.BoundaryBounce;
+import com.oosd.gamemaker.behavior.BoundaryRotate;
 import com.oosd.gamemaker.behavior.ClockTick;
 import com.oosd.gamemaker.behavior.ManualDown;
 import com.oosd.gamemaker.behavior.ManualLeft;
 import com.oosd.gamemaker.models.Ball;
 import com.oosd.gamemaker.models.Composite;
 import com.oosd.gamemaker.models.DigitalClock;
+
+import com.oosd.gamemaker.models.Picture;
 import com.oosd.gamemaker.models.Rectangle;
 import com.oosd.gamemaker.models.Sprite;
 
@@ -126,6 +130,7 @@ public class Maker extends JPanel implements ActionListener {
 			}
 			else if(boundaryBehavior == 1) {
 				//rotate
+				newSprite.setBoundaryMovement(new BoundaryRotate());
 			}
 			else if(boundaryBehavior == 2) {
 				//vanish
@@ -157,6 +162,12 @@ public class Maker extends JPanel implements ActionListener {
 			newSprite.setAutomaticMovement(new ClockTick());
 			
 		}
+		
+		else if(componentIndex == 4) {
+			newSprite = new Picture( Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(height), Integer.parseInt(width),Integer.parseInt(dx),Integer.parseInt(dy));
+			allItems.add(newSprite);
+		}
+		
 		for(Movement manual :manualMovements) {
 			newSprite.setManualMovement(manual);
 		}
@@ -203,8 +214,6 @@ public class Maker extends JPanel implements ActionListener {
 			KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
 	        manager.addKeyEventDispatcher((KeyEventDispatcher) spriteManual);	
 	        manualMovements.add(spriteManual);
-	        	
-			
 		}
 	}
 	

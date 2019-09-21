@@ -1,6 +1,7 @@
 package com.oosd.gamemaker;
 
 import java.awt.Color;
+import java.awt.Image;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,6 +14,7 @@ public class Main extends JPanel {
 	public static void main(String[] args) {
 		final int frameWidth = 1200;
 		final int frameHeight = 800;
+		
 		JFrame frame = new JFrame();
 		
 		//playgroundPanel.setBackground(Color.BLACK);
