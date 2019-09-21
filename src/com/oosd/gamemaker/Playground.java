@@ -80,6 +80,7 @@ public class Playground extends JPanel{
 		
 		while(true){
 			this.allItems = maker.getAllItems();
+			//System.out.println(allItems.getAllSprites().size());
 			for(Sprite sprite: allItems.getAllSprites()) {
 				
 				sprite.move(this);

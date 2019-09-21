@@ -16,11 +16,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import com.oosd.gamemaker.behavior.AutomaticMovement;
 import com.oosd.gamemaker.behavior.ManualMovement;
+import com.oosd.gamemaker.behavior.ManualRight;
 import com.oosd.gamemaker.behavior.ManualUp;
 import com.oosd.gamemaker.behavior.Movement;
 import com.oosd.gamemaker.behavior.BoundaryBounce;
 import com.oosd.gamemaker.behavior.BoundaryRotate;
 import com.oosd.gamemaker.behavior.ClockTick;
+import com.oosd.gamemaker.behavior.ManualDown;
+import com.oosd.gamemaker.behavior.ManualLeft;
 import com.oosd.gamemaker.models.Ball;
 import com.oosd.gamemaker.models.Composite;
 import com.oosd.gamemaker.models.DigitalClock;
@@ -32,13 +35,13 @@ import com.oosd.gamemaker.models.Sprite;
 public class Maker extends JPanel implements ActionListener {
 	JPanel makerPanel = new JPanel();
 	Composite allItems;
-	Sprite currentSprite;
+	Sprite newSprite;
 	int x,y,dx,dy;
 	String boundaryReaction;
 	ArrayList<String> keys = new ArrayList<String>() ;
-	ArrayList<String> manualMovement = new ArrayList<String>() ;
+	ArrayList<Movement> manualMovements = new ArrayList<Movement>() ;
 	ArrayList<JTextField> textboxes = new ArrayList<JTextField>() ;
-	ArrayList<JComboBox<String>> comboBoxes = new ArrayList<JComboBox<String>>() ;
+	ArrayList<JComboBox<ComboItem>> comboBoxes = new ArrayList<JComboBox<ComboItem>>() ;
 	ArrayList<JButton> buttons = new ArrayList<JButton>();
 	
 	public Maker() {
@@ -55,7 +58,7 @@ public class Maker extends JPanel implements ActionListener {
 	public void makeGame() {
 		addLabel("Add a new Component", 10, 10);
 		addLabel("Component Type", 10, 30);
-		addCombobox(new String[] { "Ball", "Paddle", "Brick", "Clock","Image" }, 200, 30); //2
+		addCombobox(new ComboItem[] { new ComboItem("Ball", 0) , new ComboItem("Rectangle", 1) , new ComboItem("Image", 2) , new ComboItem("Clock", 3)  }, 200, 30); //2
 		addLabel("Location", 10, 50);
 		addLabel("x", 180, 50); 
 		addTextBox(200,50);  
@@ -74,20 +77,18 @@ public class Maker extends JPanel implements ActionListener {
 		addLabel("dy", 250, 90); //11
 		addTextBox(270,90); //12
 		addLabel("Boundary Reaction", 10, 110); //13
-		addCombobox(new String[] { "Bounce", "Rotate", "Vanish" }, 200, 110); //14
+		addCombobox(new ComboItem[] { new ComboItem("Bounce", 0) , new ComboItem("Rotate", 1) , new ComboItem("Vanish", 2)}, 200, 110); //2
 		addLabel("Keypress", 10, 170); //15
-		addCombobox(new String[] { "Up","Down"}, 200, 170); //16
+		addCombobox(new ComboItem[] { new ComboItem("Up", KeyEvent.VK_UP) , new ComboItem("Down", KeyEvent.VK_DOWN) , new ComboItem("Left",  KeyEvent.VK_LEFT), new ComboItem("Right", KeyEvent.VK_RIGHT)}, 200, 170); //2
 		addLabel("Movement", 10, 190); //17 
-		addCombobox(new String[] { "Up","Down"}, 200, 190); //18
 		addButtonToPanel("Add Manual Movement", 10, 210); //19
+		addCombobox(new ComboItem[] { new ComboItem("Up", 0) , new ComboItem("Down", 1) , new ComboItem("Left", 2), new ComboItem("Right", 3)}, 200, 190); //2
 		addLabel("Reactions", 10, 260); //20
 		ArrayList<Sprite> items =  (ArrayList)allItems.getAllSprites(); 
 		String componentNames[] = new String[items.size()]; 
 		for(int i = 0; i < items.size();i++) {
 			componentNames[i] = items.get(i).getName();
 		}
-		addCombobox(componentNames, 10, 280); //21
-		addCombobox(new String[] { "Bounce Back", "Explode"}, 150, 280); //22
 		addButtonToPanel("Add Reaction", 10, 300); //23
 		addButtonToPanel("Add Component", 10, 320); //24
 	}
@@ -117,17 +118,13 @@ public class Maker extends JPanel implements ActionListener {
 		String width = textboxes.get(3).getText();
 		String dx = textboxes.get(4).getText();
 		String dy = textboxes.get(5).getText();
-		Sprite newSprite;
 		int componentIndex = comboBoxes.get(0).getSelectedIndex();
 		int boundaryBehavior = comboBoxes.get(1).getSelectedIndex();
-		System.out.println(x+","+y);
-		System.out.println("Hey"+componentIndex);
 		if(componentIndex == 0) {
 
 			newSprite = new Ball(Color.BLUE, Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(height), Integer.parseInt(width),Integer.parseInt(dx),Integer.parseInt(dy));
-			//newSprite.setManualMovement(new AutomaticMovement());
 			newSprite.setAutomaticMovement(new AutomaticMovement());
-			if(boundaryBehavior ==0) {
+			if(boundaryBehavior == 0) {
 				//set boundary behavior to bounce 
 				   newSprite.setBoundaryMovement(new BoundaryBounce());
 			}
@@ -138,35 +135,52 @@ public class Maker extends JPanel implements ActionListener {
 			else if(boundaryBehavior == 2) {
 				//vanish
 			}
-			allItems.add(newSprite);
+			for(Movement manual :manualMovements) {
+				newSprite.setManualMovement(manual);
+			}
 		}
 		
 		else if(componentIndex == 1) {
-			newSprite = new Rectangle(Color.RED, Integer.parseInt(x), Integer.parseInt(y), 10, 10);
-			Movement spriteManual = new ManualUp(KeyEvent.VK_UP);
-			newSprite.setManualMovement(spriteManual);
-			KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
-	        manager.addKeyEventDispatcher((KeyEventDispatcher) spriteManual);	
-			
-			allItems.add(newSprite);
+			newSprite = new Rectangle(Color.RED, Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(height), Integer.parseInt(width),Integer.parseInt(dx),Integer.parseInt(dy) );
+			newSprite.setAutomaticMovement(new AutomaticMovement());
+			if(boundaryBehavior == 0) {
+				//set boundary behavior to bounce 
+				   newSprite.setBoundaryMovement(new BoundaryBounce());
+			}
+			else if(boundaryBehavior == 1) {
+				//rotate
+			}
+			else if(boundaryBehavior == 2) {
+				//vanish
+			}
+			for(Movement manual :manualMovements) {
+				newSprite.setManualMovement(manual);
+			}
 		}
 		else if(componentIndex == 3) {
 			newSprite = new DigitalClock(Integer.parseInt(x), Integer.parseInt(y));
 			newSprite.setAutomaticMovement(new ClockTick());
-			allItems.add(newSprite);
+			
 		}
+		
 		else if(componentIndex == 4) {
 			newSprite = new Picture( Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(height), Integer.parseInt(width),Integer.parseInt(dx),Integer.parseInt(dy));
 			allItems.add(newSprite);
 		}
+		
+		for(Movement manual :manualMovements) {
+			newSprite.setManualMovement(manual);
+		}
+		allItems.add(newSprite);
+		manualMovements.clear();
 	}
 	
 	public Composite getAllItems() {
 		return allItems;
 	}
 
-	public void addCombobox(String labels[], int x, int y) {
-		JComboBox<String> combo = new JComboBox<>(labels);
+	public void addCombobox(ComboItem items[], int x, int y) {
+		JComboBox<ComboItem> combo = new JComboBox<ComboItem>(items);
 		combo.setBounds(x, y, 100, 20);
 		combo.setMaximumSize(combo.getPreferredSize());
 		comboBoxes.add(combo);
@@ -175,13 +189,59 @@ public class Maker extends JPanel implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		for (int i = 0; i < buttons.size(); i++) {
-			if (arg0.getSource() == buttons.get(2)) {
-				
-				addSprite();
-			}
-			else if(arg0.getSource() == buttons.get(0)) {
-			}
+		if (arg0.getSource() == buttons.get(2)) {
+			addSprite();
 		}
+		else if(arg0.getSource() == buttons.get(0)) {
+			Object keyItem = comboBoxes.get(2).getSelectedItem();
+			int keyCode = ((ComboItem)keyItem).getValue();
+			Movement spriteManual = null;
+			Object actionItem = comboBoxes.get(3).getSelectedItem();
+			int itemCode = ((ComboItem)actionItem).getValue();
+			if(itemCode == 0) {
+				 spriteManual = new ManualUp(keyCode);
+			}
+			else if(itemCode == 1) {
+				 spriteManual = new ManualDown(keyCode);
+			}
+			else if(itemCode == 2) {
+				spriteManual = new ManualLeft(keyCode);
+			}
+			else if(itemCode == 3) {
+			   spriteManual = new ManualRight(keyCode);
+			}
+			
+			KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+	        manager.addKeyEventDispatcher((KeyEventDispatcher) spriteManual);	
+	        manualMovements.add(spriteManual);
+		}
+	}
+	
+	class ComboItem
+	{
+	    private String label;
+	    private int value;
+
+	    public ComboItem(String label, int value)
+	    {
+	        this.label = label;
+	        this.value = value;
+	    }
+
+	    @Override
+	    public String toString()
+	    {
+	        return label;
+	    }
+
+	    public String getKey()
+	    {
+	        return label;
+	    }
+
+	    public int getValue()
+	    {
+	        return value;
+	    }
 	}
 }
