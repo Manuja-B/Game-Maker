@@ -3,8 +3,14 @@ package com.oosd.gamemaker;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.oosd.gamemaker.behavior.Movement;
@@ -20,16 +26,31 @@ import com.oosd.gamemaker.models.Composite;
 import com.oosd.gamemaker.models.Sprite;
 
 public class Playground extends JPanel{
+	
 	Maker maker;
 	JPanel controller;
+	Image image;
 	Composite allItems = new Composite();
-	public Playground(Maker maker) {
-		this.setBackground(Color.WHITE);
+	
+	public Playground(Maker maker)  {
+		//this.setBackground(Color.WHITE);
 		this.maker = maker;
 		this.allItems = maker.getAllItems();
 		this.setLayout(null);
 		
+		File sourceimage = new File("D:\\Fall 2019\\OOSD Assignment\\Assignment 4\\new asgn4\\Team2-Week4\\src\\com\\oosd\\gamemaker\\abc.jpg");
+
+		try {
+			image = ImageIO.read(sourceimage);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	 
 	}
+	
+	
+	
 //	public static Graphics2D graphobj = null;
 //	public void startGame() {
 //		this.setLayout(null);
@@ -38,8 +59,13 @@ public class Playground extends JPanel{
 	public void startGame() {
 		JPanel border  = new FlowLayoutClass();
 		//JPanel border = new BorderLayoutClass();
+		
+		
+		 border.setOpaque(false);
+		
 		border.setBounds(0,600,800,150);
-		border.setBackground(Color.GRAY);
+		//border.setBackground(Color.GRAY);		
+		
 		ButtonContainer buttonContainer = new ButtonContainer( allItems,(ControllerLayout) border);
 		this.add(border);
 
@@ -49,6 +75,7 @@ public class Playground extends JPanel{
 		buttonContainer.addButton("Undo", new UndoCommand(allItems.getAllSprites()), (ControllerLayout)border);
 		buttonContainer.addButton("Save", new SaveCommand(allItems.getAllSprites()), (ControllerLayout)border);
 		buttonContainer.addButton("Load", new LoadCommand(allItems.getAllSprites()), (ControllerLayout)border);
+		
 		
 		
 		while(true){
@@ -78,7 +105,11 @@ public class Playground extends JPanel{
 	}
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-	    graphobj = (Graphics2D) g;
+
+	    graphobj = (Graphics2D) g; 
+	    
+	    graphobj.drawImage(image,0,0,800,600,this);
+	    
 	    for(Sprite sprite: allItems.getAllSprites()) {
 	    	sprite.draw(graphobj);
 	    }
