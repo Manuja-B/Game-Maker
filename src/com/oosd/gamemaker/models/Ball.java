@@ -47,6 +47,26 @@ public class Ball extends Sprite {
 		g2d.fillOval(x, y, height, width);
 		
 	}
+	@Override
+	public void undo() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void replay() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void endReplay() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void storeHistory() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 
