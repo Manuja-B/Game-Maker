@@ -1,8 +1,12 @@
 package com.oosd.gamemaker;
 
 import java.awt.Color;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -10,8 +14,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import com.oosd.gamemaker.behavior.AutomaticMovement;
+import com.oosd.gamemaker.behavior.ManualMovement;
+import com.oosd.gamemaker.behavior.ManualUp;
+import com.oosd.gamemaker.behavior.Movement;
 import com.oosd.gamemaker.models.Ball;
 import com.oosd.gamemaker.models.Composite;
+import com.oosd.gamemaker.models.Rectangle;
 import com.oosd.gamemaker.models.Sprite;
 
 public class Maker extends JPanel implements ActionListener {
@@ -97,12 +105,12 @@ public class Maker extends JPanel implements ActionListener {
 		int componentIndex = comboBoxes.get(0).getSelectedIndex();
 		int boundaryBehavior = comboBoxes.get(1).getSelectedIndex();
 		System.out.println(x+","+y);
+		System.out.println("Hey"+componentIndex);
 		if(componentIndex == 0) {
-			
+
 			newSprite = new Ball(Color.BLUE, Integer.parseInt(x), Integer.parseInt(y), 10, 10,Integer.parseInt(dx),Integer.parseInt(dy));
-			newSprite.setMovement(new AutomaticMovement());
+			newSprite.setManualMovement(new AutomaticMovement());
 			if(boundaryBehavior ==0) {
-				//set boundary behavior to bounce 
 				//newSprite.setBoundaryMovement(boundaryBehavior);
 			}
 			else if(boundaryBehavior == 1) {
@@ -112,7 +120,16 @@ public class Maker extends JPanel implements ActionListener {
 				//vanish
 			}
 			allItems.add(newSprite);
+		}
+		
+		else if(componentIndex == 1) {
+			newSprite = new Rectangle(Color.RED, Integer.parseInt(x), Integer.parseInt(y), 10, 10);
+			Movement spriteManual = new ManualUp(KeyEvent.VK_UP);
+			newSprite.setManualMovement(spriteManual);
+			KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+	        manager.addKeyEventDispatcher((KeyEventDispatcher) spriteManual);	
 			
+			allItems.add(newSprite);
 		}
 	}
 	
@@ -132,7 +149,10 @@ public class Maker extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		for (int i = 0; i < buttons.size(); i++) {
 			if (arg0.getSource() == buttons.get(2)) {
+				
 				addSprite();
+			}
+			else if(arg0.getSource() == buttons.get(0)) {
 			}
 		}
 	}

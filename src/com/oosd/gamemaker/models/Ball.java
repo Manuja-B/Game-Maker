@@ -32,7 +32,7 @@ public class Ball extends Sprite {
 		this.totalCount = 0;
 		this.setDx(dx);
 		this.setDy(dy);
-		this.movements = new ArrayList<Movement>();
+		this.manualMovements = new ArrayList<Movement>();
 		
 	}
 	@Override

@@ -10,8 +10,9 @@ import com.oosd.gamemaker.behavior.Movement;
 import com.oosd.gamemaker.behavior.Reaction;
 
 public abstract class Sprite {
-	protected ArrayList<Movement>  movements;
+	protected ArrayList<Movement>  manualMovements = new ArrayList<Movement>();
 	protected ArrayList<Reaction> reactions;
+	private Movement automaticMovement;
 	private boolean isReplay = false;
 	private boolean isGamePaused = false;
 	private int dx = 1;
@@ -53,21 +54,30 @@ public abstract class Sprite {
 	public void setDy(int dy) {
 		this.dy = dy;
 	}
-	public void setMovement(Movement movement) {
-		this.movements.add(movement);
+	public void setManualMovement(Movement movement) {
+		this.manualMovements.add(movement);
 	}
+	
 	public void setReaction(Reaction reaction) {
 		this.reactions.add(reaction);
 	}
 
 	public void move(Playground playground) {
-		for(Movement movement : movements) {
+		for(Movement movement : getManualMovements()) {
 			movement.move(this, playground);
 		}
 	}
 	public void setBoundaryMovement(BoundaryBehavior boundaryBehavior) {
 		this.boundaryBehavior = boundaryBehavior;
 	}
-
+	public ArrayList<Movement> getManualMovements() {
+		return manualMovements;
+	}
+	public Movement getAutomaticMovement() {
+		return automaticMovement;
+	}
+	public void setAutomaticMovement(Movement automaticMovement) {
+		this.automaticMovement = automaticMovement;
+	}
 	
 }
