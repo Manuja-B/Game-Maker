@@ -23,8 +23,7 @@ public class ManualUp implements Movement, KeyEventDispatcher {
 		// TODO Auto-generated method stub
 		int positionY = sprite.getY();
 		int positionX = sprite.getX();;
-		int maxX = playground.getHeight();
-		int dy = sprite.getDy();
+		int dy = 1;
 		if (isUp && positionY > 0) {
 			positionY -= dy;
 		}
@@ -34,13 +33,10 @@ public class ManualUp implements Movement, KeyEventDispatcher {
 	@Override
 	public boolean dispatchKeyEvent(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println(e.getKeyCode());
 		if(e.getKeyCode() == key) {
 			if (e.getID() == KeyEvent.KEY_PRESSED) {
-	            System.out.println("press");
 	            this.isUp = true;
 	        } else if (e.getID() == KeyEvent.KEY_RELEASED) {
-	            System.out.println("release");
 	            this.isUp = false;
 	        } 
 		}

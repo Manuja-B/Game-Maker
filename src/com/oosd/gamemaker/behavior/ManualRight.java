@@ -1,5 +1,6 @@
 package com.oosd.gamemaker.behavior;
 
+import java.awt.KeyEventDispatcher;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -7,30 +8,40 @@ import javax.swing.JPanel;
 
 import com.oosd.gamemaker.models.Sprite;
 
-public class ManualRight implements Movement, KeyListener {
+public class ManualRight implements Movement, KeyEventDispatcher {
 
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-
+	Boolean isRight = false;
+	int key;
+	
+	public ManualRight(int key) {
+		super();
+		this.key = key;
 	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
 	@Override
 	public void move(Sprite sprite, JPanel playground) {
 		// TODO Auto-generated method stub
+		int positionY = sprite.getY();
+		int positionX = sprite.getX();
+		int maxRight = playground.getWidth();
+		int endposition = positionX + sprite.getWidth();
+		int dx = 1;
+		if (isRight && endposition < maxRight) {
+			positionX += dx;
+		}
+		sprite.update(positionX, positionY);
+	}
 
+	@Override
+	public boolean dispatchKeyEvent(KeyEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getKeyCode() == key) {
+			if (e.getID() == KeyEvent.KEY_PRESSED) {
+	            this.isRight = true;
+	        } else if (e.getID() == KeyEvent.KEY_RELEASED) {
+	            this.isRight = false;
+	        } 
+		}
+		return false;
 	}
 
 }

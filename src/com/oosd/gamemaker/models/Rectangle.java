@@ -16,12 +16,14 @@ public class Rectangle extends Sprite{
 	Color color;
 	public static int counter = 0;
 	
-	public Rectangle(Color color, int initialPositionX, int initialPositionY, int paddleWidth, int paddleHeight) {
+	public Rectangle(Color color, int initialPositionX, int initialPositionY, int paddleWidth, int paddleHeight, int dx, int dy) {
 		this.color = color;
 		this.initialPositionX = initialPositionX;
 		this.initialPositionY = initialPositionY;
 		this.width = paddleWidth;
 		this.height = paddleHeight;
+		this.setDx(dx);
+		this.setDy(dy);
 		this.update(initialPositionX, initialPositionY);
 		
 	}
