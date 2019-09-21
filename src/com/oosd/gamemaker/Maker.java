@@ -18,6 +18,7 @@ import com.oosd.gamemaker.behavior.ManualMovement;
 import com.oosd.gamemaker.behavior.ManualUp;
 import com.oosd.gamemaker.behavior.Movement;
 import com.oosd.gamemaker.behavior.BoundaryBounce;
+import com.oosd.gamemaker.behavior.BoundaryRotate;
 import com.oosd.gamemaker.behavior.ClockTick;
 import com.oosd.gamemaker.models.Ball;
 import com.oosd.gamemaker.models.Composite;
@@ -129,6 +130,7 @@ public class Maker extends JPanel implements ActionListener {
 			}
 			else if(boundaryBehavior == 1) {
 				//rotate
+				newSprite.setBoundaryMovement(new BoundaryRotate());
 			}
 			else if(boundaryBehavior == 2) {
 				//vanish
