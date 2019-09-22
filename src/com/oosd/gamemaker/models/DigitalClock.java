@@ -17,6 +17,7 @@ public class DigitalClock extends Sprite{
 //	private int minutes;
 	private int positionX;
 	private int positionY;
+	private static int counter = 0;
 	int currMinutes, currSeconds;
 	
 	public DigitalClock(int positionX, int positionY)
@@ -25,6 +26,9 @@ public class DigitalClock extends Sprite{
 		this.positionY = positionY; 
 		this.update(0,0); // initializing minutes and seconds
 //		this.movements = new ArrayList<Movement>();
+		StringBuilder strName = new StringBuilder("Clock ");
+		strName.append(++counter);
+		this.name = strName.toString();
 	}
 	
 		@Override

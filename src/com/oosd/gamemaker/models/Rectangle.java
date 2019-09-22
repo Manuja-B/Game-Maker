@@ -25,6 +25,9 @@ public class Rectangle extends Sprite{
 		this.setDx(dx);
 		this.setDy(dy);
 		this.update(initialPositionX, initialPositionY);
+		StringBuilder strName = new StringBuilder("Rectangle ");
+		strName.append(++counter);
+		this.name = strName.toString();
 		
 	}
 	@Override

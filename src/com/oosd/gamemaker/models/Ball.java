@@ -33,6 +33,12 @@ public class Ball extends Sprite {
 		this.setDx(dx);
 		this.setDy(dy);
 		this.manualMovements = new ArrayList<Movement>();
+		//counter++;
+//		this.name = StringBuilder("Ball",+counter);
+		StringBuilder strName = new StringBuilder("Ball ");
+		strName.append(++counter);
+		this.name = strName.toString();
+	
 		
 	}
 	@Override
