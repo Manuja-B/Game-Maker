@@ -1,7 +1,7 @@
 package com.oosd.gamemaker;
 
 import java.awt.Color;
-
+import java.awt.Dimension;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
@@ -11,6 +11,7 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -49,66 +50,67 @@ public class Maker extends JPanel implements ActionListener {
 		this.setLayout(null);
 	}
 
-	public void addLabel(String message, int x, int y) {
+	public void addLabel(String message, int x, int y, JPanel panel) {
 		JLabel label = new JLabel(message);
 		label.setBounds(x, y, 200, 20);
-		this.add(label);
+		panel.add(label);
 	}
 
 	public void makeGame() {
-		addLabel("Add a new Component", 10, 10);
-		addLabel("Component Type", 10, 30);
-		addCombobox(new ComboItem[] { new ComboItem("Ball", 0) , new ComboItem("Rectangle", 1) , new ComboItem("Image", 2) , new ComboItem("Clock", 3)  }, 200, 30); //2
-		addLabel("Location", 10, 50);
-		addLabel("x", 180, 50); 
-		addTextBox(200,50);  
-		addLabel("y", 280, 50); 
-		addTextBox(300,50);
+		addLabel("Add a new Component", 10, 10,this);
+		addLabel("Component Type", 10, 30,this);
+		addCombobox(new ComboItem[] { new ComboItem("Ball", 0) , new ComboItem("Rectangle", 1) , new ComboItem("Image", 2) , new ComboItem("Clock", 3)  }, 200, 30,this); //2
+		addLabel("Location", 10, 50,this);
+		addLabel("x", 180, 50,this); 
+		addTextBox(200,50,this);  
+		addLabel("y", 280, 50,this); 
+		addTextBox(300,50,this);
 		
-		addLabel("Dimensions", 10, 70);
-		addLabel("Height", 140, 70); //4
-		addTextBox(200,70);  //5
-		addLabel("Width", 250, 70); //6
-		addTextBox(300,70); //7
+		addLabel("Dimensions", 10, 70,this);
+		addLabel("Height", 140, 70,this); //4
+		addTextBox(200,70,this);  //5
+		addLabel("Width", 250, 70,this); //6
+		addTextBox(300,70,this); //7
 		
-		addLabel("Automatic Movement", 10, 90 ); //8
-		addLabel("dx", 180, 90); //9
-		addTextBox(200,90); //10
-		addLabel("dy", 250, 90); //11
-		addTextBox(270,90); //12
-		addLabel("Boundary Reaction", 10, 110); //13
-		addCombobox(new ComboItem[] { new ComboItem("Bounce", 0) , new ComboItem("Rotate", 1) , new ComboItem("Vanish", 2)}, 200, 110); //2
-		addLabel("Keypress", 10, 170); //15
-		addCombobox(new ComboItem[] { new ComboItem("Up", KeyEvent.VK_UP) , new ComboItem("Down", KeyEvent.VK_DOWN) , new ComboItem("Left",  KeyEvent.VK_LEFT), new ComboItem("Right", KeyEvent.VK_RIGHT)}, 200, 170); //2
-		addLabel("Movement", 10, 190); //17 
-		addButtonToPanel("Add Manual Movement", 10, 210); //19
-		addCombobox(new ComboItem[] { new ComboItem("Up", 0) , new ComboItem("Down", 1) , new ComboItem("Left", 2), new ComboItem("Right", 3)}, 200, 190); //2
-		addLabel("Reactions", 10, 260); //20
+		addLabel("Automatic Movement", 10, 90,this ); //8
+		addLabel("dx", 180, 90,this); //9
+		addTextBox(200,90,this); //10
+		addLabel("dy", 250, 90,this); //11
+		addTextBox(270,90,this); //12
+		addLabel("Boundary Reaction", 10, 110,this); //13
+		addCombobox(new ComboItem[] { new ComboItem("Bounce", 0) , new ComboItem("Rotate", 1) , new ComboItem("Vanish", 2)}, 200, 110,this); //2
+		addLabel("Keypress", 10, 170,this); //15
+		addCombobox(new ComboItem[] { new ComboItem("Up", KeyEvent.VK_UP) , new ComboItem("Down", KeyEvent.VK_DOWN) , new ComboItem("Left",  KeyEvent.VK_LEFT), new ComboItem("Right", KeyEvent.VK_RIGHT)}, 200, 170,this); //2
+		addLabel("Movement", 10, 190,this); //17 
+		addButtonToPanel("Add Manual Movement", 10, 210,this); //19
+		addCombobox(new ComboItem[] { new ComboItem("Up", 0) , new ComboItem("Down", 1) , new ComboItem("Left", 2), new ComboItem("Right", 3)}, 200, 190,this); //2
+		addLabel("Reactions", 10, 260,this); //20
 		ArrayList<Sprite> items =  (ArrayList)allItems.getAllSprites(); 
 		String componentNames[] = new String[items.size()]; 
 		for(int i = 0; i < items.size();i++) {
 			componentNames[i] = items.get(i).getName();
 		}
-		addButtonToPanel("Add Reaction", 10, 300); //23
-		addButtonToPanel("Add Component", 10, 320); //24
+		addButtonToPanel("Add Component", 10, 300,this); //24
+		addButtonToPanel("Add Reaction", 10, 320,this); //23
+		
 	}
 	
-	public void addTextBox(int x, int y) {
+	public void addTextBox(int x, int y, JPanel panel) {
 		JTextField  textbox = new JTextField();
 		textbox.setBounds(x,y,50,20);
 		textbox.addActionListener(this);
 		textboxes.add(textbox);
-		this.add(textbox);
+		panel.add(textbox);
 		
 	}
 	
-	public void addButtonToPanel(String name, int x, int y) {
+	public void addButtonToPanel(String name, int x, int y, JPanel panel) {
 		JButton button = new JButton(name);
 		button.addActionListener(this);
 		button.setVisible(true);
 		button.setBounds(x, y, 200, 20);
-		this.add(button);
-		buttons.add(button);
+		panel.add(button);
+		getButtons().add(button);
 	}
 	
 	public void addSprite() {
@@ -135,7 +137,7 @@ public class Maker extends JPanel implements ActionListener {
 			else if(boundaryBehavior == 2) {
 				//vanish
 			}
-			for(Movement manual :manualMovements) {
+			for(Movement manual :getManualMovements()) {
 				newSprite.setManualMovement(manual);
 			}
 		}
@@ -153,7 +155,7 @@ public class Maker extends JPanel implements ActionListener {
 			else if(boundaryBehavior == 2) {
 				//vanish
 			}
-			for(Movement manual :manualMovements) {
+			for(Movement manual :getManualMovements()) {
 				newSprite.setManualMovement(manual);
 			}
 		}
@@ -168,31 +170,31 @@ public class Maker extends JPanel implements ActionListener {
 			allItems.add(newSprite);
 		}
 		
-		for(Movement manual :manualMovements) {
+		for(Movement manual :getManualMovements()) {
 			newSprite.setManualMovement(manual);
 		}
 		allItems.add(newSprite);
-		manualMovements.clear();
+		getManualMovements().clear();
 	}
 	
 	public Composite getAllItems() {
 		return allItems;
 	}
 
-	public void addCombobox(ComboItem items[], int x, int y) {
+	public void addCombobox(ComboItem items[], int x, int y, JPanel panel) {
 		JComboBox<ComboItem> combo = new JComboBox<ComboItem>(items);
 		combo.setBounds(x, y, 100, 20);
 		combo.setMaximumSize(combo.getPreferredSize());
 		comboBoxes.add(combo);
-		this.add(combo);
+		panel.add(combo);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		if (arg0.getSource() == buttons.get(2)) {
+		if (arg0.getSource() == getButtons().get(1)) {
 			addSprite();
 		}
-		else if(arg0.getSource() == buttons.get(0)) {
+		else if(arg0.getSource() == getButtons().get(0)) {
 			Object keyItem = comboBoxes.get(2).getSelectedItem();
 			int keyCode = ((ComboItem)keyItem).getValue();
 			Movement spriteManual = null;
@@ -213,10 +215,31 @@ public class Maker extends JPanel implements ActionListener {
 			
 			KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
 	        manager.addKeyEventDispatcher((KeyEventDispatcher) spriteManual);	
-	        manualMovements.add(spriteManual);
+	        getManualMovements().add(spriteManual);
 		}
+		else if(arg0.getSource() == getButtons().get(2)) {
+			JFrame nextFrame = new JFrame();
+			nextFrame.setVisible(true);
+			JPanel nextPanel = new JPanel();
+			addCombobox(new ComboItem[] { new ComboItem("Bounce Back", 0) , new ComboItem("Explode", 1)} , 10, 10, nextPanel);
+			nextFrame.add(nextPanel);
+//			nextPanel.setPreferredSize(new Dimension(400, 150 ));
+			//nextPanel.setPreferredSize(new Dimension(150, 170));
+			nextPanel.setSize(800, 400);
+			nextFrame.setLocation(150, 100);
+			//nextFrame.pack();
+		}
+
 	}
 	
+	public ArrayList<Movement> getManualMovements() {
+		return manualMovements;
+	}
+
+	public ArrayList<JButton> getButtons() {
+		return buttons;
+	}
+
 	class ComboItem
 	{
 	    private String label;

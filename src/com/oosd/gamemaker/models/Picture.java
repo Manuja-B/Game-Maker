@@ -16,6 +16,7 @@ public class Picture extends Sprite{
 	private int initialPositionX;
 	private int initialPositionY;
 	private File f=new File(currentPath+"/doggy.jpeg");
+	private static int counter = 0;
 	public Picture( int initialPositionX, int initialPositionY, int imageHeight, int imageWidth,int dx, int dy)
 	{	
 		this.initialPositionX = initialPositionX;
@@ -38,6 +39,9 @@ public class Picture extends Sprite{
 		this.width = imageWidth;
 		this.setDx(dx);
 		this.setDy(dy);
+		StringBuilder strName = new StringBuilder("Picture ");
+		strName.append(++counter);
+		this.name = strName.toString();
 	}
 
 	@Override
