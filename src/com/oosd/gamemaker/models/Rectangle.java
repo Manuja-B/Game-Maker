@@ -16,12 +16,12 @@ public class Rectangle extends Sprite{
 	Color color;
 	public static int counter = 0;
 	
-	public Rectangle(Color color, int initialPositionX, int initialPositionY, int paddleWidth, int paddleHeight, int dx, int dy) {
+	public Rectangle(Color color, int initialPositionX, int initialPositionY, int width, int height, int dx, int dy) {
 		this.color = color;
 		this.initialPositionX = initialPositionX;
 		this.initialPositionY = initialPositionY;
-		this.width = paddleWidth;
-		this.height = paddleHeight;
+		this.width = width;
+		this.height = height;
 		this.setDx(dx);
 		this.setDy(dy);
 		this.update(initialPositionX, initialPositionY);
@@ -39,7 +39,7 @@ public class Rectangle extends Sprite{
 	@Override
 	public void draw(Graphics2D g2d) {
 		g2d.setColor(this.color);
-		g2d.fillRect(x, y, height, width);
+		g2d.fillRect(x, y , width, height);
 		
 	}
 	@Override

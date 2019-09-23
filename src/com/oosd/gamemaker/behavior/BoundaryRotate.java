@@ -8,13 +8,13 @@ public class BoundaryRotate implements BoundaryBehavior{
 	@Override
 	public void reactWithBoundary(Sprite sprite, Playground playground) {
 		// TODO Auto-generated method stub
-		int xMin = sprite.getX() - sprite.getWidth() / 2;
-		int yMin = sprite.getY() - sprite.getHeight() / 2;
-		int xMax = sprite.getX() + sprite.getWidth() / 2;
-		int yMax = sprite.getY() + sprite.getHeight() / 2;
-		if ( xMax > playground.getWidth())
+		int xMin = sprite.getX() ;//- sprite.getWidth() / 2;
+		int yMin = sprite.getY() ;//- sprite.getHeight() / 2;
+		int xMax = sprite.getX() + sprite.getWidth() ;
+		int yMax = sprite.getY() + sprite.getHeight();
+		if ( xMin > playground.getWidth())
 		{
-			sprite.update(sprite.getWidth(),sprite.getY());
+			sprite.update(1,sprite.getY());
 		}
 		if(xMin<0)
 			sprite.update(playground.getWidth(),sprite.getY());
@@ -24,6 +24,8 @@ public class BoundaryRotate implements BoundaryBehavior{
 		}
 		if(yMax>playground.getHeight())
 			sprite.update(sprite.getX(),sprite.getHeight());
+		System.out.println(sprite.getHeight());
+		System.out.println(sprite.getWidth());
 	}
 
 }

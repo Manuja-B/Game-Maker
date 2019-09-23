@@ -143,14 +143,14 @@ public class Maker extends JPanel implements ActionListener {
 		}
 		
 		else if(componentIndex == 1) {
-			newSprite = new Rectangle(Color.RED, Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(height), Integer.parseInt(width),Integer.parseInt(dx),Integer.parseInt(dy) );
+			newSprite = new Rectangle(Color.RED, Integer.parseInt(x), Integer.parseInt(y),  Integer.parseInt(width),Integer.parseInt(height),Integer.parseInt(dx),Integer.parseInt(dy) );
 			newSprite.setAutomaticMovement(new AutomaticMovement());
 			if(boundaryBehavior == 0) {
-				//set boundary behavior to bounce 
+				
 				   newSprite.setBoundaryMovement(new BoundaryBounce());
 			}
 			else if(boundaryBehavior == 1) {
-				//rotate
+				   newSprite.setBoundaryMovement(new BoundaryRotate());
 			}
 			else if(boundaryBehavior == 2) {
 				//vanish
@@ -175,7 +175,7 @@ public class Maker extends JPanel implements ActionListener {
 				   newSprite.setBoundaryMovement(new BoundaryBounce());
 			}
 			else if(boundaryBehavior == 1) {
-				//rotate
+				newSprite.setBoundaryMovement(new BoundaryRotate());
 			}
 			else if(boundaryBehavior == 2) {
 				//vanish
