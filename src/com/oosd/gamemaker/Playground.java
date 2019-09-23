@@ -57,25 +57,25 @@ public class Playground extends JPanel{
 //	}
 	public static Graphics2D graphobj = null;
 	public void startGame() {
-		JPanel border  = new FlowLayoutClass();
-		//JPanel border = new BorderLayoutClass();
-		
-		
-		 border.setOpaque(false);
-		
-		border.setBounds(0,600,800,150);
-		//border.setBackground(Color.GRAY);		
-		
-		ButtonContainer buttonContainer = new ButtonContainer( allItems,(ControllerLayout) border);
-		this.add(border);
-
-		
-		buttonContainer.addButton("Pause", new PauseCommand(allItems.getAllSprites()), (ControllerLayout)border);
-		buttonContainer.addButton("Replay", new ReplayCommand(allItems.getAllSprites()), (ControllerLayout)border);
-		buttonContainer.addButton("Undo", new UndoCommand(allItems.getAllSprites()), (ControllerLayout)border);
-		buttonContainer.addButton("Save", new SaveCommand(allItems.getAllSprites()), (ControllerLayout)border);
-		buttonContainer.addButton("Load", new LoadCommand(allItems.getAllSprites()), (ControllerLayout)border);
-		
+//		JPanel border  = new FlowLayoutClass();
+//		//JPanel border = new BorderLayoutClass();
+//		
+//		
+//		 border.setOpaque(false);
+//		
+//		border.setBounds(0,600,800,150);
+//		//border.setBackground(Color.GRAY);		
+//		
+//		ButtonContainer buttonContainer = new ButtonContainer( allItems,(ControllerLayout) border);
+//		this.add(border);
+//
+//		
+//		buttonContainer.addButton("Pause", new PauseCommand(allItems.getAllSprites()), (ControllerLayout)border);
+//		buttonContainer.addButton("Replay", new ReplayCommand(allItems.getAllSprites()), (ControllerLayout)border);
+//		buttonContainer.addButton("Undo", new UndoCommand(allItems.getAllSprites()), (ControllerLayout)border);
+//		buttonContainer.addButton("Save", new SaveCommand(allItems.getAllSprites()), (ControllerLayout)border);
+//		buttonContainer.addButton("Load", new LoadCommand(allItems.getAllSprites()), (ControllerLayout)border);
+//		
 		
 		
 		while(true){
@@ -102,7 +102,7 @@ public class Playground extends JPanel{
 
 	    graphobj = (Graphics2D) g; 
 	    
-	    graphobj.drawImage(image,0,0,800,600,this);
+	    graphobj.drawImage(image,0,0,800,800,this);
 	    
 	    for(Sprite sprite: allItems.getAllSprites()) {
 	    	sprite.draw(graphobj);
