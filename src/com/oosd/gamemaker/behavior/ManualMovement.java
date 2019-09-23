@@ -19,7 +19,6 @@ public class ManualMovement implements Movement, KeyListener{
 	@Override
 	public void move(Sprite sprite, JPanel playground) {
 		// TODO Auto-generated method stub
-        //System.out.println("inside move");
         int positionY = sprite.getY();;
 		int positionX = sprite.getX();;
 		int maxX = playground.getWidth();

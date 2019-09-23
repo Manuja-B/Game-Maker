@@ -2,7 +2,6 @@ package com.oosd.gamemaker.behavior;
 
 import java.awt.KeyEventDispatcher;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
 
@@ -19,7 +18,6 @@ public class ManualRight implements Movement, KeyEventDispatcher {
 	}
 	@Override
 	public void move(Sprite sprite, JPanel playground) {
-		// TODO Auto-generated method stub
 		int positionY = sprite.getY();
 		int positionX = sprite.getX();
 		int maxRight = playground.getWidth();
@@ -33,7 +31,6 @@ public class ManualRight implements Movement, KeyEventDispatcher {
 
 	@Override
 	public boolean dispatchKeyEvent(KeyEvent e) {
-		// TODO Auto-generated method stub
 		if(e.getKeyCode() == key) {
 			if (e.getID() == KeyEvent.KEY_PRESSED) {
 	            this.isRight = true;
