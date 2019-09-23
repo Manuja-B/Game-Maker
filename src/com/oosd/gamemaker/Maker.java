@@ -114,12 +114,12 @@ public class Maker extends JPanel implements ActionListener {
 	}
 	
 	public void addSprite() {
-		String x = textboxes.get(0).getText();
-		String y = textboxes.get(1).getText();
-		String height = textboxes.get(2).getText();
-		String width = textboxes.get(3).getText();
-		String dx = textboxes.get(4).getText();
-		String dy = textboxes.get(5).getText();
+		String x = textboxes.get(0).getText().isBlank()?"0":textboxes.get(0).getText();
+		String y = textboxes.get(1).getText().isBlank()?"0":textboxes.get(1).getText();
+		String height = textboxes.get(2).getText().isBlank()?"0":textboxes.get(2).getText();
+		String width = textboxes.get(3).getText().isBlank()?"0":textboxes.get(3).getText();
+		String dx = textboxes.get(4).getText().isBlank()?"0":textboxes.get(4).getText();
+		String dy = textboxes.get(5).getText().isBlank()?"0":textboxes.get(5).getText();
 		int componentIndex = comboBoxes.get(0).getSelectedIndex();
 		int boundaryBehavior = comboBoxes.get(1).getSelectedIndex();
 		if(componentIndex == 0) {
@@ -165,8 +165,21 @@ public class Maker extends JPanel implements ActionListener {
 			
 		}
 		
-		else if(componentIndex == 4) {
+		else if(componentIndex == 2) {
 			newSprite = new Picture( Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(height), Integer.parseInt(width),Integer.parseInt(dx),Integer.parseInt(dy));
+			newSprite.setAutomaticMovement(new AutomaticMovement());
+			
+			
+			if(boundaryBehavior == 0) {
+				//set boundary behavior to bounce 
+				   newSprite.setBoundaryMovement(new BoundaryBounce());
+			}
+			else if(boundaryBehavior == 1) {
+				//rotate
+			}
+			else if(boundaryBehavior == 2) {
+				//vanish
+			}
 			allItems.add(newSprite);
 		}
 		

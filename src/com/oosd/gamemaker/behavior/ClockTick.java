@@ -25,7 +25,6 @@ public class ClockTick implements Movement {
 			minutes++;
 			seconds = 0;
 		}
-		System.out.println(minutes+","+seconds);
 		((DigitalClock) sprite).update(minutes, seconds);
 		
 	}

@@ -38,7 +38,7 @@ public class Playground extends JPanel{
 		this.allItems = maker.getAllItems();
 		this.setLayout(null);
 		
-		File sourceimage = new File("D:\\Fall 2019\\OOSD Assignment\\Assignment 4\\new asgn4\\Team2-Week4\\src\\com\\oosd\\gamemaker\\abc.jpg");
+		File sourceimage = new File("//home//bivas//Pictures//background.jpg");
 
 		try {
 			image = ImageIO.read(sourceimage);
@@ -96,14 +96,7 @@ public class Playground extends JPanel{
 		}
 	}
 	
-	public void addManualMovement() {
-		for(Sprite sprite: allItems.getAllSprites()) {
-			ArrayList<Movement> spriteManual = sprite.getManualMovements();	
-			for(Movement manual : spriteManual) {
-				System.out.println("playground"+manual);
-			}
-		}	
-	}
+	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 

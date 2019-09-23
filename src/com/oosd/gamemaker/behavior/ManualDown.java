@@ -23,7 +23,7 @@ public class ManualDown implements Movement, KeyEventDispatcher {
 		int positionY = sprite.getY() ;
 		int endpositionY = positionY + sprite.getHeight();
 		int positionX = sprite.getX();;
-		int maxY = playground.getHeight();
+		int maxY = playground.getHeight()-220;
 		int dy = 1;
 		System.out.println(positionY);
 		if (isDown && endpositionY < maxY) {

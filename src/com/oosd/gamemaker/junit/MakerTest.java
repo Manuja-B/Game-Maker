@@ -14,6 +14,7 @@ public class MakerTest {
 		mk.makeGame();
 		int check = mk.getButtons().size();
 		assertEquals(3, check);
+		
 	}
 
 }
