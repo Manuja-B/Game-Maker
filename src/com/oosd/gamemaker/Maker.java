@@ -114,12 +114,12 @@ public class Maker extends JPanel implements ActionListener {
 	}
 	
 	public void addSprite() {
-		String x = textboxes.get(0).getText().isBlank()?"0":textboxes.get(0).getText();
-		String y = textboxes.get(1).getText().isBlank()?"0":textboxes.get(1).getText();
-		String height = textboxes.get(2).getText().isBlank()?"0":textboxes.get(2).getText();
-		String width = textboxes.get(3).getText().isBlank()?"0":textboxes.get(3).getText();
-		String dx = textboxes.get(4).getText().isBlank()?"0":textboxes.get(4).getText();
-		String dy = textboxes.get(5).getText().isBlank()?"0":textboxes.get(5).getText();
+		String x = textboxes.get(0).getText().isEmpty()?"0":textboxes.get(0).getText();
+		String y = textboxes.get(1).getText().isEmpty()?"0":textboxes.get(1).getText();
+		String height = textboxes.get(2).getText().isEmpty()?"0":textboxes.get(2).getText();
+		String width = textboxes.get(3).getText().isEmpty()?"0":textboxes.get(3).getText();
+		String dx = textboxes.get(4).getText().isEmpty()?"0":textboxes.get(4).getText();
+		String dy = textboxes.get(5).getText().isEmpty()?"0":textboxes.get(5).getText();
 		int componentIndex = comboBoxes.get(0).getSelectedIndex();
 		int boundaryBehavior = comboBoxes.get(1).getSelectedIndex();
 		if(componentIndex == 0) {
