@@ -60,13 +60,17 @@ public class Maker extends JPanel implements ActionListener {
 	ArrayList<JComboBox<ComboItem>> comboBoxes = new ArrayList<JComboBox<ComboItem>>() ;
 	ArrayList<JButton> buttons = new ArrayList<JButton>();
 	ArrayList<Reaction> reactions = new ArrayList<Reaction>();
-	
 	public void addReaction(Reaction reaction) {
 		this.reactions.add(reaction);
 	}
 
 	public ArrayList<Reaction> getReactions() {
 		return reactions;
+	}
+	
+	int currentSpriteIndex=-1;
+	public int getCurrentSpriteIndex() {
+		return currentSpriteIndex;
 	}
 
 	public Maker() {
@@ -89,7 +93,7 @@ public class Maker extends JPanel implements ActionListener {
 		addButtonToPanel("Rectangle",10,100,this);//button 1
 		addButtonToPanel("Image",200,70,this);//button 2
 		addButtonToPanel("Clock",200,100,this);//button 3
-		addButtonToPanel("Add Component", 10, 300,this); //24
+		//addButtonToPanel("Add Component", 10, 300,this); //24
 		addButtonToPanel("Add Reaction", 10, 320,this); //23
 		addButtonToPanel("Choose Theme",10, 340,this); //25
 	}
@@ -109,97 +113,22 @@ public class Maker extends JPanel implements ActionListener {
 		button.setVisible(true);
 		button.setBounds(x, y, 200, 20);
 		panel.add(button);
-		getButtons().add(button);
+		buttons.add(button);
 	}
-	
-	public void addSprite() {
-		String x = textboxes.get(0).getText().isEmpty()?"0":textboxes.get(0).getText();
-		String y = textboxes.get(1).getText().isEmpty()?"0":textboxes.get(1).getText();
-		String height = textboxes.get(2).getText().isEmpty()?"0":textboxes.get(2).getText();
-		String width = textboxes.get(3).getText().isEmpty()?"0":textboxes.get(3).getText();
-		String dx = textboxes.get(4).getText().isEmpty()?"0":textboxes.get(4).getText();
-		String dy = textboxes.get(5).getText().isEmpty()?"0":textboxes.get(5).getText();
-		int componentIndex = comboBoxes.get(0).getSelectedIndex();
-		int boundaryBehavior = comboBoxes.get(1).getSelectedIndex();
-		if(componentIndex == 0) {
 
-			newSprite = new Ball(Color.BLUE, Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(height), Integer.parseInt(width),Integer.parseInt(dx),Integer.parseInt(dy));
-			newSprite.setAutomaticMovement(new AutomaticMovement());
-			if(boundaryBehavior == 0) {
-				//set boundary behavior to bounce 
-				   newSprite.setBoundaryMovement(new BoundaryBounce());
-			}
-			else if(boundaryBehavior == 1) {
-				//rotate
-				newSprite.setBoundaryMovement(new BoundaryRotate());
-			}
-			else if(boundaryBehavior == 2) {
-				//vanish
-			}
-			for(Movement manual :getManualMovements()) {
-				newSprite.setManualMovement(manual);
-			}
-		}
-		
-		else if(componentIndex == 1) {
-			newSprite = new Rectangle(Color.RED, Integer.parseInt(x), Integer.parseInt(y),  Integer.parseInt(width),Integer.parseInt(height),Integer.parseInt(dx),Integer.parseInt(dy) );
-			newSprite.setAutomaticMovement(new AutomaticMovement());
-			if(boundaryBehavior == 0) {
-				
-				   newSprite.setBoundaryMovement(new BoundaryBounce());
-			}
-			else if(boundaryBehavior == 1) {
-				   newSprite.setBoundaryMovement(new BoundaryRotate());
-			}
-			else if(boundaryBehavior == 2) {
-				//vanish
-			}
-			for(Movement manual :getManualMovements()) {
-				newSprite.setManualMovement(manual);
-			}
-		}
-		else if(componentIndex == 3) {
-			newSprite = new DigitalClock(Integer.parseInt(x), Integer.parseInt(y));
-			newSprite.setAutomaticMovement(new ClockTick());
-			
-		}
-		
-		else if(componentIndex == 2) {
-			newSprite = new Picture( Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(height), Integer.parseInt(width),Integer.parseInt(dx),Integer.parseInt(dy));
-			newSprite.setAutomaticMovement(new AutomaticMovement());
-			
-			
-			if(boundaryBehavior == 0) {
-				//set boundary behavior to bounce 
-				   newSprite.setBoundaryMovement(new BoundaryBounce());
-			}
-			else if(boundaryBehavior == 1) {
-				newSprite.setBoundaryMovement(new BoundaryRotate());
-			}
-			else if(boundaryBehavior == 2) {
-				//vanish
-			}
-			allItems.add(newSprite);
-		}
-		
-		for(Movement manual :getManualMovements()) {
-			newSprite.setManualMovement(manual);
-		}
-		allItems.add(newSprite);
-		getManualMovements().clear();
-	}
+
 	
+	
+	
+	
+	
+		
+		
 	public Composite getAllItems() {
 		return allItems;
 	}
 
-	public void addCombobox(ComboItem items[], int x, int y, JPanel panel) {
-		JComboBox<ComboItem> combo = new JComboBox<ComboItem>(items);
-		combo.setBounds(x, y, 100, 20);
-		combo.setMaximumSize(combo.getPreferredSize());
-		comboBoxes.add(combo);
-		panel.add(combo);
-	}
+	
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
@@ -234,7 +163,7 @@ public class Maker extends JPanel implements ActionListener {
 			spritePropertiesPanelObject.drawSpritePropertiesPanel();
 		
 		}
-		else if(arg0.getSource() == getButtons().get(2)) {
+		else if(arg0.getSource() == getButtons().get(4)) {
 			JFrame nextFrame = new JFrame();
 			JPanel nextPanel = new NextPanel(this);
 			nextFrame.add(nextPanel);
@@ -248,16 +177,9 @@ public class Maker extends JPanel implements ActionListener {
 			
 		}
 		else if(arg0.getSource() == getButtons().get(2)) {
-			JFrame nextFrame = new JFrame();
-			nextFrame.setVisible(true);
-			JPanel nextPanel = new JPanel();
-			addCombobox(new ComboItem[] { new ComboItem("Bounce Back", 0) , new ComboItem("Explode", 1)} , 10, 10, nextPanel);
-			nextFrame.add(nextPanel);
-			nextPanel.setSize(800, 400);
-			nextFrame.setLocation(150, 100);
+			
 		}
-		
-		else if(arg0.getSource() == getButtons().get(3)) {
+		else if(arg0.getSource() == getButtons().get(5)) {
 			
 			String path = "C:\\Users\\Maruti\\OneDrive\\Pictures\\Saved Pictures";
 			JFileChooser jfc = new JFileChooser(new File(path));
@@ -320,6 +242,7 @@ class ComboItem
     {
         return label;
     }
+
 
     public int getValue()
     {
