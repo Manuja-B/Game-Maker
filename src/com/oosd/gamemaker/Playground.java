@@ -45,7 +45,6 @@ public class Playground extends JPanel{
 	{
 		this.selectedpath = maker.getSelectedpath();
 		
-		System.out.println("B4 selectedpath: "+selectedpath+" in setBackgroundImage() of Playground");	
 		if(selectedpath != null)
 		{
 			File sourceimage = new File(selectedpath);
@@ -61,39 +60,13 @@ public class Playground extends JPanel{
 		
 	}
 	
-	
-//	public static Graphics2D graphobj = null;
-//	public void startGame() {
-//		this.setLayout(null);
-//	}
 	public static Graphics2D graphobj = null;
 	public void startGame() {
-//		JPanel border  = new FlowLayoutClass();
-//		//JPanel border = new BorderLayoutClass();
-//		
-//		
-//		 border.setOpaque(false);
-//		
-//		border.setBounds(0,600,800,150);
-//		//border.setBackground(Color.GRAY);		
-//		
-//		ButtonContainer buttonContainer = new ButtonContainer( allItems,(ControllerLayout) border);
-//		this.add(border);
-//+
-//		
-//		buttonContainer.addButton("Pause", new PauseCommand(allItems.getAllSprites()), (ControllerLayout)border);
-//		buttonContainer.addButton("Replay", new ReplayCommand(allItems.getAllSprites()), (ControllerLayout)border);
-//		buttonContainer.addButton("Undo", new UndoCommand(allItems.getAllSprites()), (ControllerLayout)border);
-//		buttonContainer.addButton("Save", new SaveCommand(allItems.getAllSprites()), (ControllerLayout)border);
-//		buttonContainer.addButton("Load", new LoadCommand(allItems.getAllSprites()), (ControllerLayout)border);
-//		
-		
-		
+	
 		while(true){
 			
 			this.setBackgroundImage();
 			this.allItems = maker.getAllItems();
-			//System.out.println(allItems.getAllSprites().size());
 			for(Sprite sprite: allItems.getAllSprites()) {
 				
 				sprite.move(this);

@@ -11,14 +11,12 @@ import com.oosd.gamemaker.models.Sprite;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 
-public class BounceBack implements Reaction {
-
+public class Explode implements Reaction {
+	
 	Sprite primary;
 	Sprite secondary;
 	
-	
-	
-	public BounceBack(Sprite primary, Sprite secondary) {
+	public Explode(Sprite primary, Sprite secondary) {
 		super();
 		this.primary = primary;
 		this.secondary = secondary;
@@ -26,7 +24,6 @@ public class BounceBack implements Reaction {
 	@Override
 	public boolean react() {
 		// TODO Auto-generated method stub
-		//System.out.println("yo");
 		int primaryXmin = primary.getX();
 		int primaryYmin = primary.getY();
 		int secondaryXmin = secondary.getX();
@@ -60,18 +57,19 @@ public class BounceBack implements Reaction {
 			int secondaryXCenter = secondary.getX() + secondary.getWidth()/2;
 			int secondaryYCenter = secondary.getY() + secondary.getHeight()/2;
 			if(primaryYmin <= secondaryYCenter && secondaryYCenter <= primaryYmax ) {
-				secondary.setDx(-secondary.getDx());
+				secondary.update(secondaryXmin + 1000, secondaryYmin + 1000);
 				AudioPlayer.player.start(audio);
 			}
 			else {
-				secondary.setDy(-(secondary.getDy()));
+				secondary.update(secondaryXmin + 1000, secondaryYmin + 1000);
 				AudioPlayer.player.start(audio);
+				
 			}
-			//System.out.println("yo");
 			return true;
 		}
 		
 		return false;
 	}
+
 
 }
