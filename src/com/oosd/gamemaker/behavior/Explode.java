@@ -6,24 +6,17 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.swing.JOptionPane;
-
 import com.oosd.gamemaker.models.Sprite;
 
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 
-public class BounceBack implements Reaction {
-
+public class Explode implements Reaction {
+	
 	Sprite primary;
 	Sprite secondary;
 	
-	
-	
-	public BounceBack(Sprite primary, Sprite secondary) {
+	public Explode(Sprite primary, Sprite secondary) {
 		super();
 		this.primary = primary;
 		this.secondary = secondary;
@@ -31,7 +24,6 @@ public class BounceBack implements Reaction {
 	@Override
 	public boolean react() {
 		// TODO Auto-generated method stub
-		//System.out.println("yo");
 		int primaryXmin = primary.getX();
 		int primaryYmin = primary.getY();
 		int secondaryXmin = secondary.getX();
@@ -55,51 +47,29 @@ public class BounceBack implements Reaction {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		AudioPlayer.player.start(audio);
-//		Clip clip = AudioSystem.getClip();
-//        AudioInputStream inputStream = AudioSystem.getAudioInputStream(
-//          Main.class.getResourceAsStream("/Users/juhi/Desktop/OOSD/Ball_Bounce.wav" + url));
-//        clip.open(inputStream);
-//        clip.start(); 
-	
+		
 		if((primaryYmin - secondary.getHeight())<= secondaryYmin 
 				&& secondaryYmin <= primaryYmax 
 				&& secondaryXmin >= (primaryXmin - secondary.getWidth())
 				&& secondaryXmin <= primaryXmax)
 		{
-//			if(primaryXmin <= secondaryXmax || primaryXmax <= secondaryXmax) {
-//				secondary.setDx(-(secondary.getDx()));
-//			}
-//			else if (secondaryYmin <= primaryYmin || secondaryYmax >= primaryYmax) {
-//				secondary.setDy(-(secondary.getDy()));
-//			}
-//			if(primaryYmin <= secondaryYmax && secondaryYmin <= primaryYmin) {
-//				secondary.setDy(-(secondary.getDy()));
-//			}
-//			else if (secondaryYmin <= primaryYmax && secondaryYmax >= primaryYmax) {
-//				secondary.setDy(-(secondary.getDy()));
-//			}
-//			else if(primaryXmin <= secondaryXmax && secondaryXmin <= primaryXmin) {
-//				secondary.setDx(-(secondary.getDx()));
-//			}
-//			else if(primaryXmax <= secondaryXmax && secondaryXmin <= primaryXmax) {
-//				secondary.setDx(-(secondary.getDx()));
-//			}
+
 			int secondaryXCenter = secondary.getX() + secondary.getWidth()/2;
 			int secondaryYCenter = secondary.getY() + secondary.getHeight()/2;
 			if(primaryYmin <= secondaryYCenter && secondaryYCenter <= primaryYmax ) {
-				secondary.setDx(-secondary.getDx());
+				secondary.update(secondaryXmin + 1000, secondaryYmin + 1000);
 				AudioPlayer.player.start(audio);
 			}
 			else {
-				secondary.setDy(-(secondary.getDy()));
+				secondary.update(secondaryXmin + 1000, secondaryYmin + 1000);
 				AudioPlayer.player.start(audio);
+				
 			}
-			System.out.println("yo");
 			return true;
 		}
 		
 		return false;
 	}
+
 
 }

@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 import com.oosd.gamemaker.ComboItem;
 import com.oosd.gamemaker.behavior.BounceBack;
+import com.oosd.gamemaker.behavior.Explode;
 import com.oosd.gamemaker.models.Composite;
 
 public class NextPanel extends JPanel implements ActionListener{
@@ -61,7 +62,10 @@ public class NextPanel extends JPanel implements ActionListener{
 			
 			maker.addReaction((new BounceBack(maker.getAllItems().getAllSprites().get(spriteCode1), maker.getAllItems().getAllSprites().get(spriteCode2))));
 		}
-		System.out.println("yo");
+		else if(reactionCode == 1) {
+			
+			maker.addReaction((new Explode(maker.getAllItems().getAllSprites().get(spriteCode1), maker.getAllItems().getAllSprites().get(spriteCode2))));
+		}
 		
 	}
 }
