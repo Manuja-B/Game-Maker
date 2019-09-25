@@ -16,10 +16,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import com.oosd.gamemaker.behavior.AutomaticMovement;
+import com.oosd.gamemaker.behavior.BounceBack;
 import com.oosd.gamemaker.behavior.ManualMovement;
 import com.oosd.gamemaker.behavior.ManualRight;
 import com.oosd.gamemaker.behavior.ManualUp;
 import com.oosd.gamemaker.behavior.Movement;
+import com.oosd.gamemaker.behavior.Reaction;
 import com.oosd.gamemaker.behavior.BoundaryBounce;
 import com.oosd.gamemaker.behavior.BoundaryRotate;
 import com.oosd.gamemaker.behavior.ClockTick;
@@ -44,7 +46,16 @@ public class Maker extends JPanel implements ActionListener {
 	ArrayList<JTextField> textboxes = new ArrayList<JTextField>() ;
 	ArrayList<JComboBox<ComboItem>> comboBoxes = new ArrayList<JComboBox<ComboItem>>() ;
 	ArrayList<JButton> buttons = new ArrayList<JButton>();
+	ArrayList<Reaction> reactions = new ArrayList<Reaction>();
 	
+	public void addReaction(Reaction reaction) {
+		this.reactions.add(reaction);
+	}
+
+	public ArrayList<Reaction> getReactions() {
+		return reactions;
+	}
+
 	public Maker() {
 		allItems = new Composite();
 		this.setLayout(null);
@@ -232,17 +243,18 @@ public class Maker extends JPanel implements ActionListener {
 		}
 		else if(arg0.getSource() == getButtons().get(2)) {
 			JFrame nextFrame = new JFrame();
-			nextFrame.setVisible(true);
-			JPanel nextPanel = new JPanel();
-			addCombobox(new ComboItem[] { new ComboItem("Bounce Back", 0) , new ComboItem("Explode", 1)} , 10, 10, nextPanel);
+			JPanel nextPanel = new NextPanel(this);
 			nextFrame.add(nextPanel);
 //			nextPanel.setPreferredSize(new Dimension(400, 150 ));
 			//nextPanel.setPreferredSize(new Dimension(150, 170));
-			nextPanel.setSize(800, 400);
+			nextPanel.setSize(400, 400);
 			nextFrame.setLocation(150, 100);
+			nextFrame.setSize(400, 400);
+			nextFrame.setVisible(true);
 			//nextFrame.pack();
+			
 		}
-
+		
 	}
 	
 	public ArrayList<Movement> getManualMovements() {
@@ -253,31 +265,33 @@ public class Maker extends JPanel implements ActionListener {
 		return buttons;
 	}
 
-	class ComboItem
-	{
-	    private String label;
-	    private int value;
+	
+}
 
-	    public ComboItem(String label, int value)
-	    {
-	        this.label = label;
-	        this.value = value;
-	    }
+class ComboItem
+{
+    private String label;
+    private int value;
 
-	    @Override
-	    public String toString()
-	    {
-	        return label;
-	    }
+    public ComboItem(String label, int value)
+    {
+        this.label = label;
+        this.value = value;
+    }
 
-	    public String getKey()
-	    {
-	        return label;
-	    }
+    @Override
+    public String toString()
+    {
+        return label;
+    }
 
-	    public int getValue()
-	    {
-	        return value;
-	    }
-	}
+    public String getKey()
+    {
+        return label;
+    }
+
+    public int getValue()
+    {
+        return value;
+    }
 }

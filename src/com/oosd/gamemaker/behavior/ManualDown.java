@@ -25,7 +25,6 @@ public class ManualDown implements Movement, KeyEventDispatcher {
 		int positionX = sprite.getX();;
 		int maxY = playground.getHeight()-220;
 		int dy = 1;
-		System.out.println(positionY);
 		if (isDown && endpositionY < maxY) {
 			positionY += dy;
 		}
@@ -37,7 +36,6 @@ public class ManualDown implements Movement, KeyEventDispatcher {
 		System.out.println("Yo");
 		// TODO Auto-generated method stub
 		if(e.getKeyCode() == key) {
-			System.out.println("down pressed");
 			if (e.getID() == KeyEvent.KEY_PRESSED) {
 	            this.isDown = true;
 	        } else if (e.getID() == KeyEvent.KEY_RELEASED) {

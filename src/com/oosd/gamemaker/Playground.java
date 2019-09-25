@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.oosd.gamemaker.behavior.Movement;
+import com.oosd.gamemaker.behavior.Reaction;
 import com.oosd.gamemaker.commmands.LoadCommand;
 import com.oosd.gamemaker.commmands.PauseCommand;
 import com.oosd.gamemaker.commmands.ReplayCommand;
@@ -85,12 +86,16 @@ public class Playground extends JPanel{
 				
 				sprite.move(this);
 			}
+			for(Reaction reaction: maker.getReactions()) {
+				reaction.react();
+			}
 			try {
 				
 				Thread.sleep(10);
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
 			}
+			
 			repaint();
 			
 		}
