@@ -32,24 +32,7 @@ public class BounceBack implements Reaction {
 				&& secondaryXmin >= (primaryXmin - secondary.getWidth())
 				&& secondaryXmin <= primaryXmax)
 		{
-//			if(primaryXmin <= secondaryXmax || primaryXmax <= secondaryXmax) {
-//				secondary.setDx(-(secondary.getDx()));
-//			}
-//			else if (secondaryYmin <= primaryYmin || secondaryYmax >= primaryYmax) {
-//				secondary.setDy(-(secondary.getDy()));
-//			}
-//			if(primaryYmin <= secondaryYmax && secondaryYmin <= primaryYmin) {
-//				secondary.setDy(-(secondary.getDy()));
-//			}
-//			else if (secondaryYmin <= primaryYmax && secondaryYmax >= primaryYmax) {
-//				secondary.setDy(-(secondary.getDy()));
-//			}
-//			else if(primaryXmin <= secondaryXmax && secondaryXmin <= primaryXmin) {
-//				secondary.setDx(-(secondary.getDx()));
-//			}
-//			else if(primaryXmax <= secondaryXmax && secondaryXmin <= primaryXmax) {
-//				secondary.setDx(-(secondary.getDx()));
-//			}
+
 			int secondaryXCenter = secondary.getX() + secondary.getWidth()/2;
 			int secondaryYCenter = secondary.getY() + secondary.getHeight()/2;
 			if(primaryYmin <= secondaryYCenter && secondaryYCenter <= primaryYmax ) {
@@ -58,7 +41,7 @@ public class BounceBack implements Reaction {
 			else {
 				secondary.setDy(-(secondary.getDy()));
 			}
-			System.out.println("yo");
+			//System.out.println("yo");
 			return true;
 		}
 		

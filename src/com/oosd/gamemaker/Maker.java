@@ -1,7 +1,9 @@
 package com.oosd.gamemaker;
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
@@ -9,6 +11,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -34,6 +39,11 @@ import com.oosd.gamemaker.models.DigitalClock;
 import com.oosd.gamemaker.models.Picture;
 import com.oosd.gamemaker.models.Rectangle;
 import com.oosd.gamemaker.models.Sprite;
+import java.awt.Desktop;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileSystemView;
+import java.io.File;
+import java.io.IOException;
 
 public class Maker extends JPanel implements ActionListener {
 	JPanel makerPanel = new JPanel();
@@ -41,6 +51,9 @@ public class Maker extends JPanel implements ActionListener {
 	Sprite newSprite;
 	int x,y,dx,dy;
 	String boundaryReaction;
+	private  String selectedpath;
+	Image image;
+	
 	ArrayList<String> keys = new ArrayList<String>() ;
 	ArrayList<Movement> manualMovements = new ArrayList<Movement>() ;
 	ArrayList<JTextField> textboxes = new ArrayList<JTextField>() ;
@@ -68,44 +81,19 @@ public class Maker extends JPanel implements ActionListener {
 	}
 
 	public void makeGame() {
+		SpritePropertiesPanel spritePropertyPanelObject=new SpritePropertiesPanel(this); 
 		addLabel("Add a new Component", 10, 10,this);
 		addLabel("Component Type", 10, 30,this);
-		addCombobox(new ComboItem[] { new ComboItem("Ball", 0) , new ComboItem("Rectangle", 1) , new ComboItem("Image", 2) , new ComboItem("Clock", 3)  }, 200, 30,this); //2
-		addLabel("Location", 10, 50,this);
-		addLabel("x", 180, 50,this); 
-		addTextBox(200,50,this);  
-		addLabel("y", 280, 50,this); 
-		addTextBox(300,50,this);
 		
-		addLabel("Dimensions", 10, 70,this);
-		addLabel("Height", 140, 70,this); //4
-		addTextBox(200,70,this);  //5
-		addLabel("Width", 250, 70,this); //6
-		addTextBox(300,70,this); //7
-		
-		addLabel("Automatic Movement", 10, 90,this ); //8
-		addLabel("dx", 180, 90,this); //9
-		addTextBox(200,90,this); //10
-		addLabel("dy", 250, 90,this); //11
-		addTextBox(270,90,this); //12
-		addLabel("Boundary Reaction", 10, 110,this); //13
-		addCombobox(new ComboItem[] { new ComboItem("Bounce", 0) , new ComboItem("Rotate", 1) , new ComboItem("Vanish", 2)}, 200, 110,this); //2
-		addLabel("Keypress", 10, 170,this); //15
-		addCombobox(new ComboItem[] { new ComboItem("Up", KeyEvent.VK_UP) , new ComboItem("Down", KeyEvent.VK_DOWN) , new ComboItem("Left",  KeyEvent.VK_LEFT), new ComboItem("Right", KeyEvent.VK_RIGHT)}, 200, 170,this); //2
-		addLabel("Movement", 10, 190,this); //17 
-		addButtonToPanel("Add Manual Movement", 10, 210,this); //19
-		addCombobox(new ComboItem[] { new ComboItem("Up", 0) , new ComboItem("Down", 1) , new ComboItem("Left", 2), new ComboItem("Right", 3)}, 200, 190,this); //2
-		addLabel("Reactions", 10, 260,this); //20
-		ArrayList<Sprite> items =  (ArrayList)allItems.getAllSprites(); 
-		String componentNames[] = new String[items.size()]; 
-		for(int i = 0; i < items.size();i++) {
-			componentNames[i] = items.get(i).getName();
-		}
+		addButtonToPanel("Circle",10,70,this);//button 0
+		addButtonToPanel("Rectangle",10,100,this);//button 1
+		addButtonToPanel("Image",200,70,this);//button 2
+		addButtonToPanel("Clock",200,100,this);//button 3
 		addButtonToPanel("Add Component", 10, 300,this); //24
 		addButtonToPanel("Add Reaction", 10, 320,this); //23
-		
+		addButtonToPanel("Choose Theme",10, 340,this); //25
 	}
-	
+		
 	public void addTextBox(int x, int y, JPanel panel) {
 		JTextField  textbox = new JTextField();
 		textbox.setBounds(x,y,50,20);
@@ -215,31 +203,36 @@ public class Maker extends JPanel implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		if (arg0.getSource() == getButtons().get(1)) {
-			addSprite();
-		}
-		else if(arg0.getSource() == getButtons().get(0)) {
-			Object keyItem = comboBoxes.get(2).getSelectedItem();
-			int keyCode = ((ComboItem)keyItem).getValue();
-			Movement spriteManual = null;
-			Object actionItem = comboBoxes.get(3).getSelectedItem();
-			int itemCode = ((ComboItem)actionItem).getValue();
-			if(itemCode == 0) {
-				 spriteManual = new ManualUp(keyCode);
-			}
-			else if(itemCode == 1) {
-				 spriteManual = new ManualDown(keyCode);
-			}
-			else if(itemCode == 2) {
-				spriteManual = new ManualLeft(keyCode);
-			}
-			else if(itemCode == 3) {
-			   spriteManual = new ManualRight(keyCode);
-			}
-			
-			KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
-	        manager.addKeyEventDispatcher((KeyEventDispatcher) spriteManual);	
-	        getManualMovements().add(spriteManual);
+		if(arg0.getSource()==buttons.get(0) || arg0.getSource()==buttons.get(1) ||arg0.getSource()==buttons.get(2) ||arg0.getSource()==buttons.get(3))
+		{	
+			if(arg0.getSource()==buttons.get(0))
+				currentSpriteIndex=0;
+			else if(arg0.getSource()==buttons.get(1))
+				currentSpriteIndex=1;
+			else if(arg0.getSource()==buttons.get(2))
+				currentSpriteIndex=2;
+			else if(arg0.getSource()==buttons.get(3))
+				currentSpriteIndex=3;
+			JFrame frame1 = new JFrame();
+			frame1.setSize(400,400);
+			SpritePropertiesPanel spritePropertiesPanelObject=new SpritePropertiesPanel(this);
+			spritePropertiesPanelObject.setSize(200,800);
+			spritePropertiesPanelObject.setLocation(10,10);
+			spritePropertiesPanelObject.setBackground(Color.LIGHT_GRAY);
+			//whitePanel = maker;
+		
+			//JPanel playgroundPanel = new Playground((spritePropertiesPanelObject));
+			//playgroundPanel.setSize(400, 800);
+			//playgroundPanel.setLocation(400,0);
+			//frame.add(playgroundPanel);
+			frame1.add(spritePropertiesPanelObject);
+			//frame.pack();
+			//frame.add(whitePanel);
+			System.out.println(frame1.getComponentCount());
+			frame1.setVisible(true);
+		
+			spritePropertiesPanelObject.drawSpritePropertiesPanel();
+		
 		}
 		else if(arg0.getSource() == getButtons().get(2)) {
 			JFrame nextFrame = new JFrame();
@@ -254,8 +247,46 @@ public class Maker extends JPanel implements ActionListener {
 			//nextFrame.pack();
 			
 		}
+		else if(arg0.getSource() == getButtons().get(2)) {
+			JFrame nextFrame = new JFrame();
+			nextFrame.setVisible(true);
+			JPanel nextPanel = new JPanel();
+			addCombobox(new ComboItem[] { new ComboItem("Bounce Back", 0) , new ComboItem("Explode", 1)} , 10, 10, nextPanel);
+			nextFrame.add(nextPanel);
+			nextPanel.setSize(800, 400);
+			nextFrame.setLocation(150, 100);
+		}
 		
+		else if(arg0.getSource() == getButtons().get(3)) {
+			
+			String path = "C:\\Users\\Maruti\\OneDrive\\Pictures\\Saved Pictures";
+			JFileChooser jfc = new JFileChooser(new File(path));
+//			JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+			
+			jfc.setDialogTitle("Multiple file and directory selection:");
+			jfc.setMultiSelectionEnabled(true);
+			jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+			int returnValue = jfc.showOpenDialog(null);
+			if (returnValue == JFileChooser.APPROVE_OPTION) {
+				File[] files = jfc.getSelectedFiles();
+				 File selectedFile = jfc.getSelectedFile();
+				 this.selectedpath = selectedFile.getAbsolutePath();
+				 System.out.println(selectedpath);
+				 
+				Arrays.asList(files).forEach(x -> {
+					if (x.isFile()) {
+						System.out.println(x.getName());
+					}
+				});
+			}
+		}
+			
+		}
+	
+	public String getSelectedpath() {
+		return selectedpath;
 	}
+	
 	
 	public ArrayList<Movement> getManualMovements() {
 		return manualMovements;
