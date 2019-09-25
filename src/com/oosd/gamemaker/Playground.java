@@ -30,25 +30,35 @@ public class Playground extends JPanel{
 	Maker maker;
 	JPanel controller;
 	Image image;
+	String selectedpath;
 	Composite allItems = new Composite();
-	
+		
 	public Playground(Maker maker)  {
 		//this.setBackground(Color.WHITE);
 		this.maker = maker;
 		this.allItems = maker.getAllItems();
 		this.setLayout(null);
-		
-		File sourceimage = new File("//home//bivas//Pictures//background.jpg");
-
-		try {
-			image = ImageIO.read(sourceimage);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	 
+			 
 	}
-	
+	public void setBackgroundImage()
+	{
+		this.selectedpath = maker.getSelectedpath();
+		
+		System.out.println("B4 selectedpath: "+selectedpath+" in setBackgroundImage() of Playground");	
+		if(selectedpath != null)
+		{
+			File sourceimage = new File(selectedpath);
+			try {
+				image = ImageIO.read(sourceimage);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		
+	}
 	
 	
 //	public static Graphics2D graphobj = null;
@@ -68,7 +78,7 @@ public class Playground extends JPanel{
 //		
 //		ButtonContainer buttonContainer = new ButtonContainer( allItems,(ControllerLayout) border);
 //		this.add(border);
-//
+//+
 //		
 //		buttonContainer.addButton("Pause", new PauseCommand(allItems.getAllSprites()), (ControllerLayout)border);
 //		buttonContainer.addButton("Replay", new ReplayCommand(allItems.getAllSprites()), (ControllerLayout)border);
@@ -79,6 +89,8 @@ public class Playground extends JPanel{
 		
 		
 		while(true){
+			
+			this.setBackgroundImage();
 			this.allItems = maker.getAllItems();
 			//System.out.println(allItems.getAllSprites().size());
 			for(Sprite sprite: allItems.getAllSprites()) {
@@ -100,10 +112,14 @@ public class Playground extends JPanel{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-	    graphobj = (Graphics2D) g; 
+		//this.setBackgroundImage();
+		graphobj = (Graphics2D) g; 
 	    
-	    graphobj.drawImage(image,0,0,800,800,this);
-	    
+	    if(image!=null)
+	    {
+	    	graphobj.drawImage(image,0,0,800,800,this);
+	    }
+		
 	    for(Sprite sprite: allItems.getAllSprites()) {
 	    	sprite.draw(graphobj);
 	    }
