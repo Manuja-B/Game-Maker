@@ -18,14 +18,6 @@ import javax.swing.JPanel;
 
 import com.oosd.gamemaker.behavior.Movement;
 import com.oosd.gamemaker.behavior.Reaction;
-import com.oosd.gamemaker.commmands.LoadCommand;
-import com.oosd.gamemaker.commmands.PauseCommand;
-import com.oosd.gamemaker.commmands.ReplayCommand;
-import com.oosd.gamemaker.commmands.SaveCommand;
-import com.oosd.gamemaker.commmands.UndoCommand;
-import com.oosd.gamemaker.layouts.ButtonContainer;
-import com.oosd.gamemaker.layouts.ControllerLayout;
-import com.oosd.gamemaker.layouts.FlowLayoutClass;
 import com.oosd.gamemaker.models.Composite;
 import com.oosd.gamemaker.models.Sprite;
 
@@ -116,9 +108,7 @@ public class Playground extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == startButton ) {
-			for(Sprite sprite: allItems.getAllSprites()) {
-				sprite.pause();
-			}
+			allItems.pause();
 		}
 	}
 }
