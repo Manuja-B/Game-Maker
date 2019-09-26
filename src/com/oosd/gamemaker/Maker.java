@@ -134,15 +134,27 @@ public class Maker extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		if(arg0.getSource()==buttons.get(0) || arg0.getSource()==buttons.get(1) ||arg0.getSource()==buttons.get(2) ||arg0.getSource()==buttons.get(3))
 		{	
-			if(arg0.getSource()==buttons.get(0))
-				currentSpriteIndex=0;
-			else if(arg0.getSource()==buttons.get(1))
-				currentSpriteIndex=1;
-			else if(arg0.getSource()==buttons.get(2))
-				currentSpriteIndex=2;
-			else if(arg0.getSource()==buttons.get(3))
-				currentSpriteIndex=3;
 			JFrame frame1 = new JFrame();
+			if(arg0.getSource()==buttons.get(0))
+			{
+				frame1.setTitle("New Circle");
+				currentSpriteIndex=0;
+			}
+			else if(arg0.getSource()==buttons.get(1))
+			{	
+				frame1.setTitle("New Rectange");
+				currentSpriteIndex=1;
+			}
+			else if(arg0.getSource()==buttons.get(2))
+			{	
+				frame1.setTitle("New Image");
+				currentSpriteIndex=2;
+			}
+			else if(arg0.getSource()==buttons.get(3))
+			{
+				frame1.setTitle("New Clock");
+				currentSpriteIndex=3;
+			}
 			frame1.setSize(400,400);
 			SpritePropertiesPanel spritePropertiesPanelObject=new SpritePropertiesPanel(this);
 			spritePropertiesPanelObject.setSize(200,800);

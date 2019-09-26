@@ -82,13 +82,6 @@ public class SpritePropertiesPanel extends JPanel implements ActionListener{
 		panel.add(combo);
 	}
 	
-	//int x,y,dx,dy;
-	//ArrayList<String> keys = new ArrayList<String>() ;
-	//ArrayList<String> manualMovement = new ArrayList<String>() ;
-	//ArrayList<JTextField> textboxes = new ArrayList<JTextField>() ;
-	//ArrayList<JComboBox<String>> comboBoxes = new ArrayList<JComboBox<String>>() ;
-	//ArrayList<JButton> buttons = new ArrayList<JButton>();
-	
 	
 	public void addSprite(int spriteIndex) {
 		String x = textboxes.get(0).getText().isEmpty()?"0":textboxes.get(0).getText();
