@@ -31,14 +31,7 @@ public class DigitalClock extends Sprite{
 		this.name = strName.toString();
 	}
 	
-		@Override
-	public void update(int x, int y) {
-		// TODO Auto-generated method stub
-		this.x = x;
-		this.y = y;	
-		
-	}
-
+	
 	@Override
 	public void draw(Graphics2D g2d) {
 		// TODO Auto-generated method stub

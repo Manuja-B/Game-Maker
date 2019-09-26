@@ -43,7 +43,12 @@ import java.awt.Desktop;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class Maker extends JPanel implements ActionListener {
 	JPanel makerPanel = new JPanel();
@@ -96,6 +101,8 @@ public class Maker extends JPanel implements ActionListener {
 		//addButtonToPanel("Add Component", 10, 300,this); //24
 		addButtonToPanel("Add Reaction", 10, 320,this); //23
 		addButtonToPanel("Choose Theme",10, 340,this); //25
+		addButtonToPanel("Save", 10, 360, this);
+		addButtonToPanel("Load", 10, 380, this);
 	}
 		
 	public void addTextBox(int x, int y, JPanel panel) {
@@ -116,14 +123,7 @@ public class Maker extends JPanel implements ActionListener {
 		buttons.add(button);
 	}
 
-
 	
-	
-	
-	
-	
-		
-		
 	public Composite getAllItems() {
 		return allItems;
 	}
@@ -202,8 +202,16 @@ public class Maker extends JPanel implements ActionListener {
 				});
 			}
 		}
-			
+		else if(arg0.getSource() == getButtons().get(6)) {
+			SaveObject saveobject = new SaveObject(reactions, allItems);
+			WriteObjectToFile(saveobject);
+			ReadObjectFromFile("test");
 		}
+		else if(arg0.getSource() == getButtons().get(7)) {
+			ReadObjectFromFile("test");
+		}
+			
+	}
 	
 	public String getSelectedpath() {
 		return selectedpath;
@@ -217,7 +225,44 @@ public class Maker extends JPanel implements ActionListener {
 	public ArrayList<JButton> getButtons() {
 		return buttons;
 	}
-
+	
+	public void WriteObjectToFile(Object serObj) {
+		 
+        try {
+ 
+            FileOutputStream fileOut = new FileOutputStream("/Users/juhi/Desktop/test");
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(serObj);
+            objectOut.close();
+            System.out.println("The Object  was succesfully written to a file");
+ 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+	
+	public void ReadObjectFromFile(String filename) {
+		
+		try {
+			FileInputStream fi = new FileInputStream(new File("/Users/juhi/Desktop/test"));
+			ObjectInputStream oi = new ObjectInputStream(fi);
+			SaveObject so = (SaveObject)oi.readObject();
+			allItems = so.getAllSprites();
+			reactions = so.getReactions();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	
 }
 

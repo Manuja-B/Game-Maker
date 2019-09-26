@@ -1,11 +1,12 @@
 package com.oosd.gamemaker.models;
 import com.oosd.gamemaker.commmands.Command;
 import java.awt.Graphics2D;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Composite extends Sprite {
+public class Composite extends Sprite implements Serializable {
 	List<Sprite> sprites;
 	
 	public Composite() {

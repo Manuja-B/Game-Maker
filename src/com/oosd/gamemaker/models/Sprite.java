@@ -2,6 +2,7 @@ package com.oosd.gamemaker.models;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.oosd.gamemaker.Playground;
@@ -9,23 +10,28 @@ import com.oosd.gamemaker.behavior.BoundaryBehavior;
 import com.oosd.gamemaker.behavior.Movement;
 import com.oosd.gamemaker.behavior.Reaction;
 
-public abstract class Sprite {
+public abstract class Sprite implements Serializable{
 	protected ArrayList<Movement>  manualMovements = new ArrayList<Movement>();
 	protected ArrayList<Reaction> reactions;
 	private Movement automaticMovement;
 	private boolean isReplay = false;
-	private boolean isGamePaused = false;
+	private boolean isGamePaused = true;
 	private int dx = 1;
 	private int dy = 1;
 	protected int x,y;
 	protected String name;
 	protected int height, width;
 	protected BoundaryBehavior boundaryBehavior;
-	public abstract void update(int x, int y);
+	//public abstract void update(int x, int y);
 	public abstract void draw(Graphics2D g2d);
 	
 	
-	
+	public void update(int x, int y) {
+		if(!isGamePaused()) {
+			this.x = x;
+			this.y = y;
+		}	
+	}
 	public String getName() {
 		return name;
 	}
@@ -96,8 +102,12 @@ public abstract class Sprite {
 	public abstract void endReplay();
 
 	public abstract void storeHistory();
+	
 	public void pause() {
 		this.isGamePaused = !isGamePaused;
+	}
+	public boolean isGamePaused() {
+		return isGamePaused;
 	}
 	
 }
