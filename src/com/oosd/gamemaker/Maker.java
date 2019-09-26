@@ -205,10 +205,11 @@ public class Maker extends JPanel implements ActionListener {
 		else if(arg0.getSource() == getButtons().get(6)) {
 			SaveObject saveobject = new SaveObject(reactions, allItems);
 			WriteObjectToFile(saveobject);
-			ReadObjectFromFile("test");
+			//ReadObjectFromFile("test");
 		}
 		else if(arg0.getSource() == getButtons().get(7)) {
-			ReadObjectFromFile("test");
+			String path = "/Users/juhi/Desktop/";
+			ReadObjectFromFile(path);
 		}
 			
 	}
@@ -230,7 +231,7 @@ public class Maker extends JPanel implements ActionListener {
 		 
         try {
  
-            FileOutputStream fileOut = new FileOutputStream("/Users/juhi/Desktop/test");
+            FileOutputStream fileOut = new FileOutputStream("/Users/juhi/Desktop/test"+System.currentTimeMillis());
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
             objectOut.writeObject(serObj);
             objectOut.close();
@@ -244,12 +245,25 @@ public class Maker extends JPanel implements ActionListener {
 	public void ReadObjectFromFile(String filename) {
 		
 		try {
-			FileInputStream fi = new FileInputStream(new File("/Users/juhi/Desktop/test"));
+			String path = "/Users/juhi/Desktop/test";
+			JFileChooser fileChooser = new JFileChooser(new File(path));
+			fileChooser.setDialogTitle("Multiple file and directory selection:");
+			fileChooser.setMultiSelectionEnabled(true);
+			fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+			int returnValue = fileChooser.showOpenDialog(null);
+			if (returnValue == JFileChooser.APPROVE_OPTION) {
+				File[] files = fileChooser.getSelectedFiles();
+				 File selectedFile = fileChooser.getSelectedFile();
+				 this.selectedpath = selectedFile.getAbsolutePath();
+			
+			FileInputStream fi = new FileInputStream((selectedFile));
 			ObjectInputStream oi = new ObjectInputStream(fi);
 			SaveObject so = (SaveObject)oi.readObject();
 			allItems = so.getAllSprites();
 			reactions = so.getReactions();
-		} catch (FileNotFoundException e) {
+				}
+			}
+		catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
