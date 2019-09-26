@@ -13,16 +13,11 @@ import javax.imageio.ImageIO;
 public class Picture extends Sprite{
 	private String currentPath=System.getProperty("user.dir");
 	private Image image ;
-	private int initialPositionX;
-	private int initialPositionY;
 	//private File f=new File(currentPath+"/doggy.jpeg");
 	private File f=new File("//home//bivas//Pictures//football.jepg");
 	private static int counter = 0;
 	public Picture( int initialPositionX, int initialPositionY, int imageHeight, int imageWidth,int dx, int dy)
 	{	
-		System.out.println(currentPath);
-		this.initialPositionX = initialPositionX;
-		this.initialPositionY = initialPositionY;
 		this.height = imageHeight;
 		this.width = imageWidth;
 		this.update(initialPositionX, initialPositionY);
@@ -50,30 +45,6 @@ public class Picture extends Sprite{
 	@Override
 	public void draw(Graphics2D g2d) {
         g2d.drawImage(image,x,y,width,height,null);
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void undo() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void replay() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void endReplay() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void storeHistory() {
 		// TODO Auto-generated method stub
 		
 	}

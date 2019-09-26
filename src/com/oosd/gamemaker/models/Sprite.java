@@ -14,7 +14,6 @@ public abstract class Sprite implements Serializable{
 	protected ArrayList<Movement>  manualMovements = new ArrayList<Movement>();
 	protected ArrayList<Reaction> reactions;
 	private Movement automaticMovement;
-	private boolean isReplay = false;
 	private boolean isGamePaused = true;
 	private int dx = 1;
 	private int dy = 1;
@@ -22,15 +21,19 @@ public abstract class Sprite implements Serializable{
 	protected String name;
 	protected int height, width;
 	protected BoundaryBehavior boundaryBehavior;
+	private boolean firstUpdate = true;
 	//public abstract void update(int x, int y);
 	public abstract void draw(Graphics2D g2d);
 	
-	
-	public void update(int x, int y) {
-		if(!isGamePaused()) {
+	public void update(int x, int y ) {
+		System.out.println(x+","+y);
+		if(!isGamePaused() || firstUpdate) {
 			this.x = x;
 			this.y = y;
 		}	
+		if(firstUpdate) {
+			firstUpdate = false;
+		}
 	}
 	public String getName() {
 		return name;
@@ -95,16 +98,12 @@ public abstract class Sprite implements Serializable{
 	public void setAutomaticMovement(Movement automaticMovement) {
 		this.automaticMovement = automaticMovement;
 	}
-	public abstract void undo();
-
-	public abstract void replay();
-
-	public abstract void endReplay();
-
-	public abstract void storeHistory();
 	
 	public void pause() {
-		this.isGamePaused = !isGamePaused;
+		this.isGamePaused = true;
+	}
+	public void play(){
+		this.isGamePaused = false;
 	}
 	public boolean isGamePaused() {
 		return isGamePaused;

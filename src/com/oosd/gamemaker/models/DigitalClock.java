@@ -13,8 +13,6 @@ import com.oosd.gamemaker.behavior.Movement;
 public class DigitalClock extends Sprite{
 	
 	private double milliSeconds;
-//	private int seconds;
-//	private int minutes;
 	private int positionX;
 	private int positionY;
 	private static int counter = 0;
@@ -25,7 +23,6 @@ public class DigitalClock extends Sprite{
 		this.positionX = positionX;
 		this.positionY = positionY; 
 		this.update(0,0); // initializing minutes and seconds
-//		this.movements = new ArrayList<Movement>();
 		StringBuilder strName = new StringBuilder("Clock ");
 		strName.append(++counter);
 		this.name = strName.toString();
@@ -61,36 +58,6 @@ public class DigitalClock extends Sprite{
 		// TODO Auto-generated method stub
 		this.currSeconds = currSeconds;
 	}
-
-	@Override
-	public void undo() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void replay() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void endReplay() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void storeHistory() {
-		// TODO Auto-generated method stub
-		
-	}
-
-//	public void position(int minutes2, int seconds2) {
-//		// TODO Auto-generated method stub
-//		setCurrSeconds(seconds);
-//		setCurrMinutes(minutes);
-//	}
 
 
 }
