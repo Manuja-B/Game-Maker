@@ -46,13 +46,6 @@ public class Picture extends Sprite{
 		this.name = strName.toString();
 	}
 
-	@Override
-	public void update(int x, int y) {
-		this.x=x;
-		this.y=y;
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void draw(Graphics2D g2d) {

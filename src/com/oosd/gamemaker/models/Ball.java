@@ -41,12 +41,7 @@ public class Ball extends Sprite {
 	
 		
 	}
-	@Override
-	public void update(int x, int y) {
-		this.x = x;
-		this.y = y;
-		
-	}
+	
 	@Override
 	public void draw(Graphics2D g2d) {
 		g2d.setColor(this.color);

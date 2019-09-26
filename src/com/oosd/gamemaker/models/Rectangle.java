@@ -30,12 +30,7 @@ public class Rectangle extends Sprite{
 		this.name = strName.toString();
 		
 	}
-	@Override
-	public void update(int x, int y) {
-		this.x = x;
-		this.y = y;
-		
-	}
+
 	@Override
 	public void draw(Graphics2D g2d) {
 		g2d.setColor(this.color);

@@ -1,5 +1,7 @@
 package com.oosd.gamemaker.behavior;
 
-public interface Reaction {
+import java.io.Serializable;
+
+public interface Reaction extends Serializable{
 	boolean react();
 }
