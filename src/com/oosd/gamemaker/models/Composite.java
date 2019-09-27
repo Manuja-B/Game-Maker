@@ -1,8 +1,11 @@
 package com.oosd.gamemaker.models;
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.oosd.gamemaker.behavior.AutomaticMovement;
 
 
 public class Composite extends Sprite implements Serializable {
@@ -44,10 +47,20 @@ public class Composite extends Sprite implements Serializable {
 			}
 		}
 	}
-	
-	public void edit(int index, Sprite sprite) {
-		sprites.set(index, sprite);
+	public void shoot() {
+		ArrayList<Sprite> bullets = new ArrayList<Sprite>();
+		for( Sprite sprite: sprites) {
+			if(sprite.isWillShoot()) {
+				Sprite bullet = new Ball(Color.BLACK,sprite.getX(),sprite.getY(),10,10,0,-3);
+				bullet.setAutomaticMovement(new AutomaticMovement());
+				bullet.play();
+				bullets.add(bullet);
+			}	
+		}
+		
+		sprites.addAll(bullets);
 	}
+	
 	
 	
 
