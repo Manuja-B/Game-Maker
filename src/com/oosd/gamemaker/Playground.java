@@ -29,12 +29,15 @@ public class Playground extends JPanel implements ActionListener{
 	String selectedpath;
 	Composite allItems = new Composite();
 	JButton startButton;
-
-		
+	ArrayList<Reaction> reactions; 
+	//String level="1";
+	JLabel levelNumberLabel;
+	
 	public Playground(Maker maker)  {
 		//this.setBackground(Color.WHITE);
 		this.maker = maker;
-		this.allItems = maker.getAllItems();
+		this.allItems = new Composite();//maker.getLevelObjects().get(maker.getCurrentLevel()).getSprites();
+		this.reactions=new ArrayList<Reaction>();//maker.getLevelObjects().get(maker.getCurrentLevel()).getReactions();
 		this.setLayout(null);
 			 
 	}
@@ -60,6 +63,7 @@ public class Playground extends JPanel implements ActionListener{
 	public static Graphics2D graphobj = null;
 	public void startGame() {
 		startButton = new JButton("Play/ Pause");
+		levelNumberLabel=new JLabel(""+LevelObject.level);
 		startButton.addActionListener(this);
 		startButton.setVisible(true);
 		startButton.setBounds(200, 10, 200, 20);
@@ -67,12 +71,12 @@ public class Playground extends JPanel implements ActionListener{
 		while(true){
 			
 			this.setBackgroundImage();
-			this.allItems = maker.getAllItems();
+			this.allItems = maker.getLevelObjects().get(maker.getCurrentLevel()).getSprites();
 			for(Sprite sprite: allItems.getAllSprites()) {
 				
 				sprite.move(this);
 			}
-			for(Reaction reaction: maker.getReactions()) {
+			for(Reaction reaction: reactions) {
 				reaction.react();
 			}
 			try {
