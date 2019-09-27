@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import com.oosd.gamemaker.behavior.Reaction;
 import com.oosd.gamemaker.models.Composite;
 
-public class SaveObject implements Serializable {
-	public SaveObject(ArrayList<Reaction> reactions, Composite allSprites) {
+public class LevelObject implements Serializable {
+	static int level=0;
+	public LevelObject(ArrayList<Reaction> reactions, Composite allSprites) {
 		super();
 		this.reactions = reactions;
 		this.allSprites = allSprites;
@@ -19,7 +20,7 @@ public class SaveObject implements Serializable {
 		return reactions;
 	}
 	
-	public Composite getAllSprites() {
+	public Composite getSprites() {
 		return allSprites;
 	}
 	

@@ -15,13 +15,14 @@ import com.oosd.gamemaker.models.Composite;
 import com.oosd.gamemaker.models.Sprite;
 
 public class ListPanel extends JPanel implements ActionListener {
-	//int pageSize;
+	Composite allSprites;
 	JButton buttonDelete;
 	JButton buttonEdit;
-	public ListPanel(Composite allSprites) {
-		//this.setLayout(null);
-		//this.pageSize = pageSize;
-		
+	JList<String> listSprite;
+	Maker maker;
+	public ListPanel(Composite allSprites, Maker maker) {
+		this.allSprites = allSprites;
+		this.maker = maker;
 		List<Sprite> sprites = allSprites.getAllSprites();
 		int count = sprites.size();
 		//To Implement 3 jlists. one for all sprite names, another with edit and another with delete
@@ -31,12 +32,14 @@ public class ListPanel extends JPanel implements ActionListener {
 			arraySprites[i] = sprites.get(i).getName();
 			//System.out.println(arraySprites[i]);
 		}
-		JList<String> listSprite = new JList<String>(arraySprites);
+		listSprite = new JList<String>(arraySprites);
 		//listSprite.getSize();
 		buttonDelete = new JButton("Delete");
 		buttonEdit = new JButton("Edit");
 		this.add(buttonDelete);
 		this.add(buttonEdit);
+		buttonDelete.addActionListener(this);
+		buttonEdit.addActionListener(this);
 		this.add(new JScrollPane(listSprite));
 		
 		
@@ -49,7 +52,12 @@ public class ListPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-
+		int selectedIndex = listSprite.getSelectedIndex();
+		//System.out.println(selectedIndex);
+		if(e.getSource() == buttonDelete) {
+			System.out.println(allSprites.getAllSprites().get(selectedIndex));
+			maker.allItems.remove(allSprites.getAllSprites().get(selectedIndex));
+		}
 	}
 
 }

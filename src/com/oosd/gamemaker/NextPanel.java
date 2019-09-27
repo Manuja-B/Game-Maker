@@ -2,21 +2,30 @@ package com.oosd.gamemaker;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 
 import com.oosd.gamemaker.ComboItem;
 import com.oosd.gamemaker.behavior.BounceBack;
 import com.oosd.gamemaker.behavior.Explode;
+import com.oosd.gamemaker.behavior.Sound;
 import com.oosd.gamemaker.models.Composite;
+
+import sun.audio.AudioStream;
 
 public class NextPanel extends JPanel implements ActionListener{
 	ArrayList<JComboBox<ComboItem>> comboBoxes = new ArrayList<JComboBox<ComboItem>>() ;
 	ArrayList<JButton> buttons = new ArrayList<JButton>();
 	Maker maker;
+	Sound sound;
+	String audiopath;
+	AudioStream audio = null;
 	
 	public NextPanel(Maker maker) {
 		// TODO Auto-generated constructor stubs
@@ -29,7 +38,8 @@ public class NextPanel extends JPanel implements ActionListener{
 		addCombobox(sprites, 30, 10, this);
 		addCombobox(sprites, 50, 10, this);
 		
-		addButtonToPanel("Add Reaction", 30, 30, this);
+		addButtonToPanel("Add Sound", 50, 120, this);
+		addButtonToPanel("Add Reaction", 60, 30, this);
 		this.maker=maker;
 	}
 	
@@ -52,19 +62,61 @@ public class NextPanel extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		Object reactionItem = comboBoxes.get(0).getSelectedItem();
-		int reactionCode = ((ComboItem)reactionItem).getValue();
-		Object spriteItem1 = comboBoxes.get(1).getSelectedItem();
-		int spriteCode1 = ((ComboItem)spriteItem1).getValue();
-		Object spriteItem2 = comboBoxes.get(2).getSelectedItem();
-		int spriteCode2 = ((ComboItem)spriteItem2).getValue();
-		if(reactionCode == 0) {
+		
+		
+		if(e.getSource()==buttons.get(1))
+		{
+			Object reactionItem = comboBoxes.get(0).getSelectedItem();
+			int reactionCode = ((ComboItem)reactionItem).getValue();
+			Object spriteItem1 = comboBoxes.get(1).getSelectedItem();
+			int spriteCode1 = ((ComboItem)spriteItem1).getValue();
+			Object spriteItem2 = comboBoxes.get(2).getSelectedItem();
+			int spriteCode2 = ((ComboItem)spriteItem2).getValue();
+			if(reactionCode == 0) {
 			
-			maker.addReaction((new BounceBack(maker.getAllItems().getAllSprites().get(spriteCode1), maker.getAllItems().getAllSprites().get(spriteCode2))));
-		}
-		else if(reactionCode == 1) {
+				maker.addReaction((new BounceBack(maker.getAllItems().getAllSprites().get(spriteCode1), maker.getAllItems().getAllSprites().get(spriteCode2), sound)));
+			}
+			else if(reactionCode == 1) {
 			
-			maker.addReaction((new Explode(maker.getAllItems().getAllSprites().get(spriteCode1), maker.getAllItems().getAllSprites().get(spriteCode2))));
+				maker.addReaction((new Explode(maker.getAllItems().getAllSprites().get(spriteCode1), maker.getAllItems().getAllSprites().get(spriteCode2), sound)));
+			}
 		}
+		
+		else if(e.getSource()==buttons.get(0))
+		{
+			String path = "Music";
+			JFileChooser jfc = new JFileChooser(new File(path));
+//			JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+			
+			jfc.setDialogTitle("Choose Background Sound");
+			jfc.setMultiSelectionEnabled(true);
+			jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+			System.out.println("Inside NextPanel btn.get(1)");
+			int returnValue = jfc.showOpenDialog(null);
+			if (returnValue == JFileChooser.APPROVE_OPTION) {
+				File[] files = jfc.getSelectedFiles();
+				 File selectedFile = jfc.getSelectedFile();
+				 this.audiopath = selectedFile.getAbsolutePath();
+				 System.out.println("Music selected is : "+audiopath);
+				 
+				 sound = new Sound(audiopath);
+				 
+				Arrays.asList(files).forEach(x -> {
+					if (x.isFile()) {
+						System.out.println(x.getName());
+					}
+				});
+			}
+			
+		}
+		
 	}
+
+	public String getAudiopath() {
+		return audiopath;
+	}
+
+	
+	
+	
 }

@@ -29,6 +29,7 @@ import com.oosd.gamemaker.behavior.ManualRight;
 import com.oosd.gamemaker.behavior.ManualUp;
 import com.oosd.gamemaker.behavior.Movement;
 import com.oosd.gamemaker.behavior.Reaction;
+import com.oosd.gamemaker.behavior.Sound;
 import com.oosd.gamemaker.behavior.BoundaryBounce;
 import com.oosd.gamemaker.behavior.BoundaryRotate;
 import com.oosd.gamemaker.behavior.ClockTick;
@@ -61,6 +62,7 @@ public class Maker extends JPanel implements ActionListener {
 	private  String selectedpath;
 	JPanel listPanel = new JPanel();
 	Image image;
+	int currentLevel=0;
 	ArrayList<String> keys = new ArrayList<String>() ;
 	ArrayList<Movement> manualMovements = new ArrayList<Movement>() ;
 	ArrayList<JTextField> textboxes = new ArrayList<JTextField>() ;
@@ -76,6 +78,16 @@ public class Maker extends JPanel implements ActionListener {
 		this.listPanel = listPanel;
 	}
 	
+	ArrayList<LevelObject> levelObjects=new ArrayList<LevelObject>();
+	public ArrayList<LevelObject> getLevelObjects() {
+		return levelObjects;
+	}
+
+	public void setLevelObjects(ArrayList<LevelObject> levelObjects) {
+		this.levelObjects = levelObjects;
+	}
+
+	ArrayList<JLabel> labels=new ArrayList<JLabel>();
 	public void addReaction(Reaction reaction) {
 		this.reactions.add(reaction);
 	}
@@ -98,12 +110,15 @@ public class Maker extends JPanel implements ActionListener {
 		JLabel label = new JLabel(message);
 		label.setBounds(x, y, 200, 20);
 		panel.add(label);
+		labels.add(label);
 	}
 
 	public void makeGame() {
 		SpritePropertiesPanel spritePropertyPanelObject=new SpritePropertiesPanel(this); 
-		addLabel("Add a new Component", 10, 10,this);
-		addLabel("Component Type", 10, 30,this);
+		levelObjects.add(new LevelObject(reactions,allItems));
+		addLabel("You are creating level "+currentLevel,10,10,this);
+		addLabel("Add a new Component", 10, 30,this);
+		addLabel("Component Type", 10, 50,this);
 		
 		addButtonToPanel("Circle",10,70,this);//button 0
 		addButtonToPanel("Rectangle",10,100,this);//button 1
@@ -112,8 +127,11 @@ public class Maker extends JPanel implements ActionListener {
 		//addButtonToPanel("Add Component", 10, 300,this); //24
 		addButtonToPanel("Add Reaction", 10, 320,this); //23
 		addButtonToPanel("Choose Theme",10, 340,this); //25
-		addButtonToPanel("Save", 10, 360, this);
-		addButtonToPanel("Load", 10, 380, this);
+		addButtonToPanel("Add Level", 10, 360, this);
+		addButtonToPanel("Save", 10, 380, this);
+		addButtonToPanel("Load", 10, 400, this);
+		addTextBox(10,420, this);
+		addButtonToPanel("Go To Level", 50,420, this);
 	}
 		
 	public void addTextBox(int x, int y, JPanel panel) {
@@ -206,7 +224,7 @@ public class Maker extends JPanel implements ActionListener {
 			JFileChooser jfc = new JFileChooser(new File(path));
 //			JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 			
-			jfc.setDialogTitle("Multiple file and directory selection:");
+			jfc.setDialogTitle("Choose Background Theme");
 			jfc.setMultiSelectionEnabled(true);
 			jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 			int returnValue = jfc.showOpenDialog(null);
@@ -223,17 +241,52 @@ public class Maker extends JPanel implements ActionListener {
 				});
 			}
 		}
-		else if(arg0.getSource() == getButtons().get(6)) {
-			SaveObject saveobject = new SaveObject(reactions, allItems);
+		else if(arg0.getSource() == getButtons().get(6))
+		{
+			//AddLevel functionality
+			//ArrayList<Reaction> reactionsCopy=new ArrayList<Reaction>();
+			//reactionsCopy=reactions;
+			//Composite allItemsCopy=new Composite();
+			//allItemsCopy=allItems;
+			
+			allItems=new Composite();
+			reactions=new ArrayList<Reaction>();
+			
+			levelObjects.add(new LevelObject(reactions, allItems));
+			System.out.println(levelObjects.get(currentLevel).getSprites().getAllSprites().size());
+			currentLevel++;
+//			this.setVisible(false);
+//			this.setVisible(true);
+			labels.get(0).setText("You are on level "+currentLevel);
+			//reactions = 
+			//allItems.getAllSprites().clear();
+			
+		
+		}
+		else if(arg0.getSource() == getButtons().get(7)) {
+			LevelObject saveobject = new LevelObject(reactions, allItems);
 			WriteObjectToFile(saveobject);
 			//ReadObjectFromFile("test");
 		}
-		else if(arg0.getSource() == getButtons().get(7)) {
+		else if(arg0.getSource() == getButtons().get(8)) {
 			ReadObjectFromFile("test");
 		}
+		else if(arg0.getSource() == getButtons().get(9)) {
+			String goToLevel = textboxes.get(0).getText().isEmpty()?"0":textboxes.get(0).getText();
+			currentLevel=Integer.parseInt(goToLevel);
+		}
+		
 			
 	}
 	
+	public int getCurrentLevel() {
+		return currentLevel;
+	}
+
+	public void setCurrentLevel(int currentLevel) {
+		this.currentLevel = currentLevel;
+	}
+
 	public String getSelectedpath() {
 		return selectedpath;
 	}
@@ -251,7 +304,8 @@ public class Maker extends JPanel implements ActionListener {
 		 
         try {
  
-            FileOutputStream fileOut = new FileOutputStream("/Users/juhi/Desktop/test");
+            FileOutputStream fileOut = new FileOutputStream("/Users/juhi/"
+            		+ "Desktop/test");
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
             objectOut.writeObject(serObj);
             objectOut.close();
@@ -267,8 +321,8 @@ public class Maker extends JPanel implements ActionListener {
 		try {
 			FileInputStream fi = new FileInputStream(new File("/Users/juhi/Desktop/test"));
 			ObjectInputStream oi = new ObjectInputStream(fi);
-			SaveObject so = (SaveObject)oi.readObject();
-			allItems = so.getAllSprites();
+			LevelObject so = (LevelObject)oi.readObject();
+			allItems = so.getSprites();
 			reactions = so.getReactions();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
