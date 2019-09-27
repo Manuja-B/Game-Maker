@@ -22,11 +22,9 @@ public abstract class Sprite implements Serializable{
 	protected int height, width;
 	protected BoundaryBehavior boundaryBehavior;
 	private boolean firstUpdate = true;
-	//public abstract void update(int x, int y);
 	public abstract void draw(Graphics2D g2d);
 	
 	public void update(int x, int y ) {
-		System.out.println(x+","+y);
 		if(!isGamePaused() || firstUpdate) {
 			this.x = x;
 			this.y = y;

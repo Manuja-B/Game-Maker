@@ -158,6 +158,15 @@ public class SpritePropertiesPanel extends JPanel implements ActionListener{
 		}
 		maker.allItems.add(newSprite);
 		//maker.getManualMovements().clear();
+		
+		JPanel listPanel = new ListPanel(maker.allItems);
+		listPanel.setSize(200, 200);
+		listPanel.setLocation(10, 500);
+		maker.remove(maker.getListPanel());
+		maker.setListPanel(listPanel);
+		maker.add(listPanel);
+		maker.setVisible(false);
+		maker.setVisible(true);
 	}
 
 	

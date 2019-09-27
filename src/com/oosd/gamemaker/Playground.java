@@ -53,8 +53,7 @@ public class Playground extends JPanel implements ActionListener{
 			}
 			
 		}
-		
-		
+			
 	}
 	
 	public static Graphics2D graphobj = null;

@@ -36,20 +36,20 @@ public class BounceBack implements Reaction {
 		int secondaryXmax = secondaryXmin + primary.getWidth();
 		int secondaryYmax = secondaryYmin + primary.getHeight();
 		
-//		InputStream music = null;
-//		try {
-//			music = new FileInputStream(new File("/Users/juhi/Desktop/OOSD/Ball_Bounce.wav"));
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		AudioStream audio = null;
-//		try {
-//			audio = new AudioStream(music);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		InputStream music = null;
+		try {
+			music = new FileInputStream(new File("/Users/juhi/Desktop/OOSD/Ball_Bounce.wav"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		AudioStream audio = null;
+		try {
+			audio = new AudioStream(music);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		if((primaryYmin - secondary.getHeight())<= secondaryYmin 
 				&& secondaryYmin <= primaryYmax 
@@ -67,7 +67,7 @@ public class BounceBack implements Reaction {
 				secondary.setDy(-(secondary.getDy()));
 				//AudioPlayer.player.start(audio);
 			}
-			//System.out.println("yo");
+			AudioPlayer.player.start(audio);
 			return true;
 		}
 		
