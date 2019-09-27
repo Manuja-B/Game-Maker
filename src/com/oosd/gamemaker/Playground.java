@@ -43,8 +43,8 @@ public class Playground extends JPanel implements ActionListener{
 	}
 	public void setBackgroundImage()
 	{
-		this.selectedpath = maker.getSelectedpath();
-		
+		this.selectedpath = maker.getLevelObjects().get(maker.getCurrentLevel()).getSelectedPath();
+		//System.out.println(selectedpath);
 		if(selectedpath != null)
 		{
 			File sourceimage = new File(selectedpath);
@@ -54,6 +54,9 @@ public class Playground extends JPanel implements ActionListener{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}	
+		}
+		else {
+			image = null;
 		}
 	}
 	
