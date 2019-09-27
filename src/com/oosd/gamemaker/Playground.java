@@ -50,11 +50,8 @@ public class Playground extends JPanel implements ActionListener{
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-			
+			}	
 		}
-		
-		
 	}
 	
 	public static Graphics2D graphobj = null;

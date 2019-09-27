@@ -27,6 +27,7 @@ import com.oosd.gamemaker.behavior.ManualRight;
 import com.oosd.gamemaker.behavior.ManualUp;
 import com.oosd.gamemaker.behavior.Movement;
 import com.oosd.gamemaker.behavior.Reaction;
+import com.oosd.gamemaker.behavior.Sound;
 import com.oosd.gamemaker.behavior.BoundaryBounce;
 import com.oosd.gamemaker.behavior.BoundaryRotate;
 import com.oosd.gamemaker.behavior.ClockTick;
@@ -58,6 +59,7 @@ public class Maker extends JPanel implements ActionListener {
 	String boundaryReaction;
 	private  String selectedpath;
 	Image image;
+	
 	
 	ArrayList<String> keys = new ArrayList<String>() ;
 	ArrayList<Movement> manualMovements = new ArrayList<Movement>() ;
@@ -169,7 +171,7 @@ public class Maker extends JPanel implements ActionListener {
 			frame1.add(spritePropertiesPanelObject);
 			//frame.pack();
 			//frame.add(whitePanel);
-			System.out.println(frame1.getComponentCount());
+			//System.out.println(frame1.getComponentCount());
 			frame1.setVisible(true);
 		
 			spritePropertiesPanelObject.drawSpritePropertiesPanel();
@@ -197,7 +199,7 @@ public class Maker extends JPanel implements ActionListener {
 			JFileChooser jfc = new JFileChooser(new File(path));
 //			JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 			
-			jfc.setDialogTitle("Multiple file and directory selection:");
+			jfc.setDialogTitle("Choose Background Theme");
 			jfc.setMultiSelectionEnabled(true);
 			jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 			int returnValue = jfc.showOpenDialog(null);

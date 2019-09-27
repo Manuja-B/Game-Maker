@@ -26,7 +26,7 @@ public abstract class Sprite implements Serializable{
 	public abstract void draw(Graphics2D g2d);
 	
 	public void update(int x, int y ) {
-		System.out.println(x+","+y);
+		//System.out.println(x+","+y);
 		if(!isGamePaused() || firstUpdate) {
 			this.x = x;
 			this.y = y;
