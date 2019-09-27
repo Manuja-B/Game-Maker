@@ -27,7 +27,6 @@ public class Sound {
 			System.out.println("Inside Sound if : "+audiopath);
 			try {
 				music = new FileInputStream(new File(audiopath));
-			//AudioStream audio = null;
 				audio = new AudioStream(music);
 				System.out.println("below AudioStream(music)");
 				AudioPlayer.player.start(audio);
@@ -35,29 +34,6 @@ public class Sound {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}		
-			
-		
-//		String path = "C:\\Users\\Maruti\\OneDrive\\Pictures\\Saved Pictures";
-//		JFileChooser jfc = new JFileChooser(new File(path));
-////		JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-//		
-//		jfc.setDialogTitle("Choose Background Sound");
-//		jfc.setMultiSelectionEnabled(true);
-//		jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-//		int returnValue = jfc.showOpenDialog(null);
-//		if (returnValue == JFileChooser.APPROVE_OPTION) {
-//			File[] files = jfc.getSelectedFiles();
-//			 File selectedFile = jfc.getSelectedFile();
-//			 this.audiopath = selectedFile.getAbsolutePath();
-//			 System.out.println("Music selected is : "+audiopath);
-//			 
-//			Arrays.asList(files).forEach(x -> {
-//				if (x.isFile()) {
-//					System.out.println(x.getName());
-//				}
-//			});
-//		}
 		
 	}
-
 }

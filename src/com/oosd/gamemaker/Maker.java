@@ -18,7 +18,9 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import com.oosd.gamemaker.behavior.AutomaticMovement;
 import com.oosd.gamemaker.behavior.BounceBack;
@@ -58,16 +60,24 @@ public class Maker extends JPanel implements ActionListener {
 	int x,y,dx,dy;
 	String boundaryReaction;
 	private  String selectedpath;
+	JPanel listPanel = new JPanel();
 	Image image;
 	int currentLevel=0;
-	
-	
 	ArrayList<String> keys = new ArrayList<String>() ;
 	ArrayList<Movement> manualMovements = new ArrayList<Movement>() ;
 	ArrayList<JTextField> textboxes = new ArrayList<JTextField>() ;
 	ArrayList<JComboBox<ComboItem>> comboBoxes = new ArrayList<JComboBox<ComboItem>>() ;
 	ArrayList<JButton> buttons = new ArrayList<JButton>();
 	ArrayList<Reaction> reactions = new ArrayList<Reaction>();
+	
+	public JPanel getListPanel() {
+		return listPanel;
+	}
+
+	public void setListPanel(JPanel listPanel) {
+		this.listPanel = listPanel;
+	}
+	
 	ArrayList<LevelObject> levelObjects=new ArrayList<LevelObject>();
 	public ArrayList<LevelObject> getLevelObjects() {
 		return levelObjects;
@@ -146,7 +156,6 @@ public class Maker extends JPanel implements ActionListener {
 	public Composite getAllItems() {
 		return allItems;
 	}
-
 	
 	
 	@Override
@@ -190,7 +199,6 @@ public class Maker extends JPanel implements ActionListener {
 			//frame.add(whitePanel);
 			//System.out.println(frame1.getComponentCount());
 			frame1.setVisible(true);
-		
 			spritePropertiesPanelObject.drawSpritePropertiesPanel();
 		
 		}
@@ -224,7 +232,7 @@ public class Maker extends JPanel implements ActionListener {
 				File[] files = jfc.getSelectedFiles();
 				 File selectedFile = jfc.getSelectedFile();
 				 this.selectedpath = selectedFile.getAbsolutePath();
-				 System.out.println(selectedpath);
+				 //System.out.println(selectedpath);
 				 
 				Arrays.asList(files).forEach(x -> {
 					if (x.isFile()) {
@@ -258,7 +266,7 @@ public class Maker extends JPanel implements ActionListener {
 		else if(arg0.getSource() == getButtons().get(7)) {
 			LevelObject saveobject = new LevelObject(reactions, allItems);
 			WriteObjectToFile(saveobject);
-			ReadObjectFromFile("test");
+			//ReadObjectFromFile("test");
 		}
 		else if(arg0.getSource() == getButtons().get(8)) {
 			ReadObjectFromFile("test");

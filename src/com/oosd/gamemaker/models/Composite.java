@@ -45,6 +45,10 @@ public class Composite extends Sprite implements Serializable {
 		}
 	}
 	
+	public void edit(int index, Sprite sprite) {
+		sprites.set(index, sprite);
+	}
+	
 	
 
 }

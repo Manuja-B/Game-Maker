@@ -33,7 +33,7 @@ import com.oosd.gamemaker.models.Sprite;
 public class SpritePropertiesPanel extends JPanel implements ActionListener{
 	Maker maker;
 	Sprite newSprite;
-	int x,y,dx,dy;
+	int x,y,dx,dy, index;
 	String boundaryReaction;
 	
 	ArrayList<String> keys = new ArrayList<String>() ;
@@ -42,12 +42,18 @@ public class SpritePropertiesPanel extends JPanel implements ActionListener{
 	ArrayList<JComboBox<ComboItem>> comboBoxes = new ArrayList<JComboBox<ComboItem>>() ;
 	ArrayList<JButton> buttons = new ArrayList<JButton>();
 	
-	SpritePropertiesPanel(Maker maker)
+	public SpritePropertiesPanel(Maker maker)
 	{
 		this.maker=maker;
 		this.setLayout(null);
 	}
 	
+	public SpritePropertiesPanel(Maker maker, int index)
+	{
+		this.maker=maker;
+		this.setLayout(null);
+		this.index = index;
+	}
 	
 	public void addLabel(String message, int x, int y, JPanel panel) {
 		JLabel label = new JLabel(message);
@@ -158,6 +164,15 @@ public class SpritePropertiesPanel extends JPanel implements ActionListener{
 		}
 		maker.allItems.add(newSprite);
 		//maker.getManualMovements().clear();
+		
+		JPanel listPanel = new ListPanel(maker.allItems, maker);
+		listPanel.setSize(200, 200);
+		listPanel.setLocation(10, 500);
+		maker.remove(maker.getListPanel());
+		maker.setListPanel(listPanel);
+		maker.add(listPanel);
+		maker.setVisible(false);
+		maker.setVisible(true);
 	}
 
 	
@@ -192,13 +207,6 @@ public class SpritePropertiesPanel extends JPanel implements ActionListener{
 		addButtonToPanel("Add Manual Movement", 10, 210,this); //19 //button 5
 		
 		addButtonToPanel("Add Component", 10, 320,this);//24 //button 6
-		
-		
-		
-//		maker.items = maker.allItems.getAllSprites(); 
-//		
-//		maker.componentNames = new String[maker.items.size()];
-		
 		
 	}
 

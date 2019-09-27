@@ -84,7 +84,6 @@ public class Playground extends JPanel implements ActionListener{
 			}
 			
 			repaint();
-			
 		}
 	}
 	
