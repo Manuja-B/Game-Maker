@@ -15,13 +15,14 @@ public class BounceBack implements Reaction {
 
 	Sprite primary;
 	Sprite secondary;
+	Sound sound;
 	
 	
-	
-	public BounceBack(Sprite primary, Sprite secondary) {
+	public BounceBack(Sprite primary, Sprite secondary, Sound sound) {
 		super();
 		this.primary = primary;
 		this.secondary = secondary;
+		this.sound = sound;
 	}
 	@Override
 	public boolean react() {
@@ -36,7 +37,7 @@ public class BounceBack implements Reaction {
 		int secondaryXmax = secondaryXmin + primary.getWidth();
 		int secondaryYmax = secondaryYmin + primary.getHeight();
 		
-//		InputStream music = null;
+		//InputStream music = null;
 //		try {
 //			music = new FileInputStream(new File("/Users/juhi/Desktop/OOSD/Ball_Bounce.wav"));
 //		} catch (FileNotFoundException e) {
@@ -61,13 +62,17 @@ public class BounceBack implements Reaction {
 			int secondaryYCenter = secondary.getY() + secondary.getHeight()/2;
 			if(primaryYmin <= secondaryYCenter && secondaryYCenter <= primaryYmax ) {
 				secondary.setDx(-secondary.getDx());
+				//sound.playSound();
 				//AudioPlayer.player.start(audio);
 			}
 			else {
 				secondary.setDy(-(secondary.getDy()));
+				
+				//sound.playSound();
 				//AudioPlayer.player.start(audio);
 			}
 			//System.out.println("yo");
+				sound.playSound();
 			return true;
 		}
 		

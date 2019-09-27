@@ -15,11 +15,13 @@ public class Explode implements Reaction {
 	
 	Sprite primary;
 	Sprite secondary;
+	Sound sound;
 	
-	public Explode(Sprite primary, Sprite secondary) {
+	public Explode(Sprite primary, Sprite secondary, Sound sound) {
 		super();
 		this.primary = primary;
 		this.secondary = secondary;
+		this.sound = sound;
 	}
 	@Override
 	public boolean react() {
@@ -33,20 +35,21 @@ public class Explode implements Reaction {
 		int secondaryXmax = secondaryXmin + primary.getWidth();
 		int secondaryYmax = secondaryYmin + primary.getHeight();
 		
-		InputStream music = null;
-		try {
-			music = new FileInputStream(new File("/Users/juhi/Desktop/OOSD/Ball_Bounce.wav"));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		AudioStream audio = null;
-		try {
-			audio = new AudioStream(music);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		InputStream music = null;
+//		try {
+//			music = new FileInputStream(new File("/Users/juhi/Desktop/OOSD/Ball_Bounce.wav"));
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		AudioStream audio = null;
+//		try {
+//			audio = new AudioStream(music);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
 		
 		if((primaryYmin - secondary.getHeight())<= secondaryYmin 
 				&& secondaryYmin <= primaryYmax 
@@ -58,13 +61,14 @@ public class Explode implements Reaction {
 			int secondaryYCenter = secondary.getY() + secondary.getHeight()/2;
 			if(primaryYmin <= secondaryYCenter && secondaryYCenter <= primaryYmax ) {
 				secondary.update(secondaryXmin + 1000, secondaryYmin + 1000);
-				AudioPlayer.player.start(audio);
+				//AudioPlayer.player.start(audio);
 			}
 			else {
 				secondary.update(secondaryXmin + 1000, secondaryYmin + 1000);
-				AudioPlayer.player.start(audio);
+				//AudioPlayer.player.start(audio);
 				
 			}
+			sound.playSound();
 			return true;
 		}
 		
