@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -57,6 +58,17 @@ public class ListPanel extends JPanel implements ActionListener {
 		if(e.getSource() == buttonDelete) {
 			System.out.println(allSprites.getAllSprites().get(selectedIndex));
 			maker.allItems.remove(allSprites.getAllSprites().get(selectedIndex));
+		}
+		if(e.getSource() == buttonEdit) {
+			JFrame editFrame = new JFrame();
+			JPanel editPanel = new SpritePropertiesPanel(maker, selectedIndex);
+			editPanel.setSize(400, 400);
+			editFrame.setLocation(150, 100);
+			editFrame.setSize(400, 400);
+			editFrame.add(editPanel);
+			((SpritePropertiesPanel)editPanel).drawSpritePropertiesPanel();
+			editFrame.setVisible(true);
+			
 		}
 	}
 
