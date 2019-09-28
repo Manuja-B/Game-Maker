@@ -6,6 +6,8 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ import com.oosd.gamemaker.behavior.Reaction;
 import com.oosd.gamemaker.models.Composite;
 import com.oosd.gamemaker.models.Sprite;
 
-public class Playground extends JPanel implements ActionListener{
+public class Playground extends JPanel implements ActionListener, MouseListener{
 	
 	Maker maker;
 	JPanel controller;
@@ -39,12 +41,13 @@ public class Playground extends JPanel implements ActionListener{
 		this.allItems = new Composite();//maker.getLevelObjects().get(maker.getCurrentLevel()).getSprites();
 		this.reactions=new ArrayList<Reaction>();//maker.getLevelObjects().get(maker.getCurrentLevel()).getReactions();
 		this.setLayout(null);
+		this.addMouseListener(this);
 			 
 	}
 	public void setBackgroundImage()
 	{
-		this.selectedpath = maker.getSelectedpath();
-		
+		this.selectedpath = maker.getLevelObjects().get(maker.getCurrentLevel()).getSelectedPath();
+		//System.out.println(selectedpath);
 		if(selectedpath != null)
 		{
 			File sourceimage = new File(selectedpath);
@@ -54,6 +57,9 @@ public class Playground extends JPanel implements ActionListener{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}	
+		}
+		else {
+			image = null;
 		}
 	}
 	
@@ -69,12 +75,14 @@ public class Playground extends JPanel implements ActionListener{
 			
 			this.setBackgroundImage();
 			this.allItems = maker.getLevelObjects().get(maker.getCurrentLevel()).getSprites();
+			this.reactions = maker.getLevelObjects().get(maker.getCurrentLevel()).getReactions();
 			for(Sprite sprite: allItems.getAllSprites()) {
 				
 				sprite.move(this);
 			}
 			for(Reaction reaction: reactions) {
 				reaction.react();
+				
 			}
 			try {
 				
@@ -110,5 +118,35 @@ public class Playground extends JPanel implements ActionListener{
 		if(e.getSource() == startButton ) {
 			allItems.pause();
 		}
+		else {
+			System.out.println("yo");
+		}
+	}
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println("mouse");
+		allItems.shoot();
+		
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

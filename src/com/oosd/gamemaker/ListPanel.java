@@ -21,13 +21,26 @@ public class ListPanel extends JPanel implements ActionListener {
 	JButton buttonEdit;
 	JList<String> listSprite;
 	Maker maker;
+	JScrollPane scrollPane;
 	public ListPanel(Composite allSprites, Maker maker) {
+		buttonDelete = new JButton("Delete");
+		buttonEdit = new JButton("Edit");
+		this.add(buttonDelete);
+		this.add(buttonEdit);
 		this.allSprites = allSprites;
 		this.maker = maker;
+		this.createList();
+	}
+	
+	public ListPanel(ArrayList<Movement> movements) {
+		//this.pageSize = pageSize;
+		this.setLayout(null);
+		
+	}
+	
+	public void createList() {
 		List<Sprite> sprites = allSprites.getAllSprites();
 		int count = sprites.size();
-		//To Implement 3 jlists. one for all sprite names, another with edit and another with delete
-		//Sprite value;
 		String arraySprites[] = new String[count];
 		for(int i = 0; i < count ; i++ ) {
 			arraySprites[i] = sprites.get(i).getName();
@@ -35,20 +48,11 @@ public class ListPanel extends JPanel implements ActionListener {
 		}
 		listSprite = new JList<String>(arraySprites);
 		//listSprite.getSize();
-		buttonDelete = new JButton("Delete");
-		buttonEdit = new JButton("Edit");
-		this.add(buttonDelete);
-		this.add(buttonEdit);
+		
 		buttonDelete.addActionListener(this);
 		buttonEdit.addActionListener(this);
-		this.add(new JScrollPane(listSprite));
-		
-		
-	}
-	public ListPanel(ArrayList<Movement> movements) {
-		//this.pageSize = pageSize;
-		this.setLayout(null);
-		
+		scrollPane = new JScrollPane(listSprite);
+		this.add(scrollPane);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -56,8 +60,13 @@ public class ListPanel extends JPanel implements ActionListener {
 		int selectedIndex = listSprite.getSelectedIndex();
 		//System.out.println(selectedIndex);
 		if(e.getSource() == buttonDelete) {
-			System.out.println(allSprites.getAllSprites().get(selectedIndex));
+			//System.out.println(allSprites.getAllSprites().get(selectedIndex));
 			maker.allItems.remove(allSprites.getAllSprites().get(selectedIndex));
+			listSprite.remove(selectedIndex);
+			this.remove(scrollPane);
+			this.createList();
+			this.setVisible(false);
+			this.setVisible(true);
 		}
 		if(e.getSource() == buttonEdit) {
 			JFrame editFrame = new JFrame();

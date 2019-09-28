@@ -4,11 +4,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class SaveObject implements Serializable {
-	ArrayList<LevelObject> lo = new ArrayList<LevelObject>();
+	ArrayList<LevelObject> levelObjects = new ArrayList<LevelObject>();
 	
-	public SaveObject(ArrayList<LevelObject> lo) {
+	public ArrayList<LevelObject> getLevelObjects() {
+		return levelObjects;
+	}
+
+	public SaveObject(ArrayList<LevelObject> levelObjects) {
 		super();
-		this.lo = lo;
+		this.levelObjects = levelObjects;
 	}
 
 	

@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -41,6 +42,7 @@ public class SpritePropertiesPanel extends JPanel implements ActionListener{
 	ArrayList<JTextField> textboxes = new ArrayList<JTextField>() ;
 	ArrayList<JComboBox<ComboItem>> comboBoxes = new ArrayList<JComboBox<ComboItem>>() ;
 	ArrayList<JButton> buttons = new ArrayList<JButton>();
+	JCheckBox shootYes = new JCheckBox("Will shoot ?");
 	
 	public SpritePropertiesPanel(Maker maker)
 	{
@@ -162,6 +164,7 @@ public class SpritePropertiesPanel extends JPanel implements ActionListener{
 		for(Movement manual :manualMovements) {
 			newSprite.setManualMovement(manual);
 		}
+		newSprite.setWillShoot(shootYes.isSelected());
 		maker.allItems.add(newSprite);
 		//maker.getManualMovements().clear();
 		
@@ -205,7 +208,8 @@ public class SpritePropertiesPanel extends JPanel implements ActionListener{
 		
 		addCombobox(new ComboItem[] { new ComboItem("Up", 0) , new ComboItem("Down", 1) , new ComboItem("Left", 2), new ComboItem("Right", 3)}, 200, 190,this); //2
 		addButtonToPanel("Add Manual Movement", 10, 210,this); //19 //button 5
-		
+		shootYes.setBounds(10, 240, 160, 60);
+		this.add(shootYes);
 		addButtonToPanel("Add Component", 10, 320,this);//24 //button 6
 		
 	}

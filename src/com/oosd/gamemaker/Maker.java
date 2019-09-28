@@ -115,7 +115,7 @@ public class Maker extends JPanel implements ActionListener {
 
 	public void makeGame() {
 		SpritePropertiesPanel spritePropertyPanelObject=new SpritePropertiesPanel(this); 
-		levelObjects.add(new LevelObject(reactions,allItems));
+		levelObjects.add(new LevelObject(reactions,allItems,selectedpath));
 		addLabel("You are creating level "+currentLevel,10,10,this);
 		addLabel("Add a new Component", 10, 30,this);
 		addLabel("Component Type", 10, 50,this);
@@ -232,13 +232,10 @@ public class Maker extends JPanel implements ActionListener {
 				File[] files = jfc.getSelectedFiles();
 				 File selectedFile = jfc.getSelectedFile();
 				 this.selectedpath = selectedFile.getAbsolutePath();
+				 levelObjects.get(currentLevel).setSelectedPath(this.selectedpath);
 				 //System.out.println(selectedpath);
 				 
-				Arrays.asList(files).forEach(x -> {
-					if (x.isFile()) {
-						System.out.println(x.getName());
-					}
-				});
+	
 			}
 		}
 		else if(arg0.getSource() == getButtons().get(6))
@@ -251,9 +248,9 @@ public class Maker extends JPanel implements ActionListener {
 			
 			allItems=new Composite();
 			reactions=new ArrayList<Reaction>();
-			
-			levelObjects.add(new LevelObject(reactions, allItems));
-			System.out.println(levelObjects.get(currentLevel).getSprites().getAllSprites().size());
+			selectedpath = null;
+			levelObjects.add(new LevelObject(reactions, allItems,selectedpath));
+			//System.out.println(levelObjects.get(currentLevel).getSprites().getAllSprites().size());
 			currentLevel++;
 //			this.setVisible(false);
 //			this.setVisible(true);
@@ -264,7 +261,7 @@ public class Maker extends JPanel implements ActionListener {
 		
 		}
 		else if(arg0.getSource() == getButtons().get(7)) {
-			LevelObject saveobject = new LevelObject(reactions, allItems);
+			SaveObject saveobject = new SaveObject(levelObjects);
 			WriteObjectToFile(saveobject);
 			//ReadObjectFromFile("test");
 		}
@@ -274,6 +271,7 @@ public class Maker extends JPanel implements ActionListener {
 		else if(arg0.getSource() == getButtons().get(9)) {
 			String goToLevel = textboxes.get(0).getText().isEmpty()?"0":textboxes.get(0).getText();
 			currentLevel=Integer.parseInt(goToLevel);
+			labels.get(0).setText("You are on level "+currentLevel);
 		}
 		
 			
@@ -309,7 +307,7 @@ public class Maker extends JPanel implements ActionListener {
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
             objectOut.writeObject(serObj);
             objectOut.close();
-            System.out.println("The Object  was succesfully written to a file");
+            //System.out.println("The Object  was succesfully written to a file");
  
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -321,9 +319,10 @@ public class Maker extends JPanel implements ActionListener {
 		try {
 			FileInputStream fi = new FileInputStream(new File("/Users/juhi/Desktop/test"));
 			ObjectInputStream oi = new ObjectInputStream(fi);
-			LevelObject so = (LevelObject)oi.readObject();
-			allItems = so.getSprites();
-			reactions = so.getReactions();
+			SaveObject so = (SaveObject)oi.readObject();
+			this.levelObjects = so.getLevelObjects();
+//			allItems = so.getSprites();
+//			reactions = so.getReactions();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

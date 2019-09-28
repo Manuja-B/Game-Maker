@@ -8,10 +8,14 @@ import com.oosd.gamemaker.models.Composite;
 
 public class LevelObject implements Serializable {
 	static int level=0;
-	public LevelObject(ArrayList<Reaction> reactions, Composite allSprites) {
+	String selectedPath;
+	
+	
+	public LevelObject(ArrayList<Reaction> reactions, Composite allSprites, String selectedPath) {
 		super();
 		this.reactions = reactions;
 		this.allSprites = allSprites;
+		this.selectedPath = selectedPath;
 	}
 	ArrayList<Reaction> reactions = new ArrayList<Reaction>();
 	Composite allSprites;
@@ -23,5 +27,14 @@ public class LevelObject implements Serializable {
 	public Composite getSprites() {
 		return allSprites;
 	}
+	
+	public String getSelectedPath() {
+		return selectedPath;
+	}
+
+	public void setSelectedPath(String selectedPath) {
+		this.selectedPath = selectedPath;
+	}
+
 	
 }
