@@ -11,6 +11,7 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -18,8 +19,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.oosd.gamemaker.behavior.Explode;
 import com.oosd.gamemaker.behavior.Movement;
 import com.oosd.gamemaker.behavior.Reaction;
+import com.oosd.gamemaker.behavior.ShootBehavior;
 import com.oosd.gamemaker.models.Composite;
 import com.oosd.gamemaker.models.Sprite;
 
@@ -127,7 +130,14 @@ public class Playground extends JPanel implements ActionListener, MouseListener{
 		// TODO Auto-generated method stub
 		System.out.println("mouse");
 		allItems.shoot();
-		
+		List<Sprite> bullets = maker.getLevelObjects().get(maker.getCurrentLevel()).getSprites().getBullets();
+		for (Sprite bullet: bullets) {
+			for (Sprite component: allItems.getAllSprites()) {
+				if (component.isShootEffect()) {
+					maker.getLevelObjects().get(maker.getCurrentLevel()).addReaction(new ShootBehavior(bullet, component, null));
+				}
+			}
+		}
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {

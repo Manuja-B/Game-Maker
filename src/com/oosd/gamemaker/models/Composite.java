@@ -10,13 +10,11 @@ import com.oosd.gamemaker.behavior.AutomaticMovement;
 
 public class Composite extends Sprite implements Serializable {
 	List<Sprite> sprites;
-	
+	List<Sprite> bullets;
 	public Composite() {
 		 sprites = new ArrayList<Sprite>();
-		 
 	}
 	
-
 	@Override
 	public void draw(Graphics2D g2d) {
 		// TODO Auto-generated method stub
@@ -48,17 +46,20 @@ public class Composite extends Sprite implements Serializable {
 		}
 	}
 	public void shoot() {
-		ArrayList<Sprite> bullets = new ArrayList<Sprite>();
+		bullets = new ArrayList<Sprite>();
 		for( Sprite sprite: sprites) {
 			if(sprite.isWillShoot()) {
-				Sprite bullet = new Ball(Color.BLACK,sprite.getX(),sprite.getY(),10,10,0,-3);
+				Sprite bullet = new Ball(Color.BLACK,sprite.getX(),sprite.getY()-1,10,10,0,-3);
 				bullet.setAutomaticMovement(new AutomaticMovement());
 				bullet.play();
-				bullets.add(bullet);
+				getBullets().add(bullet);
 			}	
 		}
-		
-		sprites.addAll(bullets);
+		sprites.addAll(getBullets());
+	}
+
+	public List<Sprite> getBullets() {
+		return bullets;
 	}
 	
 	
