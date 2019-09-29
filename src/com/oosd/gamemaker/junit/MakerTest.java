@@ -13,7 +13,7 @@ public class MakerTest {
 	public void test() {
 		mk.makeGame();
 		int check = mk.getButtons().size();
-		assertEquals(3, check);
+		assertEquals(10, check);
 		
 	}
 
