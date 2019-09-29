@@ -44,11 +44,8 @@ public class ListPanel extends JPanel implements ActionListener {
 		String arraySprites[] = new String[count];
 		for(int i = 0; i < count ; i++ ) {
 			arraySprites[i] = sprites.get(i).getName();
-			//System.out.println(arraySprites[i]);
 		}
 		listSprite = new JList<String>(arraySprites);
-		//listSprite.getSize();
-		
 		buttonDelete.addActionListener(this);
 		buttonEdit.addActionListener(this);
 		scrollPane = new JScrollPane(listSprite);

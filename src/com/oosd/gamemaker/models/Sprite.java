@@ -17,7 +17,7 @@ public abstract class Sprite implements Serializable{
 	private boolean isGamePaused = true;
 	private int dx = 1;
 	private int dy = 1;
-	protected int x,y;
+	protected int locationX,locationY;
 	protected String name;
 	protected int height, width;
 	protected BoundaryBehavior boundaryBehavior;
@@ -40,8 +40,8 @@ public abstract class Sprite implements Serializable{
 	}
 	public void update(int x, int y ) {
 		if(!isGamePaused() || firstUpdate) {
-			this.x = x;
-			this.y = y;
+			this.locationX = x;
+			this.locationY = y;
 		}	
 		if(firstUpdate) {
 			firstUpdate = false;
@@ -51,11 +51,11 @@ public abstract class Sprite implements Serializable{
 		return name;
 	}
 	public int getX() {
-		return x;
+		return locationX;
 	}
 
 	public int getY() {
-		return y;
+		return locationY;
 	}
 	public int getHeight() {
 		return height;

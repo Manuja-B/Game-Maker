@@ -91,7 +91,8 @@ public class Playground extends JPanel implements ActionListener, MouseListener{
 				
 				Thread.sleep(10);
 			} catch (InterruptedException e1) {
-				e1.printStackTrace();
+				Thread.currentThread().interrupt();
+				System.out.println("Interrupted exception");
 			}
 			
 			repaint();

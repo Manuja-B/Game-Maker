@@ -1,50 +1,19 @@
 package com.oosd.gamemaker;
 
 import java.awt.Color;
-import java.awt.Desktop;
-import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.KeyEventDispatcher;
-import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import javax.imageio.ImageIO;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import com.oosd.gamemaker.behavior.AutomaticMovement;
-import com.oosd.gamemaker.behavior.BounceBack;
-import com.oosd.gamemaker.behavior.ManualMovement;
-import com.oosd.gamemaker.behavior.ManualRight;
-import com.oosd.gamemaker.behavior.ManualUp;
 import com.oosd.gamemaker.behavior.Movement;
 import com.oosd.gamemaker.behavior.Reaction;
-import com.oosd.gamemaker.behavior.Sound;
-import com.oosd.gamemaker.behavior.BoundaryBounce;
-import com.oosd.gamemaker.behavior.BoundaryRotate;
-import com.oosd.gamemaker.behavior.ClockTick;
-import com.oosd.gamemaker.behavior.ManualDown;
-import com.oosd.gamemaker.behavior.ManualLeft;
-import com.oosd.gamemaker.models.Ball;
 import com.oosd.gamemaker.models.Composite;
-import com.oosd.gamemaker.models.DigitalClock;
-
-import com.oosd.gamemaker.models.Picture;
-import com.oosd.gamemaker.models.Rectangle;
 import com.oosd.gamemaker.models.Sprite;
-import java.awt.Desktop;
 import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileSystemView;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -53,7 +22,11 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class Maker extends JPanel implements ActionListener {
+public class Maker extends PanelMaker implements ActionListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	JPanel makerPanel = new JPanel();
 	Composite allItems;
 	Sprite newSprite;
@@ -63,12 +36,6 @@ public class Maker extends JPanel implements ActionListener {
 	JPanel listPanel = new JPanel();
 	Image image;
 	int currentLevel=0;
-	ArrayList<String> keys = new ArrayList<String>() ;
-	ArrayList<Movement> manualMovements = new ArrayList<Movement>() ;
-	ArrayList<JTextField> textboxes = new ArrayList<JTextField>() ;
-	ArrayList<JComboBox<ComboItem>> comboBoxes = new ArrayList<JComboBox<ComboItem>>() ;
-	ArrayList<JButton> buttons = new ArrayList<JButton>();
-	ArrayList<Reaction> reactions = new ArrayList<Reaction>();
 	
 	public JPanel getListPanel() {
 		return listPanel;
@@ -87,7 +54,7 @@ public class Maker extends JPanel implements ActionListener {
 		this.levelObjects = levelObjects;
 	}
 
-	ArrayList<JLabel> labels=new ArrayList<JLabel>();
+	
 	public void addReaction(Reaction reaction) {
 		this.reactions.add(reaction);
 	}
@@ -106,15 +73,9 @@ public class Maker extends JPanel implements ActionListener {
 		this.setLayout(null);
 	}
 
-	public void addLabel(String message, int x, int y, JPanel panel) {
-		JLabel label = new JLabel(message);
-		label.setBounds(x, y, 200, 20);
-		panel.add(label);
-		labels.add(label);
-	}
+	
 
 	public void makeGame() {
-		SpritePropertiesPanel spritePropertyPanelObject=new SpritePropertiesPanel(this); 
 		levelObjects.add(new LevelObject(reactions,allItems,selectedpath));
 		addLabel("You are creating level "+currentLevel,10,10,this);
 		addLabel("Add a new Component", 10, 30,this);
@@ -229,7 +190,6 @@ public class Maker extends JPanel implements ActionListener {
 			jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 			int returnValue = jfc.showOpenDialog(null);
 			if (returnValue == JFileChooser.APPROVE_OPTION) {
-				File[] files = jfc.getSelectedFiles();
 				 File selectedFile = jfc.getSelectedFile();
 				 this.selectedpath = selectedFile.getAbsolutePath();
 				 levelObjects.get(currentLevel).setSelectedPath(this.selectedpath);
@@ -300,13 +260,14 @@ public class Maker extends JPanel implements ActionListener {
 	
 	public void WriteObjectToFile(Object serObj) {
 		 
-        try {
+        try(FileOutputStream fileOut = new FileOutputStream("/Users/juhi/"
+        		+ "Desktop/test"); ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
  
-            FileOutputStream fileOut = new FileOutputStream("/Users/juhi/"
-            		+ "Desktop/test");
-            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+            
+            
             objectOut.writeObject(serObj);
             objectOut.close();
+            fileOut.close();
             //System.out.println("The Object  was succesfully written to a file");
  
         } catch (Exception ex) {
@@ -315,14 +276,10 @@ public class Maker extends JPanel implements ActionListener {
     }
 	
 	public void ReadObjectFromFile(String filename) {
-		
-		try {
-			FileInputStream fi = new FileInputStream(new File("/Users/juhi/Desktop/test"));
-			ObjectInputStream oi = new ObjectInputStream(fi);
+		try(FileInputStream fi = new FileInputStream(new File("/Users/juhi/Desktop/test")); ObjectInputStream oi =new ObjectInputStream(fi); ) {
 			SaveObject so = (SaveObject)oi.readObject();
 			this.levelObjects = so.getLevelObjects();
-//			allItems = so.getSprites();
-//			reactions = so.getReactions();
+			oi.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -335,6 +292,7 @@ public class Maker extends JPanel implements ActionListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		
 	}
 	

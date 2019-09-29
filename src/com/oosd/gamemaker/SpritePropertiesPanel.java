@@ -6,16 +6,7 @@ import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-
-import com.oosd.gamemaker.ComboItem;
 import com.oosd.gamemaker.behavior.AutomaticMovement;
 import com.oosd.gamemaker.behavior.BoundaryBounce;
 import com.oosd.gamemaker.behavior.BoundaryRotate;
@@ -31,19 +22,17 @@ import com.oosd.gamemaker.models.Picture;
 import com.oosd.gamemaker.models.Rectangle;
 import com.oosd.gamemaker.models.Sprite;
 
-public class SpritePropertiesPanel extends JPanel implements ActionListener{
+public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1605212137510886388L;
 	Maker maker;
 	Sprite newSprite;
 	int x,y,dx,dy, index;
 	String boundaryReaction;
 	
-	ArrayList<String> keys = new ArrayList<String>() ;
-	ArrayList<Movement> manualMovements = new ArrayList<Movement>() ;
-	ArrayList<JTextField> textboxes = new ArrayList<JTextField>() ;
-	ArrayList<JComboBox<ComboItem>> comboBoxes = new ArrayList<JComboBox<ComboItem>>() ;
-	ArrayList<JButton> buttons = new ArrayList<JButton>();
-	//JCheckBox shootYes = new JCheckBox("Will shoot ?");
-	ArrayList<JCheckBox> checkBoxes = new ArrayList<JCheckBox>();
+	
 	
 	public SpritePropertiesPanel(Maker maker)
 	{
@@ -58,46 +47,6 @@ public class SpritePropertiesPanel extends JPanel implements ActionListener{
 		this.index = index;
 	}
 	
-	public void addLabel(String message, int x, int y, JPanel panel) {
-		JLabel label = new JLabel(message);
-		label.setBounds(x, y, 200, 20);
-		panel.add(label);
-	}
-	
-	public void addTextBox(int x, int y, JPanel panel) {
-		JTextField  textbox = new JTextField();
-		textbox.setBounds(x,y,50,20);
-		textbox.addActionListener(this);
-		textboxes.add(textbox);
-		panel.add(textbox);
-		
-	}
-	
-	public void addButtonToPanel(String name, int x, int y, JPanel panel) {
-		JButton button = new JButton(name);
-		button.addActionListener(this);
-		button.setVisible(true);
-		button.setBounds(x, y, 200, 20);
-		panel.add(button);
-		buttons.add(button);
-	}
-
-	
-	public void addCombobox(ComboItem items[], int x, int y, JPanel panel) {
-		JComboBox<ComboItem> combo = new JComboBox<ComboItem>(items);
-		combo.setBounds(x, y, 100, 20);
-		combo.setMaximumSize(combo.getPreferredSize());
-		comboBoxes.add(combo);
-		panel.add(combo);
-	}
-	public void addCheckBox(String label, int x, int y, JPanel panel) {
-		JCheckBox checkbox = new JCheckBox(label);
-		checkbox.setBounds(x,y,150,40);
-		checkBoxes.add(checkbox);
-		panel.add(checkbox);
-	}
-	
-	
 	public void addSprite(int spriteIndex) {
 		String x = textboxes.get(0).getText().isEmpty()?"0":textboxes.get(0).getText();
 		String y = textboxes.get(1).getText().isEmpty()?"0":textboxes.get(1).getText();
@@ -105,58 +54,33 @@ public class SpritePropertiesPanel extends JPanel implements ActionListener{
 		String width = textboxes.get(3).getText().isEmpty()?"0":textboxes.get(3).getText();
 		String dx = textboxes.get(4).getText().isEmpty()?"0":textboxes.get(4).getText();
 		String dy = textboxes.get(5).getText().isEmpty()?"0":textboxes.get(5).getText();
-		//int componentIndex = comboBoxes.get(0).getSelectedIndex();
 		int boundaryBehavior = comboBoxes.get(0).getSelectedIndex();
 		if(spriteIndex == 0) {
-
 			newSprite = new Ball(Color.BLUE, Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(height), Integer.parseInt(width),Integer.parseInt(dx),Integer.parseInt(dy));
-			newSprite.setAutomaticMovement(new AutomaticMovement());
-			if(boundaryBehavior == 0) {
-				//set boundary behavior to bounce 
-				   newSprite.setBoundaryMovement(new BoundaryBounce());
-			}
-			else if(boundaryBehavior == 1) {
-				//rotate
-				newSprite.setBoundaryMovement(new BoundaryRotate());
-			}
-			else if(boundaryBehavior == 2) {
-				//vanish
-			}
-			for(Movement manual :manualMovements) {
-				newSprite.setManualMovement(manual);
-			}
 		}
 		
 		else if(spriteIndex == 1) {
 			newSprite = new Rectangle(Color.RED, Integer.parseInt(x), Integer.parseInt(y),  Integer.parseInt(width),Integer.parseInt(height),Integer.parseInt(dx),Integer.parseInt(dy) );
-			newSprite.setAutomaticMovement(new AutomaticMovement());
-			if(boundaryBehavior == 0) {
-				
-				   newSprite.setBoundaryMovement(new BoundaryBounce());
-			}
-			else if(boundaryBehavior == 1) {
-				   newSprite.setBoundaryMovement(new BoundaryRotate());
-			}
-			else if(boundaryBehavior == 2) {
-				//vanish
-			}
-			for(Movement manual :manualMovements) {
-				newSprite.setManualMovement(manual);
-			}
+			
 		}
 		else if(spriteIndex == 3) {
 			newSprite = new DigitalClock(Integer.parseInt(x), Integer.parseInt(y));
-			newSprite.setAutomaticMovement(new ClockTick());
-			
 		}
 		
 		else if(spriteIndex == 2) {
 			newSprite = new Picture( Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(height), Integer.parseInt(width),Integer.parseInt(dx),Integer.parseInt(dy));
 			newSprite.setAutomaticMovement(new AutomaticMovement());
-			
-			
+		}
+		
+		for(Movement manual :manualMovements) {
+			newSprite.setManualMovement(manual);
+		}
+		if(spriteIndex == 3) {
+			newSprite.setAutomaticMovement(new ClockTick());
+		}
+		else {
+			newSprite.setAutomaticMovement(new AutomaticMovement());
 			if(boundaryBehavior == 0) {
-				//set boundary behavior to bounce 
 				   newSprite.setBoundaryMovement(new BoundaryBounce());
 			}
 			else if(boundaryBehavior == 1) {
@@ -165,17 +89,10 @@ public class SpritePropertiesPanel extends JPanel implements ActionListener{
 			else if(boundaryBehavior == 2) {
 				//vanish
 			}
-			maker.allItems.add(newSprite);
-		}
-		
-		for(Movement manual :manualMovements) {
-			newSprite.setManualMovement(manual);
 		}
 		newSprite.setWillShoot(checkBoxes.get(0).isSelected());
 		newSprite.setShootEffect(checkBoxes.get(1).isSelected());
 		maker.allItems.add(newSprite);
-		//maker.getManualMovements().clear();
-		
 		JPanel listPanel = new ListPanel(maker.allItems, maker);
 		listPanel.setSize(200, 200);
 		listPanel.setLocation(10, 500);
@@ -185,17 +102,13 @@ public class SpritePropertiesPanel extends JPanel implements ActionListener{
 		maker.setVisible(false);
 		maker.setVisible(true);
 	}
-
-	
-	
-	void drawSpritePropertiesPanel()
+	public void drawSpritePropertiesPanel()
 	{
 		maker.addLabel("Location", 10, 50,this);
 		maker.addLabel("x", 180, 50,this); 
 		addTextBox(200,50,this);  
 		maker.addLabel("y", 280, 50,this); 
 		addTextBox(300,50,this);
-		
 		
 		maker.addLabel("Dimensions", 10, 70, this);
 		maker.addLabel("Height", 140, 70, this); //4
@@ -222,12 +135,8 @@ public class SpritePropertiesPanel extends JPanel implements ActionListener{
 		addButtonToPanel("Add Component", 10, 320,this);//24 //button 6
 		
 	}
-	
-	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		
-		// TODO Auto-generated method stub
 		if (arg0.getSource() == buttons.get(1)) {
 			addSprite(maker.getCurrentSpriteIndex());
 		}
@@ -254,10 +163,5 @@ public class SpritePropertiesPanel extends JPanel implements ActionListener{
 	        manager.addKeyEventDispatcher((KeyEventDispatcher) spriteManual);	
 	        manualMovements.add(spriteManual);
 		}
-		
-		
 	}
-		
-
-
 }

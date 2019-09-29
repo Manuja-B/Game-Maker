@@ -44,7 +44,7 @@ public class Picture extends Sprite{
 
 	@Override
 	public void draw(Graphics2D g2d) {
-        g2d.drawImage(image,x,y,width,height,null);
+        g2d.drawImage(image,locationX,locationY,width,height,null);
 		// TODO Auto-generated method stub
 		
 	}
