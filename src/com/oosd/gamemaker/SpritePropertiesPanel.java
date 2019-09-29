@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -41,6 +42,8 @@ public class SpritePropertiesPanel extends JPanel implements ActionListener{
 	ArrayList<JTextField> textboxes = new ArrayList<JTextField>() ;
 	ArrayList<JComboBox<ComboItem>> comboBoxes = new ArrayList<JComboBox<ComboItem>>() ;
 	ArrayList<JButton> buttons = new ArrayList<JButton>();
+	//JCheckBox shootYes = new JCheckBox("Will shoot ?");
+	ArrayList<JCheckBox> checkBoxes = new ArrayList<JCheckBox>();
 	
 	public SpritePropertiesPanel(Maker maker)
 	{
@@ -86,6 +89,12 @@ public class SpritePropertiesPanel extends JPanel implements ActionListener{
 		combo.setMaximumSize(combo.getPreferredSize());
 		comboBoxes.add(combo);
 		panel.add(combo);
+	}
+	public void addCheckBox(String label, int x, int y, JPanel panel) {
+		JCheckBox checkbox = new JCheckBox(label);
+		checkbox.setBounds(x,y,150,40);
+		checkBoxes.add(checkbox);
+		panel.add(checkbox);
 	}
 	
 	
@@ -162,6 +171,8 @@ public class SpritePropertiesPanel extends JPanel implements ActionListener{
 		for(Movement manual :manualMovements) {
 			newSprite.setManualMovement(manual);
 		}
+		newSprite.setWillShoot(checkBoxes.get(0).isSelected());
+		newSprite.setShootEffect(checkBoxes.get(1).isSelected());
 		maker.allItems.add(newSprite);
 		//maker.getManualMovements().clear();
 		
@@ -180,7 +191,7 @@ public class SpritePropertiesPanel extends JPanel implements ActionListener{
 	void drawSpritePropertiesPanel()
 	{
 		maker.addLabel("Location", 10, 50,this);
-		maker.addLabel("x", 10, 50,this); 
+		maker.addLabel("x", 180, 50,this); 
 		addTextBox(200,50,this);  
 		maker.addLabel("y", 280, 50,this); 
 		addTextBox(300,50,this);
@@ -199,17 +210,20 @@ public class SpritePropertiesPanel extends JPanel implements ActionListener{
 		addTextBox(270,90, this); //12
 		maker.addLabel("Boundary Reaction", 10, 110, this); //13
 		addCombobox(new ComboItem[] { new ComboItem("Bounce", 0) , new ComboItem("Rotate", 1) , new ComboItem("Vanish", 2)}, 200, 110,this); //2
+		
 		maker.addLabel("Keypress", 10, 170, this); //15
 		addCombobox(new ComboItem[] { new ComboItem("Up", KeyEvent.VK_UP) , new ComboItem("Down", KeyEvent.VK_DOWN) , new ComboItem("Left",  KeyEvent.VK_LEFT), new ComboItem("Right", KeyEvent.VK_RIGHT)}, 200, 170,this); //2
 		maker.addLabel("Movement", 10, 190, this); //17 
 		
 		addCombobox(new ComboItem[] { new ComboItem("Up", 0) , new ComboItem("Down", 1) , new ComboItem("Left", 2), new ComboItem("Right", 3)}, 200, 190,this); //2
 		addButtonToPanel("Add Manual Movement", 10, 210,this); //19 //button 5
-		
+		addCheckBox("Will Shoot?", 10, 280, this);
+		addCheckBox("Shoot Affect?", 200, 280, this);
 		addButtonToPanel("Add Component", 10, 320,this);//24 //button 6
 		
 	}
-
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		

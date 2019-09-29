@@ -23,7 +23,21 @@ public abstract class Sprite implements Serializable{
 	protected BoundaryBehavior boundaryBehavior;
 	private boolean firstUpdate = true;
 	public abstract void draw(Graphics2D g2d);
+	private boolean willShoot = false;
+	private boolean shootEffect = false;
 	
+	public boolean isShootEffect() {
+		return shootEffect;
+	}
+	public void setShootEffect(boolean shootEffect) {
+		this.shootEffect = shootEffect;
+	}
+	public boolean isWillShoot() {
+		return willShoot;
+	}
+	public void setWillShoot(boolean willShoot) {
+		this.willShoot = willShoot;
+	}
 	public void update(int x, int y ) {
 		if(!isGamePaused() || firstUpdate) {
 			this.x = x;

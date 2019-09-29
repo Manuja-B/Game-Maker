@@ -56,6 +56,7 @@ public class BounceBack implements Reaction {
 				//sound.playSound();
 				//AudioPlayer.player.start(audio);
 			}
+			if(sound!= null)
 				sound.playSound();
 			return true;
 		}

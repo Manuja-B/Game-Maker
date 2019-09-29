@@ -30,10 +30,6 @@ public class ListPanel extends JPanel implements ActionListener {
 		this.allSprites = allSprites;
 		this.maker = maker;
 		this.createList();
-		
-		//To Implement 3 jlists. one for all sprite names, another with edit and another with delete
-		//Sprite value;
-			
 	}
 	
 	public ListPanel(ArrayList<Movement> movements) {

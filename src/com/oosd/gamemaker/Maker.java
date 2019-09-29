@@ -307,7 +307,7 @@ public class Maker extends JPanel implements ActionListener {
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
             objectOut.writeObject(serObj);
             objectOut.close();
-            System.out.println("The Object  was succesfully written to a file");
+            //System.out.println("The Object  was succesfully written to a file");
  
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -317,7 +317,7 @@ public class Maker extends JPanel implements ActionListener {
 	public void ReadObjectFromFile(String filename) {
 		
 		try {
-			FileInputStream fi = new FileInputStream(new File("/Users/juhi/Desktop/test"+System.currentTimeMillis()));
+			FileInputStream fi = new FileInputStream(new File("/Users/juhi/Desktop/test"));
 			ObjectInputStream oi = new ObjectInputStream(fi);
 			SaveObject so = (SaveObject)oi.readObject();
 			this.levelObjects = so.getLevelObjects();

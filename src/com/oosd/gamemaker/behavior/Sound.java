@@ -19,16 +19,16 @@ public class Sound {
 	public Sound(String audiopath)
 	{
 		this.audiopath = audiopath;
-		System.out.println("Inside sound constructer : "+this.audiopath);
+		//System.out.println("Inside sound constructer : "+this.audiopath);
 	}
 	
 	public void playSound()
 	{
-			System.out.println("Inside Sound if : "+audiopath);
+			//System.out.println("Inside Sound if : "+audiopath);
 			try {
 				music = new FileInputStream(new File(audiopath));
 				audio = new AudioStream(music);
-				System.out.println("below AudioStream(music)");
+				//System.out.println("below AudioStream(music)");
 				AudioPlayer.player.start(audio);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

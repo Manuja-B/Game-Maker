@@ -56,22 +56,12 @@ public class Explode implements Reaction {
 				&& secondaryXmin >= (primaryXmin - secondary.getWidth())
 				&& secondaryXmin <= primaryXmax)
 		{
-
-			int secondaryXCenter = secondary.getX() + secondary.getWidth()/2;
-			int secondaryYCenter = secondary.getY() + secondary.getHeight()/2;
-			if(primaryYmin <= secondaryYCenter && secondaryYCenter <= primaryYmax ) {
-				secondary.update(secondaryXmin + 1000, secondaryYmin + 1000);
-				//AudioPlayer.player.start(audio);
+			secondary.update(secondaryXmin + 1000, secondaryYmin + 1000);
+			if(sound != null) {
+				sound.playSound();
 			}
-			else {
-				secondary.update(secondaryXmin + 1000, secondaryYmin + 1000);
-				//AudioPlayer.player.start(audio);
-				
-			}
-			sound.playSound();
 			return true;
 		}
-		
 		return false;
 	}
 

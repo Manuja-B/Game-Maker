@@ -23,6 +23,9 @@ public class LevelObject implements Serializable {
 	public ArrayList<Reaction> getReactions() {
 		return reactions;
 	}
+	public void addReaction(Reaction reaction) {
+		this.reactions.add(reaction);
+	}
 	
 	public Composite getSprites() {
 		return allSprites;
