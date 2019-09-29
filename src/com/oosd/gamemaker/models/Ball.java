@@ -31,7 +31,7 @@ public class Ball extends Sprite {
 	@Override
 	public void draw(Graphics2D g2d) {
 		g2d.setColor(this.color);
-		g2d.fillOval(x, y, height, width);
+		g2d.fillOval(locationX, locationY, height, width);
 		
 	}
 	

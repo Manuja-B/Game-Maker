@@ -35,13 +35,13 @@ public class DigitalClock extends Sprite{
 		g2d.setColor(Color.BLACK);
 		Font f = new Font("Dialog", Font.PLAIN, 30);
 		g2d.setFont(f);
-		g2d.drawString(x + ":" + y, positionX, positionY);
+		g2d.drawString(locationX + ":" + locationY, positionX, positionY);
 		
 	}
 	
 	public int getCurrMinutes() {
 		// TODO Auto-generated method stub
-		return x;
+		return locationX;
 	}
 
 	public void setCurrMinutes(int currMinutes) {
@@ -51,7 +51,7 @@ public class DigitalClock extends Sprite{
 
 	public int getCurrSeconds() {
 		// TODO Auto-generated method stub
-		return y;
+		return locationY;
 	}
 
 	public void setCurrSeconds(int currSeconds) {

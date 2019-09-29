@@ -2,30 +2,22 @@ package com.oosd.gamemaker.behavior;
 
 import com.oosd.gamemaker.models.Sprite;
 
-public class ShootBehavior implements Reaction {
-	Sprite primary;
-	Sprite secondary;
-	Sound sound;
-	
+public class ShootBehavior extends Reaction {
 	public ShootBehavior(Sprite primary, Sprite secondary, Sound sound) {
-		super();
-		this.primary = primary;
-		this.secondary = secondary;
-		this.sound = sound;
+		super(primary, secondary, sound);
+		
 	}
+
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1317140047103260576L;
+	
+	
 	@Override
 	public boolean react() {
-		// TODO Auto-generated method stub
-		int primaryXmin = primary.getX();
-		int primaryYmin = primary.getY();
-		int secondaryXmin = secondary.getX();
-		int secondaryYmin = secondary.getY();
-		int primaryYmax = primaryYmin + primary.getHeight();
-		int primaryXmax = primaryXmin + primary.getWidth();
-		if((primaryYmin - secondary.getHeight())<= secondaryYmin 
-				&& secondaryYmin <= primaryYmax 
-				&& secondaryXmin >= (primaryXmin - secondary.getWidth())
-				&& secondaryXmin <= primaryXmax)
+		if(doesReact(primary, secondary))
 		{
 			secondary.update(-100,-100);
 			secondary.setDx(0);
