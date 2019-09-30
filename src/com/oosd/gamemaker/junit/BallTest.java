@@ -3,13 +3,11 @@ package com.oosd.gamemaker.junit;
 import static org.junit.Assert.*;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-
 import org.junit.Test;
-
 import com.oosd.gamemaker.models.Ball;
-import com.oosd.gamemaker.*;
+import com.oosd.gamemaker.Maker;
+import com.oosd.gamemaker.Playground;
 import com.oosd.gamemaker.behavior.AutomaticMovement;
 import com.oosd.gamemaker.behavior.BoundaryBounce;
 import com.oosd.gamemaker.behavior.ManualDown;
@@ -18,10 +16,8 @@ import com.oosd.gamemaker.behavior.ManualUp;
 
 public class BallTest {
 
-	public Ball b = new Ball(Color.BLACK, 0, 0, 0, 0, 20, 20);
-	public Playground pu = new Playground(new Maker());
-	
-
+	private Ball b = new Ball(Color.BLACK, 0, 0, 0, 0, 20, 20);
+	private Playground pu = new Playground(new Maker());
 	@Test
    public void test() {
 		//pu.startGame();

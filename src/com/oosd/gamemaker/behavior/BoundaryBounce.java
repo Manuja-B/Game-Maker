@@ -3,6 +3,11 @@ import com.oosd.gamemaker.Playground;
 import com.oosd.gamemaker.models.Sprite;
 
 public class BoundaryBounce implements BoundaryBehavior{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 235719717468226050L;
+
 	public void reactWithBoundary(Sprite sprite, Playground playground)
 	{
 		int xMin = sprite.getX();

@@ -1,16 +1,17 @@
 package com.oosd.gamemaker.behavior;
-//import com.oosd.gamemaker.Maker;
 import com.oosd.gamemaker.Playground;
 import com.oosd.gamemaker.models.Sprite;
-
 public class BoundaryRotate implements BoundaryBehavior{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 898256384686592638L;
+
 	@Override
 	public void reactWithBoundary(Sprite sprite, Playground playground) {
-		// TODO Auto-generated method stub
 		int xMin = sprite.getX() ;
 		int yMin = sprite.getY() ;
-		int xMax = sprite.getX() + sprite.getWidth() ;
 		int yMax = sprite.getY() + sprite.getHeight();
 		if ( xMin > playground.getWidth())
 		{

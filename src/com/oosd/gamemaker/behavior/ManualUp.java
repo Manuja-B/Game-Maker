@@ -2,15 +2,14 @@ package com.oosd.gamemaker.behavior;
 
 import java.awt.KeyEventDispatcher;
 import java.awt.event.KeyEvent;
-
-import java.awt.event.KeyListener;
-
 import javax.swing.JPanel;
 import com.oosd.gamemaker.models.Sprite;
 
 public class ManualUp implements Movement, KeyEventDispatcher {
-
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5768191188452110965L;
 	Boolean isUp = false;
 	int key;
 	
@@ -20,7 +19,6 @@ public class ManualUp implements Movement, KeyEventDispatcher {
 	}
 	@Override
 	public void move(Sprite sprite, JPanel playground) {
-		// TODO Auto-generated method stub
 		int positionY = sprite.getY();
 		int positionX = sprite.getX();;
 		int dy = 1;
@@ -32,7 +30,6 @@ public class ManualUp implements Movement, KeyEventDispatcher {
 
 	@Override
 	public boolean dispatchKeyEvent(KeyEvent e) {
-		// TODO Auto-generated method stub
 		if(e.getKeyCode() == key) {
 			if (e.getID() == KeyEvent.KEY_PRESSED) {
 	            this.isUp = true;

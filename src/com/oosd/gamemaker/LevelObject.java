@@ -2,6 +2,7 @@ package com.oosd.gamemaker;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.oosd.gamemaker.behavior.Reaction;
 import com.oosd.gamemaker.models.Composite;
@@ -11,8 +12,10 @@ public class LevelObject implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 8142107465518012231L;
-	static int level=0;
-	String selectedPath;
+	private static int level=0;
+	private String selectedPath;
+	private List<Reaction> reactions = new ArrayList<Reaction>();
+	private Composite allSprites;
 	
 	
 	public LevelObject(ArrayList<Reaction> reactions, Composite allSprites, String selectedPath) {
@@ -21,10 +24,8 @@ public class LevelObject implements Serializable {
 		this.allSprites = allSprites;
 		this.selectedPath = selectedPath;
 	}
-	ArrayList<Reaction> reactions = new ArrayList<Reaction>();
-	Composite allSprites;
 	
-	public ArrayList<Reaction> getReactions() {
+	public List<Reaction> getReactions() {
 		return reactions;
 	}
 	public void addReaction(Reaction reaction) {
@@ -41,6 +42,10 @@ public class LevelObject implements Serializable {
 
 	public void setSelectedPath(String selectedPath) {
 		this.selectedPath = selectedPath;
+	}
+
+	public static int getLevel() {
+		return level;
 	}
 
 	

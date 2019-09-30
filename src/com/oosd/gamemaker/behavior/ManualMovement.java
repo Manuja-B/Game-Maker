@@ -1,15 +1,17 @@
 package com.oosd.gamemaker.behavior;
 
 import java.awt.event.KeyEvent;
-
 import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
+
 import com.oosd.gamemaker.models.Sprite;
-import com.oosd.gamemaker.models.*;
-import com.oosd.gamemaker.*;
 
 public class ManualMovement implements Movement, KeyListener{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3233933797707271155L;
 	int dx;
 	int positionX;
 	int positionY;
@@ -18,7 +20,6 @@ public class ManualMovement implements Movement, KeyListener{
 
 	@Override
 	public void move(Sprite sprite, JPanel playground) {
-		// TODO Auto-generated method stub
         int positionY = sprite.getY();;
 		int positionX = sprite.getX();;
 		int maxX = playground.getWidth();
@@ -41,7 +42,6 @@ public class ManualMovement implements Movement, KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		System.out.println("press");
-		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 
 			this.isLeft = true;
@@ -56,7 +56,6 @@ public class ManualMovement implements Movement, KeyListener{
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 
 			this.isLeft = false;

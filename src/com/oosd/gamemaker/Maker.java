@@ -240,13 +240,13 @@ public class Maker extends PanelMaker implements ActionListener {
 			this.levelObjects = so.getLevelObjects();
 			oi.close();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("File Not found"+e.getMessage());
 		}
 		 catch (IOException e) {
-			e.printStackTrace();
+			 System.out.println("IO Exception"+e.getMessage());
 		}
 		catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("Class not found"+e.getMessage());
 		}
 	}
 }

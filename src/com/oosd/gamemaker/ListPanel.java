@@ -1,22 +1,21 @@
 package com.oosd.gamemaker;
-
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-
-import com.oosd.gamemaker.behavior.Movement;
 import com.oosd.gamemaker.models.Composite;
 import com.oosd.gamemaker.models.Sprite;
 
 public class ListPanel extends JPanel implements ActionListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7675156536260347672L;
 	Composite allSprites;
 	JButton buttonDelete;
 	JList<String> listSprite;
@@ -31,20 +30,14 @@ public class ListPanel extends JPanel implements ActionListener {
 		this.maker = maker;
 		this.createList();
 	}
-	
-	public ListPanel(ArrayList<Movement> movements) {
-		this.setLayout(null);
-		
-	}
-	
 	public void createList() {
 		List<Sprite> sprites = allSprites.getAllSprites();
 		int count = sprites.size();
-		String arraySprites[] = new String[count];
+		String[] arraySprites = new String[count];
 		for(int i = 0; i < count ; i++ ) {
 			arraySprites[i] = sprites.get(i).getName();
 		}
-		listSprite = new JList<String>(arraySprites);
+		listSprite = new JList<>(arraySprites);
 		buttonDelete.addActionListener(this);
 		scrollPane = new JScrollPane(listSprite);
 		this.add(scrollPane);

@@ -1,10 +1,7 @@
 package com.oosd.gamemaker.junit;
-
 import static org.junit.Assert.*;
-
 import org.junit.Test;
 
-import com.oosd.gamemaker.behavior.ClockTick;
 import com.oosd.gamemaker.models.DigitalClock;
 
 public class ClockTest {

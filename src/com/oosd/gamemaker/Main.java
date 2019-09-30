@@ -1,20 +1,17 @@
 package com.oosd.gamemaker;
-
 import java.awt.Color;
-import java.awt.Image;
-
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import com.oosd.gamemaker.models.Composite;
-
-
 public class Main extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5099005057795504559L;
+
 	public static void main(String[] args) {
 		final int frameWidth = 1200;
 		final int frameHeight = 800;
-		
 		JFrame frame = new JFrame();
 		frame.setSize(frameWidth, frameHeight);
 		frame.setResizable(false);
@@ -22,6 +19,7 @@ public class Main extends JPanel {
 		JPanel maker = new Maker();
 		maker.setSize(400,800);
 		maker.setLocation(0,0);
+		maker.setBackground(Color.LIGHT_GRAY);
 		maker.setBackground(Color.decode("#ADD8E6"));
 		((Maker)maker).makeGame();
 		JPanel playgroundPanel = new Playground((Maker)maker);

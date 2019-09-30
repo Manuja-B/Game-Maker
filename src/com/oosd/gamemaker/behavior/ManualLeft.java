@@ -2,15 +2,17 @@ package com.oosd.gamemaker.behavior;
 
 import java.awt.KeyEventDispatcher;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
 import javax.swing.JPanel;
 
 import com.oosd.gamemaker.models.Sprite;
 
 public class ManualLeft implements Movement, KeyEventDispatcher {
 
-	Boolean isLeft = false;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8062557088943136222L;
+	private Boolean isLeft = false;
 	int key;
 	
 	public ManualLeft(int key) {
