@@ -3,14 +3,15 @@ package com.oosd.gamemaker.models;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
-
-import com.oosd.gamemaker.behavior.BoundaryBehavior;
 import com.oosd.gamemaker.behavior.Movement;
 
 public class Ball extends Sprite {
-	//private int x,y;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1484789349833161766L;
 	private Color color;
-	public static int counter = 0;
+	private static int counter = 0;
 	
 	
 	public Ball(Color color, int initialPositionX, int initialPositionY, int ballWidth, int ballHeight,int dx, int dy) {
@@ -21,8 +22,6 @@ public class Ball extends Sprite {
 		this.setDx(dx);
 		this.setDy(dy);
 		this.manualMovements = new ArrayList<Movement>();
-		//counter++;
-//		this.name = StringBuilder("Ball",+counter);
 		StringBuilder strName = new StringBuilder("Ball ");
 		strName.append(++counter);
 		this.name = strName.toString();
@@ -34,8 +33,4 @@ public class Ball extends Sprite {
 		g2d.fillOval(locationX, locationY, height, width);
 		
 	}
-	
-	
-	
-
 }

@@ -3,16 +3,13 @@ package com.oosd.gamemaker.models;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
-import java.util.ArrayList;
-
-import javax.swing.JPanel;
-
-import com.oosd.gamemaker.behavior.Movement;
-
 
 public class DigitalClock extends Sprite{
 	
-	private double milliSeconds;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3083793706362721926L;
 	private int positionX;
 	private int positionY;
 	private static int counter = 0;
@@ -22,7 +19,7 @@ public class DigitalClock extends Sprite{
 	{
 		this.positionX = positionX;
 		this.positionY = positionY; 
-		this.update(0,0); // initializing minutes and seconds
+		this.update(0,0); 
 		StringBuilder strName = new StringBuilder("Clock ");
 		strName.append(++counter);
 		this.name = strName.toString();
@@ -31,7 +28,6 @@ public class DigitalClock extends Sprite{
 	
 	@Override
 	public void draw(Graphics2D g2d) {
-		// TODO Auto-generated method stub
 		g2d.setColor(Color.BLACK);
 		Font f = new Font("Dialog", Font.PLAIN, 30);
 		g2d.setFont(f);
@@ -40,22 +36,18 @@ public class DigitalClock extends Sprite{
 	}
 	
 	public int getCurrMinutes() {
-		// TODO Auto-generated method stub
 		return locationX;
 	}
 
 	public void setCurrMinutes(int currMinutes) {
-		// TODO Auto-generated method stub
 		this.currMinutes = currMinutes;
 	}
 
 	public int getCurrSeconds() {
-		// TODO Auto-generated method stub
 		return locationY;
 	}
 
 	public void setCurrSeconds(int currSeconds) {
-		// TODO Auto-generated method stub
 		this.currSeconds = currSeconds;
 	}
 

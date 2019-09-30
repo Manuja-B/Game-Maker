@@ -6,19 +6,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.oosd.gamemaker.behavior.AutomaticMovement;
-
-
 public class Composite extends Sprite implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3034276043596940830L;
 	List<Sprite> sprites;
 	List<Sprite> bullets;
 	public Composite() {
 		 sprites = new ArrayList<Sprite>();
 	}
-	
 	@Override
 	public void draw(Graphics2D g2d) {
-		// TODO Auto-generated method stub
-
+		System.out.println("Composite can't be drawn");
 	}
 	public void add(Sprite sprite) {
 		sprites.add(sprite);
@@ -61,8 +61,4 @@ public class Composite extends Sprite implements Serializable {
 	public List<Sprite> getBullets() {
 		return bullets;
 	}
-	
-	
-	
-
 }

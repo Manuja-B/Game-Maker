@@ -1,16 +1,17 @@
 package com.oosd.gamemaker.models;
-
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.io.Serializable;
 import java.util.ArrayList;
-
 import com.oosd.gamemaker.Playground;
 import com.oosd.gamemaker.behavior.BoundaryBehavior;
 import com.oosd.gamemaker.behavior.Movement;
 import com.oosd.gamemaker.behavior.Reaction;
 
 public abstract class Sprite implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8440651746666951358L;
 	protected ArrayList<Movement>  manualMovements = new ArrayList<Movement>();
 	protected ArrayList<Reaction> reactions;
 	private Movement automaticMovement;
@@ -64,11 +65,9 @@ public abstract class Sprite implements Serializable{
 		return width;
 	}
 	public int getDx() {
-		// TODO Auto-generated method stub
 		return dx;
 	}
 	public int getDy() {
-		// TODO Auto-generated method stub
 		return dy;
 	}
 	public void setDx(int dx) {

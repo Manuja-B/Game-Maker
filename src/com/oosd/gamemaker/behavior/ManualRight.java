@@ -9,7 +9,11 @@ import com.oosd.gamemaker.models.Sprite;
 
 public class ManualRight implements Movement, KeyEventDispatcher {
 
-	Boolean isRight = false;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8377315799136859634L;
+	private Boolean isRight = false;
 	int key;
 	
 	public ManualRight(int key) {
