@@ -75,35 +75,28 @@ public class Playground extends JPanel implements ActionListener, MouseListener{
 			this.allItems = maker.getLevelObjects().get(maker.getCurrentLevel()).getSprites();
 			this.reactions = maker.getLevelObjects().get(maker.getCurrentLevel()).getReactions();
 			for(Sprite sprite: allItems.getAllSprites()) {
-				
 				sprite.move(this);
 			}
 			for(Reaction reaction: reactions) {
 				reaction.react();
-				
 			}
 			try {
-				
 				Thread.sleep(10);
 			} catch (InterruptedException e1) {
 				Thread.currentThread().interrupt();
 				System.out.println("Interrupted exception");
 			}
-			
 			repaint();
 		}
 	}
 	
-	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		graphobj = (Graphics2D) g; 
-	    
 	    if(image!=null)
 	    {
 	    	graphobj.drawImage(image,0,0,800,800,this);
 	    }
-		
 	    for(Sprite sprite: allItems.getAllSprites()) {
 	    	sprite.draw(graphobj);
 	    }

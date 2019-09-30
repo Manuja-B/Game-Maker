@@ -14,11 +14,11 @@ public class LevelObject implements Serializable {
 	private static final long serialVersionUID = 8142107465518012231L;
 	private static int level=0;
 	private String selectedPath;
-	private List<Reaction> reactions = new ArrayList<Reaction>();
+	private List<Reaction> reactions = new ArrayList<>();
 	private Composite allSprites;
 	
 	
-	public LevelObject(ArrayList<Reaction> reactions, Composite allSprites, String selectedPath) {
+	public LevelObject(List<Reaction> reactions, Composite allSprites, String selectedPath) {
 		super();
 		this.reactions = reactions;
 		this.allSprites = allSprites;
