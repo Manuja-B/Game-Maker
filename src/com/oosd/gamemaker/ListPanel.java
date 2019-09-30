@@ -1,5 +1,6 @@
 package com.oosd.gamemaker;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -18,22 +19,20 @@ import com.oosd.gamemaker.models.Sprite;
 public class ListPanel extends JPanel implements ActionListener {
 	Composite allSprites;
 	JButton buttonDelete;
-	JButton buttonEdit;
 	JList<String> listSprite;
 	Maker maker;
 	JScrollPane scrollPane;
 	public ListPanel(Composite allSprites, Maker maker) {
 		buttonDelete = new JButton("Delete");
-		buttonEdit = new JButton("Edit");
+		buttonDelete.setLocation(10, 600);
 		this.add(buttonDelete);
-		this.add(buttonEdit);
+		this.setBackground((Color.decode("#ADD8E6")));
 		this.allSprites = allSprites;
 		this.maker = maker;
 		this.createList();
 	}
 	
 	public ListPanel(ArrayList<Movement> movements) {
-		//this.pageSize = pageSize;
 		this.setLayout(null);
 		
 	}
@@ -47,17 +46,13 @@ public class ListPanel extends JPanel implements ActionListener {
 		}
 		listSprite = new JList<String>(arraySprites);
 		buttonDelete.addActionListener(this);
-		buttonEdit.addActionListener(this);
 		scrollPane = new JScrollPane(listSprite);
 		this.add(scrollPane);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		int selectedIndex = listSprite.getSelectedIndex();
-		//System.out.println(selectedIndex);
 		if(e.getSource() == buttonDelete) {
-			//System.out.println(allSprites.getAllSprites().get(selectedIndex));
 			maker.allItems.remove(allSprites.getAllSprites().get(selectedIndex));
 			listSprite.remove(selectedIndex);
 			this.remove(scrollPane);
@@ -65,19 +60,7 @@ public class ListPanel extends JPanel implements ActionListener {
 			this.setVisible(false);
 			this.setVisible(true);
 		}
-		if(e.getSource() == buttonEdit) {
-			JFrame editFrame = new JFrame();
-			JPanel editPanel = new SpritePropertiesPanel(maker, selectedIndex);
-			editPanel.setSize(400, 400);
-			editFrame.setLocation(150, 100);
-			editFrame.setSize(400, 400);
-			editFrame.add(editPanel);
-			((SpritePropertiesPanel)editPanel).drawSpritePropertiesPanel();
-			editFrame.setVisible(true);
-			
-		}
 	}
-
 }
 
 class ListItem

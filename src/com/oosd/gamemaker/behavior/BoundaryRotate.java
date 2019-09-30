@@ -8,8 +8,8 @@ public class BoundaryRotate implements BoundaryBehavior{
 	@Override
 	public void reactWithBoundary(Sprite sprite, Playground playground) {
 		// TODO Auto-generated method stub
-		int xMin = sprite.getX() ;//- sprite.getWidth() / 2;
-		int yMin = sprite.getY() ;//- sprite.getHeight() / 2;
+		int xMin = sprite.getX() ;
+		int yMin = sprite.getY() ;
 		int xMax = sprite.getX() + sprite.getWidth() ;
 		int yMax = sprite.getY() + sprite.getHeight();
 		if ( xMin > playground.getWidth())

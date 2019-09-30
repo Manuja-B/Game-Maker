@@ -8,15 +8,8 @@ public class BounceBack extends Reaction {
 		super(primary, secondary, sound);
 	}
 
-
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3809186569001206218L;
-	
-	
-	
+		
 	@Override
 	public boolean react() {
 		

@@ -35,7 +35,6 @@ public class ManualMovement implements Movement, KeyListener{
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 

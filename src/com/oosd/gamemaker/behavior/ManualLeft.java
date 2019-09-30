@@ -19,7 +19,6 @@ public class ManualLeft implements Movement, KeyEventDispatcher {
 	}
 	@Override
 	public void move(Sprite sprite, JPanel playground) {
-		// TODO Auto-generated method stub
 		int positionY = sprite.getY();
 		int positionX = sprite.getX();;
 		int dx = 1;
@@ -31,8 +30,6 @@ public class ManualLeft implements Movement, KeyEventDispatcher {
 
 	@Override
 	public boolean dispatchKeyEvent(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
 		if(e.getKeyCode() == key) {
 			if (e.getID() == KeyEvent.KEY_PRESSED) {
 	            this.isLeft = true;
