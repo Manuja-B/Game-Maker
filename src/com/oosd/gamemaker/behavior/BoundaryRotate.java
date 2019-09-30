@@ -1,6 +1,6 @@
 package com.oosd.gamemaker.behavior;
-import com.oosd.gamemaker.Playground;
 import com.oosd.gamemaker.models.Sprite;
+import com.oosd.gamemaker.panels.Playground;
 public class BoundaryRotate implements BoundaryBehavior{
 	
 	/**

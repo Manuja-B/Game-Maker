@@ -1,4 +1,4 @@
-package com.oosd.gamemaker;
+package com.oosd.gamemaker.panels;
 
 import java.awt.Color;
 import java.awt.KeyEventDispatcher;
@@ -29,7 +29,11 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 	private static final long serialVersionUID = -1605212137510886388L;
 	Maker maker;
 	Sprite newSprite;
-	int x,y,dx,dy, index;
+	int locX;
+	int locY;
+	int dx;
+	int dy;
+	int index;
 	String boundaryReaction;
 	String path;
 	public SpritePropertiesPanel(Maker maker)
@@ -91,8 +95,8 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 		}
 		newSprite.setWillShoot(checkBoxes.get(0).isSelected());
 		newSprite.setShootEffect(checkBoxes.get(1).isSelected());
-		maker.allItems.add(newSprite);
-		JPanel listPanel = new ListPanel(maker.allItems, maker);
+		maker.getAllItems().add(newSprite);
+		JPanel listPanel = new ListPanel(maker.getAllItems(), maker);
 		listPanel.setSize(200, 200);
 		listPanel.setLocation(10, 500);
 		maker.remove(maker.getListPanel());

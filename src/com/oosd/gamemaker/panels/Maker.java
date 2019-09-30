@@ -1,4 +1,4 @@
-package com.oosd.gamemaker;
+package com.oosd.gamemaker.panels;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -12,10 +12,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import com.oosd.gamemaker.LevelObject;
+import com.oosd.gamemaker.SaveObject;
 import com.oosd.gamemaker.behavior.Movement;
 import com.oosd.gamemaker.behavior.Reaction;
 import com.oosd.gamemaker.models.Composite;
-import com.oosd.gamemaker.models.Sprite;
 import javax.swing.JFileChooser;
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,20 +29,15 @@ import java.io.ObjectOutputStream;
 
 public class Maker extends PanelMaker implements ActionListener {
 	private static final long serialVersionUID = 1L;
-	Composite allItems;
-	Sprite newSprite;
-	int locX;
-	int locY;
-	int dx;
-	int dy;
-	String boundaryReaction;
-	String path ;
+	private Composite allItems;
+	private String path ;
 	private  String selectedpath;
 	JPanel listPanel = new JPanel();
 	Image image;
-	private ArrayList<LevelObject> levelObjects=new ArrayList<LevelObject>();
+	private ArrayList<LevelObject> levelObjects=new ArrayList<>();
 	int currentLevel=0;
 	int currentSpriteIndex=-1;	
+	private final String userDir = "user.dir";
 	
 	public Maker() {
 		allItems = new Composite();
@@ -61,7 +58,7 @@ public class Maker extends PanelMaker implements ActionListener {
 	public void addReaction(Reaction reaction) {
 		this.reactions.add(reaction);
 	}
-	public ArrayList<Reaction> getReactions() {
+	public List<Reaction> getReactions() {
 		return reactions;
 	}
 
@@ -69,7 +66,7 @@ public class Maker extends PanelMaker implements ActionListener {
 		return currentSpriteIndex;
 	}
 	public void makeGame() {
-		levelObjects.add(new LevelObject(reactions,allItems,selectedpath));
+		levelObjects.add(new LevelObject(reactions,getAllItems(),selectedpath));
 		addLabel("You are creating level "+currentLevel,10,10,this);
 		addLabel("Add a new Component", 10, 30,this);
 		addLabel("Component Type", 10, 50,this);
@@ -85,7 +82,7 @@ public class Maker extends PanelMaker implements ActionListener {
 		addTextBox(60,410, this);
 		addButtonToPanel("Go To Level", 120,400, this);
 	}
-		
+	@Override	
 	public void addTextBox(int x, int y, JPanel panel) {
 		JTextField  textbox = new JTextField();
 		textbox.setBounds(x,y,50,20);
@@ -155,12 +152,9 @@ public class Maker extends PanelMaker implements ActionListener {
 			nextPanel.setBackground(Color.decode("#ADD8E6"));
 			nextFrame.setVisible(true);
 		}
-		else if(arg0.getSource() == getButtons().get(2)) {
-			
-		}
 		else if(arg0.getSource() == getButtons().get(5)) {
 			
-			path = System.getProperty("user.dir");
+			path = System.getProperty(userDir);
 			JFileChooser jfc = new JFileChooser(new File(path));
 			jfc.setDialogTitle("Choose Background Theme");
 			jfc.setMultiSelectionEnabled(true);
@@ -177,7 +171,7 @@ public class Maker extends PanelMaker implements ActionListener {
 			allItems=new Composite();
 			reactions=new ArrayList<Reaction>();
 			selectedpath = null;
-			levelObjects.add(new LevelObject(reactions, allItems,selectedpath));
+			levelObjects.add(new LevelObject(reactions, getAllItems(),selectedpath));
 			currentLevel++;
 			labels.get(0).setText("You are on level "+currentLevel);
 		}
@@ -217,10 +211,9 @@ public class Maker extends PanelMaker implements ActionListener {
 	}
 	
 	public void WriteObjectToFile(Object serObj) {
-		path = System.getProperty("user.dir");
+		path = System.getProperty(userDir);
         try(FileOutputStream fileOut = new FileOutputStream(path+"/test"); ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
- 
-            objectOut.writeObject(serObj);
+        	objectOut.writeObject(serObj);
             objectOut.close();
             fileOut.close();
         } catch (Exception ex) {
@@ -229,7 +222,7 @@ public class Maker extends PanelMaker implements ActionListener {
     }
 	
 	public void ReadObjectFromFile(String filename) {
-		path = System.getProperty("user.dir");
+		path = System.getProperty(userDir);
 		try(FileInputStream fi = new FileInputStream(new File(path+"/test")); ObjectInputStream oi =new ObjectInputStream(fi); ) {
 			SaveObject so = (SaveObject)oi.readObject();
 			this.levelObjects = so.getLevelObjects();

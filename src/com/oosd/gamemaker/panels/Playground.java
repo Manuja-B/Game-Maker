@@ -1,4 +1,4 @@
-package com.oosd.gamemaker;
+package com.oosd.gamemaker.panels;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.oosd.gamemaker.LevelObject;
 import com.oosd.gamemaker.behavior.Reaction;
 import com.oosd.gamemaker.behavior.ShootBehavior;
 import com.oosd.gamemaker.models.Composite;

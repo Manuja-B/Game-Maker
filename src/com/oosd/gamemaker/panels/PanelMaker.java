@@ -1,8 +1,9 @@
-package com.oosd.gamemaker;
+package com.oosd.gamemaker.panels;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -19,14 +20,13 @@ public class PanelMaker extends JPanel implements ActionListener {
 	 * 
 	 */
 	private static final long serialVersionUID = 3231287640255472209L;
-	protected ArrayList<String> keys = new ArrayList<String>() ;
-	protected ArrayList<Movement> manualMovements = new ArrayList<Movement>() ;
-	protected ArrayList<JTextField> textboxes = new ArrayList<JTextField>() ;
-	protected ArrayList<JComboBox<ComboItem>> comboBoxes = new ArrayList<JComboBox<ComboItem>>() ;
-	protected ArrayList<JButton> buttons = new ArrayList<JButton>();
-	protected ArrayList<Reaction> reactions = new ArrayList<Reaction>();
+	protected ArrayList<Movement> manualMovements = new ArrayList<>() ;
+	protected ArrayList<JTextField> textboxes = new ArrayList<>() ;
+	protected ArrayList<JComboBox<ComboItem>> comboBoxes = new ArrayList<>() ;
+	protected ArrayList<JButton> buttons = new ArrayList<>();
+	protected List<Reaction> reactions = new ArrayList<>();
 	protected ArrayList<JLabel> labels=new ArrayList<JLabel>();
-	protected ArrayList<JCheckBox> checkBoxes = new ArrayList<JCheckBox>();
+	protected ArrayList<JCheckBox> checkBoxes = new ArrayList<>();
 	
 	public void addLabel(String message, int x, int y, JPanel panel) {
 		JLabel label = new JLabel(message);
@@ -72,7 +72,7 @@ public class PanelMaker extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		// Don't do anything
 		
 	}
 }

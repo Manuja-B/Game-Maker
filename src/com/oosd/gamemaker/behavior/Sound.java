@@ -4,9 +4,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
+
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
-public class Sound {
+public class Sound implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1624691832189998575L;
 	String audiopath;
 	AudioStream audio;
 	InputStream music;

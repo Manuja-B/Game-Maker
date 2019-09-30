@@ -1,4 +1,4 @@
-package com.oosd.gamemaker;
+package com.oosd.gamemaker.panels;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
 import com.oosd.gamemaker.models.Composite;
 import com.oosd.gamemaker.models.Sprite;
 
@@ -45,7 +46,7 @@ public class ListPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		int selectedIndex = listSprite.getSelectedIndex();
 		if(e.getSource() == buttonDelete) {
-			maker.allItems.remove(allSprites.getAllSprites().get(selectedIndex));
+			maker.getAllItems().remove(allSprites.getAllSprites().get(selectedIndex));
 			listSprite.remove(selectedIndex);
 			this.remove(scrollPane);
 			this.createList();

@@ -3,6 +3,9 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.oosd.gamemaker.panels.Maker;
+import com.oosd.gamemaker.panels.Playground;
+
 public class Main extends JPanel {
 	/**
 	 * 

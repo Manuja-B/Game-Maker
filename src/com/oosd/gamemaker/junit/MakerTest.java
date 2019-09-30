@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.oosd.gamemaker.Maker;
+import com.oosd.gamemaker.panels.Maker;
 
 public class MakerTest {
 

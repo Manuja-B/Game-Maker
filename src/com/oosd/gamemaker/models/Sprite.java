@@ -2,10 +2,11 @@ package com.oosd.gamemaker.models;
 import java.awt.Graphics2D;
 import java.io.Serializable;
 import java.util.ArrayList;
-import com.oosd.gamemaker.Playground;
+
 import com.oosd.gamemaker.behavior.BoundaryBehavior;
 import com.oosd.gamemaker.behavior.Movement;
 import com.oosd.gamemaker.behavior.Reaction;
+import com.oosd.gamemaker.panels.Playground;
 
 public abstract class Sprite implements Serializable{
 	/**

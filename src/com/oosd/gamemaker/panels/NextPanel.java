@@ -1,4 +1,4 @@
-package com.oosd.gamemaker;
+package com.oosd.gamemaker.panels;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,24 +8,20 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
-import com.oosd.gamemaker.ComboItem;
 import com.oosd.gamemaker.behavior.BounceBack;
 import com.oosd.gamemaker.behavior.Explode;
 import com.oosd.gamemaker.behavior.Sound;
-
-import sun.audio.AudioStream;
 
 public class NextPanel extends JPanel implements ActionListener{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6529035796591203451L;
-	ArrayList<JComboBox<ComboItem>> comboBoxes = new ArrayList<JComboBox<ComboItem>>() ;
-	ArrayList<JButton> buttons = new ArrayList<JButton>();
-	Maker maker;
-	Sound sound;
-	String audiopath;
-	AudioStream audio = null;
+	private ArrayList<JComboBox<ComboItem>> comboBoxes = new ArrayList<>() ;
+	private ArrayList<JButton> buttons = new ArrayList<>();
+	private Maker maker;
+	private Sound sound;
+	private String audiopath;
 	
 	public NextPanel(Maker maker) {
 		int spriteCount = maker.getAllItems().getAllSprites().size();
@@ -80,7 +76,7 @@ public class NextPanel extends JPanel implements ActionListener{
 		
 		else if(e.getSource()==buttons.get(0))
 		{
-			String path = "Music";
+			String path = "";
 			JFileChooser jfc = new JFileChooser(new File(path));
 			jfc.setDialogTitle("Choose Background Sound");
 			jfc.setMultiSelectionEnabled(true);
