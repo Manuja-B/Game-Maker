@@ -7,11 +7,6 @@ public class Explode extends Reaction {
 	public Explode(Sprite primary, Sprite secondary, Sound sound) {
 		super(primary, secondary, sound);
 	}
-
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6234868905842258823L;
 	
 	@Override

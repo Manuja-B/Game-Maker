@@ -28,7 +28,6 @@ public class NextPanel extends JPanel implements ActionListener{
 	AudioStream audio = null;
 	
 	public NextPanel(Maker maker) {
-		// TODO Auto-generated constructor stubs
 		int spriteCount = maker.getAllItems().getAllSprites().size();
 		ComboItem[] sprites = new ComboItem[spriteCount];
 		for(int i = 0; i < spriteCount; i++) {
@@ -61,9 +60,6 @@ public class NextPanel extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-		
 		if(e.getSource()==buttons.get(1))
 		{
 			Object reactionItem = comboBoxes.get(0).getSelectedItem();
@@ -86,37 +82,21 @@ public class NextPanel extends JPanel implements ActionListener{
 		{
 			String path = "Music";
 			JFileChooser jfc = new JFileChooser(new File(path));
-//			JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-			
 			jfc.setDialogTitle("Choose Background Sound");
 			jfc.setMultiSelectionEnabled(true);
 			jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-			System.out.println("Inside NextPanel btn.get(1)");
 			int returnValue = jfc.showOpenDialog(null);
 			if (returnValue == JFileChooser.APPROVE_OPTION) {
 				File[] files = jfc.getSelectedFiles();
 				 File selectedFile = jfc.getSelectedFile();
 				 this.audiopath = selectedFile.getAbsolutePath();
-				 System.out.println("Music selected is : "+audiopath);
-				 
 				 sound = new Sound(audiopath);
-				 
-				Arrays.asList(files).forEach(x -> {
-					if (x.isFile()) {
-						System.out.println(x.getName());
-					}
-				});
 			}
-			
 		}
-		
 	}
 
 	public String getAudiopath() {
 		return audiopath;
 	}
-
-	
-	
-	
+		
 }

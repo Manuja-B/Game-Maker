@@ -13,12 +13,12 @@ public class ClockTest {
 	@Test
 	public void test() {
 		
-		dc.setDx(20);
-		   dc.setDy(20);
-		   assertEquals(20, dc.getDx());
-		   assertEquals(20, dc.getDy());
-		   assertEquals(0, dc.getX());
-		   assertEquals(0, dc.getY());
+			dc.setDx(20);
+			dc.setDy(20);
+			assertEquals(20, dc.getDx());
+			assertEquals(20, dc.getDy());
+			assertEquals(0, dc.getX());
+			assertEquals(0, dc.getY());
 	}
 
 	
