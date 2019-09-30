@@ -23,9 +23,6 @@ import com.oosd.gamemaker.models.Rectangle;
 import com.oosd.gamemaker.models.Sprite;
 
 public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1605212137510886388L;
 	Maker maker;
 	Sprite newSprite;

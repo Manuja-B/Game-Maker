@@ -10,7 +10,7 @@ import com.oosd.gamemaker.models.Rectangle;
 
 public class RectangleTest {
 
-	public Rectangle rec = new Rectangle(Color.BLACK, 0, 0, 0, 0, 0, 0);
+	private Rectangle rec = new Rectangle(Color.BLACK, 0, 0, 0, 0, 0, 0);
 	@Test
 	public void test() {
 		rec.setDx(20);

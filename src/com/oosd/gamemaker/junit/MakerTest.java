@@ -8,12 +8,12 @@ import com.oosd.gamemaker.Maker;
 
 public class MakerTest {
 
-	Maker mk = new Maker();
+	private Maker mk = new Maker();
 	@Test
 	public void test() {
 		mk.makeGame();
 		int check = mk.getButtons().size();
-		assertEquals(3, check);
+		assertEquals(10, check);
 		
 	}
 

@@ -1,10 +1,7 @@
 package com.oosd.gamemaker;
-
 import java.awt.Color;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 
 public class Main extends JPanel {
 	/**
@@ -23,6 +20,7 @@ public class Main extends JPanel {
 		maker.setSize(400,800);
 		maker.setLocation(0,0);
 		maker.setBackground(Color.LIGHT_GRAY);
+		maker.setBackground(Color.decode("#ADD8E6"));
 		((Maker)maker).makeGame();
 		JPanel playgroundPanel = new Playground((Maker)maker);
 		playgroundPanel.setSize(800, 800);
