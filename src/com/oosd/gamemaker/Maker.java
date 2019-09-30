@@ -25,7 +25,6 @@ import java.io.ObjectOutputStream;
 
 public class Maker extends PanelMaker implements ActionListener {
 	private static final long serialVersionUID = 1L;
-	JPanel makerPanel = new JPanel();
 	Composite allItems;
 	Sprite newSprite;
 	int x,y,dx,dy;
@@ -238,7 +237,6 @@ public class Maker extends PanelMaker implements ActionListener {
 		try(FileInputStream fi = new FileInputStream(new File("/Users/juhi/Desktop/test")); ObjectInputStream oi =new ObjectInputStream(fi); ) {
 			SaveObject so = (SaveObject)oi.readObject();
 			this.levelObjects = so.getLevelObjects();
-			oi.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("File Not found"+e.getMessage());
 		}

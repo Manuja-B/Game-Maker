@@ -61,7 +61,7 @@ public class Playground extends JPanel implements ActionListener, MouseListener{
 		}
 	}
 	
-	public static Graphics2D graphobj = null;
+	private static Graphics2D graphobj = null;
 	public void startGame() {
 		startButton = new JButton("Play/ Pause");
 		levelNumberLabel=new JLabel(""+LevelObject.getLevel());
