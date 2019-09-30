@@ -13,6 +13,8 @@ import com.oosd.gamemaker.behavior.Movement;
 import com.oosd.gamemaker.behavior.Reaction;
 import com.oosd.gamemaker.models.Composite;
 import com.oosd.gamemaker.models.Sprite;
+import com.sun.media.jfxmedia.logging.Logger;
+
 import javax.swing.JFileChooser;
 import java.io.File;
 import java.io.FileInputStream;
@@ -281,16 +283,13 @@ public class Maker extends PanelMaker implements ActionListener {
 			this.levelObjects = so.getLevelObjects();
 			oi.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("File Not found"+e.getMessage());
 		}
 		 catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			 System.out.println("IO Exception"+e.getMessage());
 		}
 		catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Class not found"+e.getMessage());
 		}
 		
 		

@@ -1,6 +1,4 @@
 package com.oosd.gamemaker;
-
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -14,13 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.oosd.gamemaker.behavior.Explode;
-import com.oosd.gamemaker.behavior.Movement;
 import com.oosd.gamemaker.behavior.Reaction;
 import com.oosd.gamemaker.behavior.ShootBehavior;
 import com.oosd.gamemaker.models.Composite;
@@ -28,21 +23,23 @@ import com.oosd.gamemaker.models.Sprite;
 
 public class Playground extends JPanel implements ActionListener, MouseListener{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2376859069846492382L;
 	Maker maker;
 	JPanel controller;
 	Image image;
 	String selectedpath;
 	Composite allItems = new Composite();
 	JButton startButton;
-	ArrayList<Reaction> reactions; 
-	//String level="1";
+	List<Reaction> reactions; 
 	JLabel levelNumberLabel;
 	
 	public Playground(Maker maker)  {
-		//this.setBackground(Color.WHITE);
 		this.maker = maker;
-		this.allItems = new Composite();//maker.getLevelObjects().get(maker.getCurrentLevel()).getSprites();
-		this.reactions=new ArrayList<Reaction>();//maker.getLevelObjects().get(maker.getCurrentLevel()).getReactions();
+		this.allItems = new Composite();
+		this.reactions=new ArrayList<Reaction>();
 		this.setLayout(null);
 		this.addMouseListener(this);
 			 
@@ -50,14 +47,12 @@ public class Playground extends JPanel implements ActionListener, MouseListener{
 	public void setBackgroundImage()
 	{
 		this.selectedpath = maker.getLevelObjects().get(maker.getCurrentLevel()).getSelectedPath();
-		//System.out.println(selectedpath);
 		if(selectedpath != null)
 		{
 			File sourceimage = new File(selectedpath);
 			try {
 				image = ImageIO.read(sourceimage);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}	
 		}
@@ -69,7 +64,7 @@ public class Playground extends JPanel implements ActionListener, MouseListener{
 	public static Graphics2D graphobj = null;
 	public void startGame() {
 		startButton = new JButton("Play/ Pause");
-		levelNumberLabel=new JLabel(""+LevelObject.level);
+		levelNumberLabel=new JLabel(""+LevelObject.getLevel());
 		startButton.addActionListener(this);
 		startButton.setVisible(true);
 		startButton.setBounds(200, 10, 200, 20);
@@ -102,8 +97,6 @@ public class Playground extends JPanel implements ActionListener, MouseListener{
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
-		//this.setBackgroundImage();
 		graphobj = (Graphics2D) g; 
 	    
 	    if(image!=null)
@@ -118,7 +111,6 @@ public class Playground extends JPanel implements ActionListener, MouseListener{
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		if(e.getSource() == startButton ) {
 			allItems.pause();
 		}
@@ -128,7 +120,6 @@ public class Playground extends JPanel implements ActionListener, MouseListener{
 	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
 		System.out.println("mouse");
 		allItems.shoot();
 		List<Sprite> bullets = maker.getLevelObjects().get(maker.getCurrentLevel()).getSprites().getBullets();
@@ -142,22 +133,22 @@ public class Playground extends JPanel implements ActionListener, MouseListener{
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
+		// Do nothing
 		
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
+		// Do nothing
 		
 	}
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
+		// Do nothing
 		
 	}
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
+		// Do nothing
 		
 	}
 }

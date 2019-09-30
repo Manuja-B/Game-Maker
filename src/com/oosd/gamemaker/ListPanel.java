@@ -2,7 +2,6 @@ package com.oosd.gamemaker;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -11,11 +10,14 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import com.oosd.gamemaker.behavior.Movement;
 import com.oosd.gamemaker.models.Composite;
 import com.oosd.gamemaker.models.Sprite;
 
 public class ListPanel extends JPanel implements ActionListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7675156536260347672L;
 	Composite allSprites;
 	JButton buttonDelete;
 	JButton buttonEdit;
@@ -32,20 +34,14 @@ public class ListPanel extends JPanel implements ActionListener {
 		this.createList();
 	}
 	
-	public ListPanel(ArrayList<Movement> movements) {
-		//this.pageSize = pageSize;
-		this.setLayout(null);
-		
-	}
-	
 	public void createList() {
 		List<Sprite> sprites = allSprites.getAllSprites();
 		int count = sprites.size();
-		String arraySprites[] = new String[count];
+		String[] arraySprites = new String[count];
 		for(int i = 0; i < count ; i++ ) {
 			arraySprites[i] = sprites.get(i).getName();
 		}
-		listSprite = new JList<String>(arraySprites);
+		listSprite = new JList<>(arraySprites);
 		buttonDelete.addActionListener(this);
 		buttonEdit.addActionListener(this);
 		scrollPane = new JScrollPane(listSprite);
@@ -53,11 +49,8 @@ public class ListPanel extends JPanel implements ActionListener {
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		int selectedIndex = listSprite.getSelectedIndex();
-		//System.out.println(selectedIndex);
 		if(e.getSource() == buttonDelete) {
-			//System.out.println(allSprites.getAllSprites().get(selectedIndex));
 			maker.allItems.remove(allSprites.getAllSprites().get(selectedIndex));
 			listSprite.remove(selectedIndex);
 			this.remove(scrollPane);
