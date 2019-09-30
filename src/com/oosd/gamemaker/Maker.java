@@ -6,6 +6,8 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -27,51 +29,45 @@ public class Maker extends PanelMaker implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	Composite allItems;
 	Sprite newSprite;
-	int x,y,dx,dy;
+	int locX;
+	int locY;
+	int dx;
+	int dy;
 	String boundaryReaction;
+	String path ;
 	private  String selectedpath;
 	JPanel listPanel = new JPanel();
 	Image image;
+	private ArrayList<LevelObject> levelObjects=new ArrayList<LevelObject>();
 	int currentLevel=0;
+	int currentSpriteIndex=-1;	
 	
-	public JPanel getListPanel() {
-		return listPanel;
-	}
-
-	public void setListPanel(JPanel listPanel) {
-		this.listPanel = listPanel;
-	}
-	
-	ArrayList<LevelObject> levelObjects=new ArrayList<LevelObject>();
-	public ArrayList<LevelObject> getLevelObjects() {
-		return levelObjects;
-	}
-
-	public void setLevelObjects(ArrayList<LevelObject> levelObjects) {
-		this.levelObjects = levelObjects;
-	}
-
-	
-	public void addReaction(Reaction reaction) {
-		this.reactions.add(reaction);
-	}
-
-	public ArrayList<Reaction> getReactions() {
-		return reactions;
-	}
-	
-	int currentSpriteIndex=-1;
-	public int getCurrentSpriteIndex() {
-		return currentSpriteIndex;
-	}
-
 	public Maker() {
 		allItems = new Composite();
 		this.setLayout(null);
 	}
+	public JPanel getListPanel() {
+		return listPanel;
+	}
+	public void setListPanel(JPanel listPanel) {
+		this.listPanel = listPanel;
+	}
+	public ArrayList<LevelObject> getLevelObjects() {
+		return levelObjects;
+	}
+	public void setLevelObjects(ArrayList<LevelObject> levelObjects) {
+		this.levelObjects = levelObjects;
+	}
+	public void addReaction(Reaction reaction) {
+		this.reactions.add(reaction);
+	}
+	public ArrayList<Reaction> getReactions() {
+		return reactions;
+	}
 
-	
-
+	public int getCurrentSpriteIndex() {
+		return currentSpriteIndex;
+	}
 	public void makeGame() {
 		levelObjects.add(new LevelObject(reactions,allItems,selectedpath));
 		addLabel("You are creating level "+currentLevel,10,10,this);
@@ -98,7 +94,7 @@ public class Maker extends PanelMaker implements ActionListener {
 		panel.add(textbox);
 		
 	}
-	
+	@Override
 	public void addButtonToPanel(String name, int x, int y, JPanel panel) {
 		JButton button = new JButton(name);
 		button.addActionListener(this);
@@ -164,7 +160,7 @@ public class Maker extends PanelMaker implements ActionListener {
 		}
 		else if(arg0.getSource() == getButtons().get(5)) {
 			
-			String path = "C:\\Users\\Maruti\\OneDrive\\Pictures\\Saved Pictures";
+			path = System.getProperty("user.dir");
 			JFileChooser jfc = new JFileChooser(new File(path));
 			jfc.setDialogTitle("Choose Background Theme");
 			jfc.setMultiSelectionEnabled(true);
@@ -212,7 +208,7 @@ public class Maker extends PanelMaker implements ActionListener {
 	}
 	
 	
-	public ArrayList<Movement> getManualMovements() {
+	public List<Movement> getManualMovements() {
 		return manualMovements;
 	}
 
@@ -221,9 +217,8 @@ public class Maker extends PanelMaker implements ActionListener {
 	}
 	
 	public void WriteObjectToFile(Object serObj) {
-		 
-        try(FileOutputStream fileOut = new FileOutputStream("/Users/juhi/"
-        		+ "Desktop/test"); ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
+		path = System.getProperty("user.dir");
+        try(FileOutputStream fileOut = new FileOutputStream(path+"/test"); ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
  
             objectOut.writeObject(serObj);
             objectOut.close();
@@ -234,7 +229,8 @@ public class Maker extends PanelMaker implements ActionListener {
     }
 	
 	public void ReadObjectFromFile(String filename) {
-		try(FileInputStream fi = new FileInputStream(new File("/Users/juhi/Desktop/test")); ObjectInputStream oi =new ObjectInputStream(fi); ) {
+		path = System.getProperty("user.dir");
+		try(FileInputStream fi = new FileInputStream(new File(path+"/test")); ObjectInputStream oi =new ObjectInputStream(fi); ) {
 			SaveObject so = (SaveObject)oi.readObject();
 			this.levelObjects = so.getLevelObjects();
 		} catch (FileNotFoundException e) {

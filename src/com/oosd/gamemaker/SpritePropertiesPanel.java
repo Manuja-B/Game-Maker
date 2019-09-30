@@ -6,6 +6,9 @@ import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.File;
+
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import com.oosd.gamemaker.behavior.AutomaticMovement;
 import com.oosd.gamemaker.behavior.BoundaryBounce;
@@ -28,9 +31,7 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 	Sprite newSprite;
 	int x,y,dx,dy, index;
 	String boundaryReaction;
-	
-	
-	
+	String path;
 	public SpritePropertiesPanel(Maker maker)
 	{
 		this.maker=maker;
@@ -65,7 +66,8 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 		}
 		
 		else if(spriteIndex == 2) {
-			newSprite = new Picture( Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(height), Integer.parseInt(width),Integer.parseInt(dx),Integer.parseInt(dy));
+			
+			newSprite = new Picture( Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(height), Integer.parseInt(width),Integer.parseInt(dx),Integer.parseInt(dy),path);
 			newSprite.setAutomaticMovement(new AutomaticMovement());
 		}
 		
@@ -101,6 +103,7 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 	}
 	public void drawSpritePropertiesPanel()
 	{
+		int currentIndex = maker.getCurrentSpriteIndex();
 		maker.addLabel("Location", 10, 50,this);
 		maker.addLabel("x", 180, 50,this); 
 		addTextBox(200,50,this);  
@@ -130,6 +133,9 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 		addCheckBox("Will Shoot?", 10, 280, this);
 		addCheckBox("Shoot Affect?", 200, 280, this);
 		addButtonToPanel("Add Component", 10, 320,this);//24 //button 6
+		if(currentIndex == 2) {
+			addButtonToPanel("Choose Image", 10, 150,this);
+		}
 		
 	}
 	@Override
@@ -159,6 +165,19 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 			KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
 	        manager.addKeyEventDispatcher((KeyEventDispatcher) spriteManual);	
 	        manualMovements.add(spriteManual);
+		}
+		else if(arg0.getSource() == buttons.get(2)) {
+			path = System.getProperty("user.dir");
+			JFileChooser jfc = new JFileChooser(new File(path));
+			jfc.setDialogTitle("Choose Background Theme");
+			jfc.setMultiSelectionEnabled(true);
+			jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+			int returnValue = jfc.showOpenDialog(null);
+			if (returnValue == JFileChooser.APPROVE_OPTION) {
+				 File selectedFile = jfc.getSelectedFile();
+				 this.path = selectedFile.getAbsolutePath();
+				 
+			}
 		}
 	}
 }

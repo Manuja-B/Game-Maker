@@ -12,18 +12,18 @@ public class Picture extends Sprite{
 	 */
 	private static final long serialVersionUID = 6449562524584478972L;
 	private Image image ;
-	private File f=new File("//home//bivas//Pictures//football.jepg");
+	private File file;//=new File("//home//bivas//Pictures//football.jepg");
 	private static int counter = 0;
-	public Picture( int initialPositionX, int initialPositionY, int imageHeight, int imageWidth,int dx, int dy)
+	public Picture( int initialPositionX, int initialPositionY, int imageHeight, int imageWidth,int dx, int dy, String fileName)
 	{	
 		this.height = imageHeight;
 		this.width = imageWidth;
 		this.update(initialPositionX, initialPositionY);
 		this.setDx(dx);
 		this.setDy(dy);
+		this.file = new File(fileName);
 		try {
-			image=ImageIO.read(f);
-			
+			image=ImageIO.read(file);
 		} catch (IOException e) {
 			System.out.println("Cannot find image"+e.getMessage());
 
