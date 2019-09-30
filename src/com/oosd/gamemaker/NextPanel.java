@@ -4,22 +4,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
-
 import com.oosd.gamemaker.ComboItem;
 import com.oosd.gamemaker.behavior.BounceBack;
 import com.oosd.gamemaker.behavior.Explode;
 import com.oosd.gamemaker.behavior.Sound;
-import com.oosd.gamemaker.models.Composite;
 
 import sun.audio.AudioStream;
 
 public class NextPanel extends JPanel implements ActionListener{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6529035796591203451L;
 	ArrayList<JComboBox<ComboItem>> comboBoxes = new ArrayList<JComboBox<ComboItem>>() ;
 	ArrayList<JButton> buttons = new ArrayList<JButton>();
 	Maker maker;
@@ -87,7 +87,6 @@ public class NextPanel extends JPanel implements ActionListener{
 			jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 			int returnValue = jfc.showOpenDialog(null);
 			if (returnValue == JFileChooser.APPROVE_OPTION) {
-				File[] files = jfc.getSelectedFiles();
 				 File selectedFile = jfc.getSelectedFile();
 				 this.audiopath = selectedFile.getAbsolutePath();
 				 sound = new Sound(audiopath);
