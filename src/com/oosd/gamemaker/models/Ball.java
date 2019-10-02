@@ -6,9 +6,6 @@ import java.util.ArrayList;
 import com.oosd.gamemaker.behavior.Movement;
 
 public class Ball extends Sprite {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1484789349833161766L;
 	private Color color;
 	private static int counter = 0;

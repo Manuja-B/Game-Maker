@@ -14,6 +14,7 @@ public class ClockTick implements Movement {
 	private double milliSeconds;
 	private int seconds;
 	private int minutes;
+	
 	@Override
 	public void move(Sprite sprite, JPanel playground) {
 		milliSeconds += 0.01;

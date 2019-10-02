@@ -11,6 +11,7 @@ public class ShootBehavior extends Reaction {
 	 * 
 	 */
 	private static final long serialVersionUID = -1317140047103260576L;
+	
 	@Override
 	public boolean react() {
 		if(doesReact(primary, secondary))
