@@ -19,7 +19,4 @@ public class SaveObject implements Serializable {
 		this.levelObjects = levelObjects;
 	}
 
-	
-	
-
 }

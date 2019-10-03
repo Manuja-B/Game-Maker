@@ -9,6 +9,7 @@ public class BoundaryRotate implements BoundaryBehavior{
 	private static final long serialVersionUID = 898256384686592638L;
 
 	@Override
+	
 	public void reactWithBoundary(Sprite sprite, Playground playground) {
 		int xMin = sprite.getX() ;
 		int yMin = sprite.getY() ;

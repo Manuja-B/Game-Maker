@@ -7,9 +7,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Picture extends Sprite{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6449562524584478972L;
 	private Image image ;
 	private File file;//=new File("//home//bivas//Pictures//football.jepg");

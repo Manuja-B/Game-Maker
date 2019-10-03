@@ -17,6 +17,7 @@ public class ManualDown implements Movement, KeyEventDispatcher {
 		super();
 		this.key = key;
 	}
+	
 	@Override
 	public void move(Sprite sprite, JPanel playground) {
 		int positionY = sprite.getY() ;

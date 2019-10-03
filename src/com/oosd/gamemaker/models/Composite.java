@@ -7,9 +7,6 @@ import java.util.List;
 
 import com.oosd.gamemaker.behavior.AutomaticMovement;
 public class Composite extends Sprite implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3034276043596940830L;
 	List<Sprite> sprites;
 	List<Sprite> bullets;

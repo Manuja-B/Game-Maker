@@ -8,9 +8,6 @@ import com.oosd.gamemaker.behavior.Movement;
 import com.oosd.gamemaker.behavior.Reaction;
 
 public abstract class Sprite implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8440651746666951358L;
 	protected ArrayList<Movement>  manualMovements = new ArrayList<Movement>();
 	protected ArrayList<Reaction> reactions;

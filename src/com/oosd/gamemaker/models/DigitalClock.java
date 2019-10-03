@@ -6,9 +6,6 @@ import java.awt.Graphics2D;
 
 public class DigitalClock extends Sprite{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -3083793706362721926L;
 	private int positionX;
 	private int positionY;

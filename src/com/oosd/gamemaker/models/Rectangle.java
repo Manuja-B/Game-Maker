@@ -6,9 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Rectangle extends Sprite{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1245882985717282226L;
 	int initialPositionX, initialPositionY;
 	int paddleWidth, paddleHeight;

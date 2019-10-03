@@ -6,9 +6,6 @@ import javax.swing.JPanel;
 import com.oosd.gamemaker.models.Composite;
 
 public class Main extends JPanel {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5099005057795504559L;
 
 	public static void main(String[] args) {
