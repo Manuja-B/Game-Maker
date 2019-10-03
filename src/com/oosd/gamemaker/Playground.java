@@ -1,5 +1,4 @@
 package com.oosd.gamemaker;
-import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -11,7 +10,6 @@ import java.awt.event.MouseMotionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -24,7 +22,6 @@ import com.oosd.gamemaker.behavior.Reaction;
 import com.oosd.gamemaker.behavior.ShootBehavior;
 import com.oosd.gamemaker.models.Composite;
 import com.oosd.gamemaker.models.Sprite;
-import com.sun.javafx.webkit.KeyCodeMap.Entry;
 
 public class Playground extends JPanel implements ActionListener, MouseListener, MouseMotionListener {
 	
@@ -125,7 +122,6 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 		
 		allItems.shoot();
 		List<Sprite> bullets = maker.getLevelObjects().get(maker.getCurrentLevel()).getSprites().getBullets();
-		System.out.println("List"+allItems.getAllSprites());
 		for (Sprite bullet: bullets) {
 			for (Sprite component: allItems.getAllSprites()) {
 				if (component.isShootEffect()) {
@@ -144,7 +140,6 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 					
 					) {
 				 
-				System.out.println("BlahBlah"+allItems.getAllSprites().get(i));
 				objpos=i;
 				break;
 	}
@@ -159,7 +154,7 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 		for(int i=0; i<allItems.getAllSprites().size(); i++) {			
 			if((startX >= allItems.getAllSprites().get(i).getX()-allItems.getAllSprites().get(i).getWidth())&&(startX <= allItems.getAllSprites().get(i).getX()+allItems.getAllSprites().get(i).getWidth())&&(startY <= allItems.getAllSprites().get(i).getY()+allItems.getAllSprites().get(i).getHeight())&&(startY >= allItems.getAllSprites().get(i).getY()-allItems.getAllSprites().get(i).getHeight())) {
 		
-				System.out.println(allItems.getAllSprites().get(i));
+				
 				break;
 			}
 		}
