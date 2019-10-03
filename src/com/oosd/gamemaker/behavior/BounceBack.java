@@ -11,6 +11,7 @@ public class BounceBack extends Reaction {
 	private static final long serialVersionUID = 3809186569001206218L;
 		
 	@Override
+	
 	public boolean react() {
 		
 		if(doesReact(primary, secondary))
