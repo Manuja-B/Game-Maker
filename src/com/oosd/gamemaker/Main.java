@@ -3,8 +3,6 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-
-
 public class Main extends JPanel {
 	private static final long serialVersionUID = 5099005057795504559L;
 
