@@ -3,6 +3,8 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.oosd.gamemaker.models.Composite;
+
 public class Main extends JPanel {
 	/**
 	 * 
@@ -22,7 +24,8 @@ public class Main extends JPanel {
 		maker.setBackground(Color.LIGHT_GRAY);
 		maker.setBackground(Color.decode("#ADD8E6"));
 		((Maker)maker).makeGame();
-		JPanel playgroundPanel = new Playground((Maker)maker);
+		Composite c = null;
+		JPanel playgroundPanel = new Playground((Maker)maker, (Composite)c);
 		playgroundPanel.setSize(800, 800);
 		playgroundPanel.setLocation(400,0);
 		frame.add(playgroundPanel);

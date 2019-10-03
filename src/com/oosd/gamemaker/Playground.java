@@ -1,4 +1,5 @@
 package com.oosd.gamemaker;
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -6,9 +7,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -16,12 +19,14 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.oosd.gamemaker.DragPlaceObjects;
 import com.oosd.gamemaker.behavior.Reaction;
 import com.oosd.gamemaker.behavior.ShootBehavior;
 import com.oosd.gamemaker.models.Composite;
 import com.oosd.gamemaker.models.Sprite;
+import com.sun.javafx.webkit.KeyCodeMap.Entry;
 
-public class Playground extends JPanel implements ActionListener, MouseListener{
+public class Playground extends JPanel implements ActionListener, MouseListener, MouseMotionListener {
 	
 	/**
 	 * 
@@ -35,15 +40,28 @@ public class Playground extends JPanel implements ActionListener, MouseListener{
 	JButton startButton;
 	List<Reaction> reactions; 
 	JLabel levelNumberLabel;
+	Sprite s;
+	Composite c = new Composite();
+	int objpos;
 	
-	public Playground(Maker maker)  {
+	public Playground(Maker maker, Composite c)  {
 		this.maker = maker;
 		this.allItems = new Composite();
+		this.c = new Composite();
 		this.reactions=new ArrayList<Reaction>();
 		this.setLayout(null);
+		this.setFocusable(true);
+		System.out.println("I am here");
 		this.addMouseListener(this);
+		//DragPlaceObjects mousemotion = new DragPlaceObjects(c);
+		
+		//this.addMouseMotionListener((MouseMotionListener) mousemotion);
+		
+		this.addMouseMotionListener(this);
+		//this.addMouseListener(mousemotion);
 			 
 	}
+	
 	public void setBackgroundImage()
 	{
 		this.selectedpath = maker.getLevelObjects().get(maker.getCurrentLevel()).getSelectedPath();
@@ -69,6 +87,7 @@ public class Playground extends JPanel implements ActionListener, MouseListener{
 		startButton.setVisible(true);
 		startButton.setBounds(200, 10, 200, 20);
 		this.add(startButton);
+		//this.addMouseListener());
 		while(true){
 			
 			this.setBackgroundImage();
@@ -111,37 +130,90 @@ public class Playground extends JPanel implements ActionListener, MouseListener{
 			System.out.println("yo");
 		}
 	}
-	@Override
 	public void mouseClicked(MouseEvent e) {
 		System.out.println("mouse");
 		allItems.shoot();
 		List<Sprite> bullets = maker.getLevelObjects().get(maker.getCurrentLevel()).getSprites().getBullets();
+		System.out.println("List"+allItems.getAllSprites());
 		for (Sprite bullet: bullets) {
 			for (Sprite component: allItems.getAllSprites()) {
+				System.out.println("All items"+ allItems.getAllSprites());
 				if (component.isShootEffect()) {
 					maker.getLevelObjects().get(maker.getCurrentLevel()).addReaction(new ShootBehavior(bullet, component, null));
 				}
 			}
 		}
+		System.out.println("C list"+c.getAllSprites());
+		
+		int startX = e.getX();
+		int startY = e.getY();
+		
+		for(int i=0; i<allItems.getAllSprites().size(); i++) {			
+			if((startX >= allItems.getAllSprites().get(i).getX()-allItems.getAllSprites().get(i).getWidth())&&(startX <=allItems.getAllSprites().get(i).getX()+allItems.getAllSprites().get(i).getWidth())&&
+					(startY <= allItems.getAllSprites().get(i).getY()+allItems.getAllSprites().get(i).getHeight())&&(startY >= allItems.getAllSprites().get(i).getY()-allItems.getAllSprites().get(i).getHeight()) 
+					
+					) {
+				 
+				System.out.println("BlahBlah"+allItems.getAllSprites().get(i));
+				objpos=i;
+				break;
 	}
+		}
+	}
+	
 	@Override
-	public void mousePressed(MouseEvent e) {
-		// Do nothing
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		int startX = e.getX();
+		int startY = e.getY();
+		for(int i=0; i<allItems.getAllSprites().size(); i++) {			
+			if((startX >= allItems.getAllSprites().get(i).getX()-allItems.getAllSprites().get(i).getWidth())&&(startX <= allItems.getAllSprites().get(i).getX()+allItems.getAllSprites().get(i).getWidth())&&(startY <= allItems.getAllSprites().get(i).getY()+allItems.getAllSprites().get(i).getHeight())&&(startY >= allItems.getAllSprites().get(i).getY()-allItems.getAllSprites().get(i).getHeight())) {
+				//component = componentList.get(i);
+				System.out.println(allItems.getAllSprites().get(i));
+				break;
+			}
+		}
+		System.out.println(e.getY());	
+		System.out.println(allItems.getAllSprites());
+		((Sprite) allItems.getAllSprites().get(objpos)).setX(e.getX());
+		((Sprite) allItems.getAllSprites().get(objpos)).setY(e.getY());
+		
 		
 	}
+
 	@Override
-	public void mouseReleased(MouseEvent e) {
-		// Do nothing
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
 		
 	}
+
 	@Override
-	public void mouseEntered(MouseEvent e) {
-		// Do nothing
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
 		
 	}
+
 	@Override
-	public void mouseExited(MouseEvent e) {
-		// Do nothing
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	
+
 }
