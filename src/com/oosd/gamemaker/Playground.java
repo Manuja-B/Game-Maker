@@ -34,7 +34,6 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 	JButton startButton;
 	List<Reaction> reactions; 
 	JLabel levelNumberLabel;
-	Sprite s;
 	int objpos;
 	
 	public Playground(Maker maker)  {
