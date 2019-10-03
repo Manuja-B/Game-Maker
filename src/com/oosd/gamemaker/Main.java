@@ -21,8 +21,7 @@ public class Main extends JPanel {
 		maker.setBackground(Color.LIGHT_GRAY);
 		maker.setBackground(Color.decode("#ADD8E6"));
 		((Maker)maker).makeGame();
-		Composite c = null;
-		JPanel playgroundPanel = new Playground((Maker)maker, (Composite)c);
+		JPanel playgroundPanel = new Playground((Maker)maker);
 		playgroundPanel.setSize(800, 800);
 		playgroundPanel.setLocation(400,0);
 		frame.add(playgroundPanel);

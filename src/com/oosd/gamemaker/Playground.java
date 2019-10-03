@@ -41,13 +41,11 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 	List<Reaction> reactions; 
 	JLabel levelNumberLabel;
 	Sprite s;
-	Composite c = new Composite();
 	int objpos;
 	
-	public Playground(Maker maker, Composite c)  {
+	public Playground(Maker maker)  {
 		this.maker = maker;
 		this.allItems = new Composite();
-		this.c = new Composite();
 		this.reactions=new ArrayList<Reaction>();
 		this.setLayout(null);
 		this.setFocusable(true);
@@ -124,19 +122,18 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 		}
 	}
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("mouse");
+		
 		allItems.shoot();
 		List<Sprite> bullets = maker.getLevelObjects().get(maker.getCurrentLevel()).getSprites().getBullets();
 		System.out.println("List"+allItems.getAllSprites());
 		for (Sprite bullet: bullets) {
 			for (Sprite component: allItems.getAllSprites()) {
-				System.out.println("All items"+ allItems.getAllSprites());
 				if (component.isShootEffect()) {
 					maker.getLevelObjects().get(maker.getCurrentLevel()).addReaction(new ShootBehavior(bullet, component, null));
 				}
 			}
 		}
-		System.out.println("C list"+c.getAllSprites());
+		
 		
 		int startX = e.getX();
 		int startY = e.getY();
@@ -166,8 +163,6 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 				break;
 			}
 		}
-		System.out.println(e.getY());	
-		System.out.println(allItems.getAllSprites());
 		((Sprite) allItems.getAllSprites().get(objpos)).setX(e.getX());
 		((Sprite) allItems.getAllSprites().get(objpos)).setY(e.getY());
 		
