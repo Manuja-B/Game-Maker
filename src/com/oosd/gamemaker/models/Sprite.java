@@ -1,9 +1,11 @@
 package com.oosd.gamemaker.models;
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.io.Serializable;
 import java.util.ArrayList;
 import com.oosd.gamemaker.Playground;
 import com.oosd.gamemaker.behavior.BoundaryBehavior;
+import com.oosd.gamemaker.behavior.MouseClickBehaviour;
 import com.oosd.gamemaker.behavior.Movement;
 import com.oosd.gamemaker.behavior.Reaction;
 
@@ -23,6 +25,8 @@ public abstract class Sprite implements Serializable{
 	public abstract void draw(Graphics2D g2d);
 	private boolean willShoot = false;
 	private boolean shootEffect = false;
+	protected Color color; 
+	protected MouseClickBehaviour mouseClickBehaviour;
 	
 	public boolean isShootEffect() {
 		return shootEffect;
@@ -74,6 +78,13 @@ public abstract class Sprite implements Serializable{
 	public void setDy(int dy) {
 		this.dy = dy;
 	}
+	
+	public Color getColor() {
+		return color;
+	}
+	public void setColor(Color color) {
+		this.color = color;
+	}
 	public void setManualMovement(Movement movement) {
 		this.manualMovements.add(movement);
 	}
@@ -94,6 +105,10 @@ public abstract class Sprite implements Serializable{
 		}
 		
 	}
+	
+	public void respondToClick() {
+		this.mouseClickBehaviour.respondToClick();
+	}
 	public void setBoundaryMovement(BoundaryBehavior boundaryBehavior) {
 		this.boundaryBehavior = boundaryBehavior;
 	}
@@ -107,6 +122,12 @@ public abstract class Sprite implements Serializable{
 		this.automaticMovement = automaticMovement;
 	}
 	
+	public MouseClickBehaviour getMouseClickBehaviour() {
+		return mouseClickBehaviour;
+	}
+	public void setMouseClickBehaviour(MouseClickBehaviour mouseClickBehaviour) {
+		this.mouseClickBehaviour = mouseClickBehaviour;
+	}
 	public void pause() {
 		this.isGamePaused = true;
 	}

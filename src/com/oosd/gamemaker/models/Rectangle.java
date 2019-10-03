@@ -12,10 +12,9 @@ public class Rectangle extends Sprite{
 	List<Integer> historyX = new ArrayList<Integer>();
 	int countX = 0, totalCount = 0;
 	Boolean flag = false;
-	Color color;
 	private static int counter = 0;
 	public Rectangle(Color color, int initialPositionX, int initialPositionY, int width, int height, int dx, int dy) {
-		this.color = color;
+		color = color;
 		this.initialPositionX = initialPositionX;
 		this.initialPositionY = initialPositionY;
 		this.width = width;
