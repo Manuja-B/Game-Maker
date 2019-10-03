@@ -19,7 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.oosd.gamemaker.DragPlaceObjects;
+
 import com.oosd.gamemaker.behavior.Reaction;
 import com.oosd.gamemaker.behavior.ShootBehavior;
 import com.oosd.gamemaker.models.Composite;
@@ -53,13 +53,7 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 		this.setFocusable(true);
 		System.out.println("I am here");
 		this.addMouseListener(this);
-		//DragPlaceObjects mousemotion = new DragPlaceObjects(c);
-		
-		//this.addMouseMotionListener((MouseMotionListener) mousemotion);
-		
 		this.addMouseMotionListener(this);
-		//this.addMouseListener(mousemotion);
-			 
 	}
 	
 	public void setBackgroundImage()
@@ -87,7 +81,6 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 		startButton.setVisible(true);
 		startButton.setBounds(200, 10, 200, 20);
 		this.add(startButton);
-		//this.addMouseListener());
 		while(true){
 			
 			this.setBackgroundImage();
@@ -163,12 +156,12 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 	
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
+		
 		int startX = e.getX();
 		int startY = e.getY();
 		for(int i=0; i<allItems.getAllSprites().size(); i++) {			
 			if((startX >= allItems.getAllSprites().get(i).getX()-allItems.getAllSprites().get(i).getWidth())&&(startX <= allItems.getAllSprites().get(i).getX()+allItems.getAllSprites().get(i).getWidth())&&(startY <= allItems.getAllSprites().get(i).getY()+allItems.getAllSprites().get(i).getHeight())&&(startY >= allItems.getAllSprites().get(i).getY()-allItems.getAllSprites().get(i).getHeight())) {
-				//component = componentList.get(i);
+		
 				System.out.println(allItems.getAllSprites().get(i));
 				break;
 			}
@@ -183,32 +176,26 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 
-
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
