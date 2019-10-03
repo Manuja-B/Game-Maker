@@ -14,10 +14,7 @@ import com.oosd.gamemaker.behavior.AutomaticMovement;
 import com.oosd.gamemaker.behavior.BoundaryBounce;
 import com.oosd.gamemaker.behavior.BoundaryRotate;
 import com.oosd.gamemaker.behavior.ClockTick;
-import com.oosd.gamemaker.behavior.ManualDown;
-import com.oosd.gamemaker.behavior.ManualLeft;
-import com.oosd.gamemaker.behavior.ManualRight;
-import com.oosd.gamemaker.behavior.ManualUp;
+import com.oosd.gamemaker.behavior.ManualMovement;
 import com.oosd.gamemaker.behavior.Movement;
 import com.oosd.gamemaker.models.Ball;
 import com.oosd.gamemaker.models.DigitalClock;
@@ -150,19 +147,8 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 			Movement spriteManual = null;
 			Object actionItem = comboBoxes.get(2).getSelectedItem();
 			int itemCode = ((ComboItem)actionItem).getValue();
-			if(itemCode == 0) {
-				 spriteManual = new ManualUp(keyCode);
-			}
-			else if(itemCode == 1) {
-				 spriteManual = new ManualDown(keyCode);
-			}
-			else if(itemCode == 2) {
-				spriteManual = new ManualLeft(keyCode);
-			}
-			else if(itemCode == 3) {
-			   spriteManual = new ManualRight(keyCode);
-			}
-			
+
+			spriteManual = new ManualMovement(keyCode,itemCode);
 			KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
 	        manager.addKeyEventDispatcher((KeyEventDispatcher) spriteManual);	
 	        manualMovements.add(spriteManual);
