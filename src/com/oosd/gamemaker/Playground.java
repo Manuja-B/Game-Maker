@@ -6,22 +6,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import com.oosd.gamemaker.behavior.Reaction;
 import com.oosd.gamemaker.behavior.ShootBehavior;
 import com.oosd.gamemaker.models.Composite;
 import com.oosd.gamemaker.models.Sprite;
 
-public class Playground extends JPanel implements ActionListener, MouseListener{
+public class Playground extends JPanel implements ActionListener, MouseListener, MouseMotionListener {
 	
 	/**
 	 * 
@@ -35,15 +34,18 @@ public class Playground extends JPanel implements ActionListener, MouseListener{
 	JButton startButton;
 	List<Reaction> reactions; 
 	JLabel levelNumberLabel;
+	int objpos;
 	
 	public Playground(Maker maker)  {
 		this.maker = maker;
 		this.allItems = new Composite();
 		this.reactions=new ArrayList<Reaction>();
 		this.setLayout(null);
+		this.setFocusable(true);
 		this.addMouseListener(this);
-			 
+		this.addMouseMotionListener(this);
 	}
+	
 	public void setBackgroundImage()
 	{
 		this.selectedpath = maker.getLevelObjects().get(maker.getCurrentLevel()).getSelectedPath();
@@ -111,9 +113,7 @@ public class Playground extends JPanel implements ActionListener, MouseListener{
 			System.out.println("yo");
 		}
 	}
-	@Override
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("mouse");
 		allItems.shoot();
 		List<Sprite> bullets = maker.getLevelObjects().get(maker.getCurrentLevel()).getSprites().getBullets();
 		for (Sprite bullet: bullets) {
@@ -123,25 +123,66 @@ public class Playground extends JPanel implements ActionListener, MouseListener{
 				}
 			}
 		}
+		
+		
+		int startX = e.getX();
+		int startY = e.getY();
+		
+		for(int i=0; i<allItems.getAllSprites().size(); i++) {			
+			if((startX >= allItems.getAllSprites().get(i).getX()-allItems.getAllSprites().get(i).getWidth())&&(startX <=allItems.getAllSprites().get(i).getX()+allItems.getAllSprites().get(i).getWidth())&&
+					(startY <= allItems.getAllSprites().get(i).getY()+allItems.getAllSprites().get(i).getHeight())&&(startY >= allItems.getAllSprites().get(i).getY()-allItems.getAllSprites().get(i).getHeight()) 
+					
+					) {
+				 
+				objpos=i;
+				break;
 	}
+		}
+	}
+	
 	@Override
-	public void mousePressed(MouseEvent e) {
-		// Do nothing
+	public void mouseDragged(MouseEvent e) {
+		
+		int startX = e.getX();
+		int startY = e.getY();
+		for(int i=0; i<allItems.getAllSprites().size(); i++) {			
+			if((startX >= allItems.getAllSprites().get(i).getX()-allItems.getAllSprites().get(i).getWidth())&&(startX <= allItems.getAllSprites().get(i).getX()+allItems.getAllSprites().get(i).getWidth())&&(startY <= allItems.getAllSprites().get(i).getY()+allItems.getAllSprites().get(i).getHeight())&&(startY >= allItems.getAllSprites().get(i).getY()-allItems.getAllSprites().get(i).getHeight())) {
+				break;
+			}
+		}
+		((Sprite) allItems.getAllSprites().get(objpos)).setX(e.getX());
+		((Sprite) allItems.getAllSprites().get(objpos)).setY(e.getY());
+		
 		
 	}
+
 	@Override
-	public void mouseReleased(MouseEvent e) {
-		// Do nothing
+	public void mouseEntered(MouseEvent arg0) {
 		
 	}
+
 	@Override
-	public void mouseEntered(MouseEvent e) {
-		// Do nothing
+	public void mouseExited(MouseEvent arg0) {
 		
 	}
+
 	@Override
-	public void mouseExited(MouseEvent e) {
-		// Do nothing
+	public void mousePressed(MouseEvent arg0) {
 		
 	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		
+	}
+
+
+
+	
+
 }
