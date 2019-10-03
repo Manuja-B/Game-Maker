@@ -55,6 +55,14 @@ public abstract class Sprite implements Serializable{
 	public int getX() {
 		return locationX;
 	}
+	
+	public void setX(int x) {
+		this.locationX=x;
+	}
+	
+	public void setY(int y) {
+		this.locationY=y;
+	}
 
 	public int getY() {
 		return locationY;
