@@ -149,20 +149,6 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 			int itemCode = ((ComboItem)actionItem).getValue();
 
 			spriteManual = new ManualMovement(keyCode,itemCode);
-			
-//			if(itemCode == 0) {
-//				 spriteManual = new ManualUp(keyCode);
-//			}
-//			else if(itemCode == 1) {
-//				 spriteManual = new ManualDown(keyCode);
-//			}
-//			else if(itemCode == 2) {
-//				spriteManual = new ManualLeft(keyCode);
-//			}
-//			else if(itemCode == 3) {
-//			   spriteManual = new ManualRight(keyCode);
-//			}
-			
 			KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
 	        manager.addKeyEventDispatcher((KeyEventDispatcher) spriteManual);	
 	        manualMovements.add(spriteManual);

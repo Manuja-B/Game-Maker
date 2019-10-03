@@ -20,7 +20,7 @@ public class ManualMovement implements Movement, KeyEventDispatcher {
 	private Boolean isDownCode = false;
 	private Boolean isUpCode = false;
 
-	int key;
+	private int key;
 	
 	public ManualMovement(int key, int directionCode) {
 		super();
@@ -50,11 +50,12 @@ public class ManualMovement implements Movement, KeyEventDispatcher {
 		int positionX = sprite.getX();
 		
 		int maxRight = playground.getWidth();
-		int endpositionX = positionX + sprite.getWidth();
+		int maxBottom = playground.getHeight()-220;
 		
+		
+		int endpositionX = positionX + sprite.getWidth();
 		int endpositionY = positionY + sprite.getHeight();
 		
-		int maxY = playground.getHeight()-220;
 		
 		int dx = 1;
 		int dy = 1;
@@ -66,7 +67,7 @@ public class ManualMovement implements Movement, KeyEventDispatcher {
 		else if (isRight && endpositionX < maxRight) {
 			positionX += dx;
 		} 
-		else if (isDown && endpositionY < maxY) {
+		else if (isDown && endpositionY < maxBottom) {
 			positionY += dy;
 		}
 		else if(isUp && positionY > 0) {
@@ -91,8 +92,7 @@ public class ManualMovement implements Movement, KeyEventDispatcher {
 	            this.isDown = true;
 	        } else if (e.getID() == KeyEvent.KEY_RELEASED && isDownCode) {
 	            this.isDown = false;
-	        }
-			else if (e.getID() == KeyEvent.KEY_PRESSED && isUpCode) {
+	        }else if (e.getID() == KeyEvent.KEY_PRESSED && isUpCode) {
 	            this.isUp = true;
 	        } else if (e.getID() == KeyEvent.KEY_RELEASED && isUpCode) {
 	            this.isUp = false;
