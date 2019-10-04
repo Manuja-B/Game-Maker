@@ -6,6 +6,7 @@ import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 
 import javax.swing.JFileChooser;
@@ -13,14 +14,19 @@ import javax.swing.JPanel;
 import com.oosd.gamemaker.behavior.AutomaticMovement;
 import com.oosd.gamemaker.behavior.BoundaryBounce;
 import com.oosd.gamemaker.behavior.BoundaryRotate;
+import com.oosd.gamemaker.behavior.ChangeColor;
+import com.oosd.gamemaker.behavior.ClickExplode;
 import com.oosd.gamemaker.behavior.ClockTick;
 import com.oosd.gamemaker.behavior.ManualMovement;
+import com.oosd.gamemaker.behavior.MouseClickBehaviour;
 import com.oosd.gamemaker.behavior.Movement;
 import com.oosd.gamemaker.models.Ball;
 import com.oosd.gamemaker.models.DigitalClock;
 import com.oosd.gamemaker.models.Picture;
 import com.oosd.gamemaker.models.Rectangle;
 import com.oosd.gamemaker.models.Sprite;
+
+import javafx.scene.input.MouseButton;
 
 public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 	private static final long serialVersionUID = -1605212137510886388L;
@@ -50,6 +56,7 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 		String dx = textboxes.get(4).getText().isEmpty()?"0":textboxes.get(4).getText();
 		String dy = textboxes.get(5).getText().isEmpty()?"0":textboxes.get(5).getText();
 		int boundaryBehavior = comboBoxes.get(0).getSelectedIndex();
+		int mouseEvent = comboBoxes.get(3).getSelectedIndex();
 		if(spriteIndex == 0) {
 			newSprite = new Ball(Color.BLUE, Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(height), Integer.parseInt(width),Integer.parseInt(dx),Integer.parseInt(dy));
 		}
@@ -85,6 +92,12 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 			else if(boundaryBehavior == 2) {
 				//vanish
 			}
+		}
+		
+		if(mouseEvent == 1) {
+			newSprite.setMouseClickBehaviour(new ChangeColor(newSprite, Color.BLUE));
+		}else if(mouseEvent == 2) {
+			newSprite.setMouseClickBehaviour(new ClickExplode(newSprite));
 		}
 		newSprite.setWillShoot(checkBoxes.get(0).isSelected());
 		newSprite.setShootEffect(checkBoxes.get(1).isSelected());
@@ -127,8 +140,13 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 		
 		addCombobox(new ComboItem[] { new ComboItem("Up", 0) , new ComboItem("Down", 1) , new ComboItem("Left", 2), new ComboItem("Right", 3)}, 200, 190,this); //2
 		addButtonToPanel("Add Manual Movement", 10, 210,this); //19 //button 5
+		
+		maker.addLabel("On Click", 10, 250, this);
+		addCombobox(new ComboItem[] {new ComboItem("None", 0), new ComboItem("Change Color", 1), new ComboItem("Explode", 2)}, 200, 250,this); //2
+		
 		addCheckBox("Will Shoot?", 10, 280, this);
 		addCheckBox("Shoot Affect?", 200, 280, this);
+		
 		addButtonToPanel("Add Component", 10, 320,this);//24 //button 6
 		if(currentIndex == 2) {
 			addButtonToPanel("Choose Image", 10, 150,this);
@@ -139,6 +157,7 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == buttons.get(1)) {
+			
 			addSprite(maker.getCurrentSpriteIndex());
 		}
 		else if(arg0.getSource() == buttons.get(0)) {
