@@ -21,7 +21,7 @@ import com.oosd.gamemaker.models.Composite;
 import com.oosd.gamemaker.models.Sprite;
 
 public class Playground extends JPanel implements ActionListener, MouseListener, MouseMotionListener {
-	
+
 	/**
 	 * 
 	 */
@@ -35,7 +35,7 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 	List<Reaction> reactions; 
 	JLabel levelNumberLabel;
 	int objpos;
-	
+
 	public Playground(Maker maker)  {
 		this.maker = maker;
 		this.allItems = new Composite();
@@ -45,7 +45,7 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
 	}
-	
+
 	public void setBackgroundImage()
 	{
 		this.selectedpath = maker.getLevelObjects().get(maker.getCurrentLevel()).getSelectedPath();
@@ -62,7 +62,7 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 			image = null;
 		}
 	}
-	
+
 	private static Graphics2D graphobj = null;
 	public void startGame() {
 		startButton = new JButton("Play/ Pause");
@@ -72,7 +72,7 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 		startButton.setBounds(200, 10, 200, 20);
 		this.add(startButton);
 		while(true){
-			
+
 			this.setBackgroundImage();
 			this.allItems = maker.getLevelObjects().get(maker.getCurrentLevel()).getSprites();
 			this.reactions = maker.getLevelObjects().get(maker.getCurrentLevel()).getReactions();
@@ -91,17 +91,17 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 			repaint();
 		}
 	}
-	
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		graphobj = (Graphics2D) g; 
-	    if(image!=null)
-	    {
-	    	graphobj.drawImage(image,0,0,800,800,this);
-	    }
-	    for(Sprite sprite: allItems.getAllSprites()) {
-	    	sprite.draw(graphobj);
-	    }
+		if(image!=null)
+		{
+			graphobj.drawImage(image,0,0,800,800,this);
+		}
+		for(Sprite sprite: allItems.getAllSprites()) {
+			sprite.draw(graphobj);
+		}
 
 	}
 	@Override
@@ -120,29 +120,30 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 			for (Sprite component: allItems.getAllSprites()) {
 				if (component.isShootEffect()) {
 					maker.getLevelObjects().get(maker.getCurrentLevel()).addReaction(new ShootBehavior(bullet, component, null));
+
 				}
 			}
 		}
-		
-		
+
 		int startX = e.getX();
 		int startY = e.getY();
-		
+
 		for(int i=0; i<allItems.getAllSprites().size(); i++) {			
 			if((startX >= allItems.getAllSprites().get(i).getX()-allItems.getAllSprites().get(i).getWidth())&&(startX <=allItems.getAllSprites().get(i).getX()+allItems.getAllSprites().get(i).getWidth())&&
-					(startY <= allItems.getAllSprites().get(i).getY()+allItems.getAllSprites().get(i).getHeight())&&(startY >= allItems.getAllSprites().get(i).getY()-allItems.getAllSprites().get(i).getHeight()) 
-					
-					) {
-				 
+					(startY <= allItems.getAllSprites().get(i).getY()+allItems.getAllSprites().get(i).getHeight())&&(startY >= allItems.getAllSprites().get(i).getY()-allItems.getAllSprites().get(i).getHeight()) ) {
+				Sprite sprite = allItems.getAllSprites().get(i);
+				if(sprite.hasMouseBehaviour()) {
+					sprite.getMouseClickBehaviour().respondToClick();
+				}
 				objpos=i;
 				break;
-	}
+			}
 		}
 	}
-	
+
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		
+
 		int startX = e.getX();
 		int startY = e.getY();
 		for(int i=0; i<allItems.getAllSprites().size(); i++) {			
@@ -152,37 +153,37 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 		}
 		((Sprite) allItems.getAllSprites().get(objpos)).setX(e.getX());
 		((Sprite) allItems.getAllSprites().get(objpos)).setY(e.getY());
-		
-		
+
+
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		
+
 	}
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		
+
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		
+
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		
+
 	}
 
 
 
-	
+
 
 }

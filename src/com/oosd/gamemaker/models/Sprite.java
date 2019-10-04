@@ -1,6 +1,7 @@
 package com.oosd.gamemaker.models;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Shape;
 import java.io.Serializable;
 import java.util.ArrayList;
 import com.oosd.gamemaker.Playground;
@@ -11,6 +12,7 @@ import com.oosd.gamemaker.behavior.Reaction;
 
 public abstract class Sprite implements Serializable{
 	private static final long serialVersionUID = 8440651746666951358L;
+	protected Shape shape;
 	protected ArrayList<Movement>  manualMovements = new ArrayList<Movement>();
 	protected ArrayList<Reaction> reactions;
 	private Movement automaticMovement;
@@ -22,12 +24,25 @@ public abstract class Sprite implements Serializable{
 	protected int height, width;
 	protected BoundaryBehavior boundaryBehavior;
 	private boolean firstUpdate = true;
-	public abstract void draw(Graphics2D g2d);
 	private boolean willShoot = false;
 	private boolean shootEffect = false;
 	protected Color color; 
 	protected MouseClickBehaviour mouseClickBehaviour;
+	private boolean hasMouseBehaviour = false;
 	
+	public abstract void draw(Graphics2D g2d);
+	public int getLocationX() {
+		return locationX;
+	}
+	public void setLocationX(int locationX) {
+		this.locationX = locationX;
+	}
+	public int getLocationY() {
+		return locationY;
+	}
+	public void setLocationY(int locationY) {
+		this.locationY = locationY;
+	}
 	public boolean isShootEffect() {
 		return shootEffect;
 	}
@@ -134,7 +149,14 @@ public abstract class Sprite implements Serializable{
 		return mouseClickBehaviour;
 	}
 	public void setMouseClickBehaviour(MouseClickBehaviour mouseClickBehaviour) {
+		hasMouseBehaviour = true;
 		this.mouseClickBehaviour = mouseClickBehaviour;
+	}
+	public boolean hasMouseBehaviour() {
+		return hasMouseBehaviour;
+	}
+	public void setHasMouseBehaviour(boolean hasMouseBehaviour) {
+		this.hasMouseBehaviour = hasMouseBehaviour;
 	}
 	public void pause() {
 		this.isGamePaused = true;
@@ -144,6 +166,12 @@ public abstract class Sprite implements Serializable{
 	}
 	public boolean isGamePaused() {
 		return isGamePaused;
+	}
+	public Shape getShape() {
+		return shape;
+	}
+	public void setShape(Shape shape) {
+		this.shape = shape;
 	}
 	
 }

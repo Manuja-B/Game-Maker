@@ -2,6 +2,7 @@ package com.oosd.gamemaker.models;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,9 +31,9 @@ public class Rectangle extends Sprite{
 
 	@Override
 	public void draw(Graphics2D g2d) {
+		shape = new Rectangle2D.Double(locationX, locationY , width, height);
 		g2d.setColor(this.color);
-		g2d.fillRect(locationX, locationY , width, height);
-		
+		g2d.fill(shape);		
 	}
 	
 }

@@ -2,6 +2,7 @@ package com.oosd.gamemaker.models;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
 import com.oosd.gamemaker.behavior.Movement;
 
@@ -25,8 +26,8 @@ public class Ball extends Sprite {
 	
 	@Override
 	public void draw(Graphics2D g2d) {
+		shape = new Ellipse2D.Double(locationX, locationY, height, width);
 		g2d.setColor(this.color);
-		g2d.fillOval(locationX, locationY, height, width);
-		
+		g2d.fill(shape);
 	}
 }
