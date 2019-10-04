@@ -2,14 +2,13 @@ package com.oosd.gamemaker.models;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
+
+import com.oosd.gamemaker.behavior.ImageDecoder;
+import com.oosd.gamemaker.behavior.ImageEncode;
 
 public class Picture extends Sprite{
 	private static final long serialVersionUID = 6449562524584478972L;
-	private Image image ;
-	private File file;//=new File("//home//bivas//Pictures//football.jepg");
+	private String imageString;
 	private static int counter = 0;
 	public Picture( int initialPositionX, int initialPositionY, int imageHeight, int imageWidth,int dx, int dy, String fileName)
 	{	
@@ -18,13 +17,8 @@ public class Picture extends Sprite{
 		this.update(initialPositionX, initialPositionY);
 		this.setDx(dx);
 		this.setDy(dy);
-		this.file = new File(fileName);
-		try {
-			image=ImageIO.read(file);
-		} catch (IOException e) {
-			System.out.println("Cannot find image"+e.getMessage());
-
-		}
+		ImageEncode imageEncodeObj = new ImageEncode(fileName);
+		this.imageString = imageEncodeObj.encodeToString(imageEncodeObj.getBufferedImage());
 		this.height = imageHeight;
 		this.width = imageWidth;
 		this.setDx(dx);
@@ -37,6 +31,8 @@ public class Picture extends Sprite{
 
 	@Override
 	public void draw(Graphics2D g2d) {
+		ImageDecoder imageDecodeObj = new ImageDecoder();
+		Image image = imageDecodeObj.decodeToImage(this.imageString);
         g2d.drawImage(image,locationX,locationY,width,height,null);
 	}
 
