@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 
 import com.oosd.gamemaker.behavior.ImageDecoder;
-import com.oosd.gamemaker.behavior.ImageEncode;
+import com.oosd.gamemaker.behavior.ImageEncoder;
 
 public class Picture extends Sprite{
 	private static final long serialVersionUID = 6449562524584478972L;
@@ -17,7 +17,7 @@ public class Picture extends Sprite{
 		this.update(initialPositionX, initialPositionY);
 		this.setDx(dx);
 		this.setDy(dy);
-		ImageEncode imageEncodeObj = new ImageEncode(fileName);
+		ImageEncoder imageEncodeObj = new ImageEncoder(fileName);
 		this.imageString = imageEncodeObj.encodeToString(imageEncodeObj.getBufferedImage());
 		this.height = imageHeight;
 		this.width = imageWidth;

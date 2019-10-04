@@ -10,13 +10,13 @@ import javax.imageio.ImageIO;
 
 import Decoder.BASE64Encoder;
 
-public class ImageEncode implements Serializable{
+public class ImageEncoder implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
 	private transient BufferedImage bimage;
 	
-	public ImageEncode(String fileName)
+	public ImageEncoder(String fileName)
 	{
 		try 
 		{
