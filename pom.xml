@@ -61,6 +61,9 @@
 				<executions>
 					<execution>
 						<phase>initialize</phase>
+               			<goals>
+                    		<goal>read-project-properties</goal>
+               			</goals>
 						<configuration>
 							<files>
 								<file>sonar-project.properties</file>
