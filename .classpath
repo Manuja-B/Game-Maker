@@ -23,11 +23,5 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Virendra/git/Team1-Week44/src/Jars/javafx-base-11-linux.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Virendra/git/Team1-Week44/src/Jars/javafx-graphics-11-linux.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Virendra/git/Team1-Week44/src/Jars/javafx-swing-11-linux.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Virendra/git/Team1-Week44/src/Jars/java-json.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Virendra/git/Team1-Week44/src/Jars/json-simple-1.1.jar"/>
-	<classpathentry kind="lib" path="C:/java/previous codes/Team1-Week4-Nahush (2)/Team1-Week4-Nahush/sun.misc.BASE64Decoder.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
