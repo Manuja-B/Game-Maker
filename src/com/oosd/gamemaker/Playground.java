@@ -2,6 +2,7 @@ package com.oosd.gamemaker;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -22,6 +23,7 @@ import com.oosd.gamemaker.models.Sprite;
 
 public class Playground extends JPanel implements ActionListener, MouseListener, MouseMotionListener {
 
+	private Point mousePt;
 	private static final long serialVersionUID = 2376859069846492382L;
 	private Maker maker;
 	private Image image;
@@ -144,13 +146,12 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 		int startY = e.getY();
 		for(int i=0; i<allItems.getAllSprites().size(); i++) {			
 			if((startX >= allItems.getAllSprites().get(i).getX()-allItems.getAllSprites().get(i).getWidth())&&(startX <= allItems.getAllSprites().get(i).getX()+allItems.getAllSprites().get(i).getWidth())&&(startY <= allItems.getAllSprites().get(i).getY()+allItems.getAllSprites().get(i).getHeight())&&(startY >= allItems.getAllSprites().get(i).getY()-allItems.getAllSprites().get(i).getHeight())) {
+				objpos=i;
 				break;
 			}
 		}
-		((Sprite) allItems.getAllSprites().get(objpos)).setX(e.getX());
-		((Sprite) allItems.getAllSprites().get(objpos)).setY(e.getY());
-
-
+		((Sprite) allItems.getAllSprites().get(objpos)).setX(startX);
+		((Sprite) allItems.getAllSprites().get(objpos)).setY(startY);
 	}
 
 	@Override
