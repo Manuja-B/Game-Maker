@@ -18,12 +18,14 @@ public class ChangeDirection extends Reaction {
 			if(movement.isUniDirectionMovementX() && !movement.isUniDirectionMovementY()) {
 				movement.setUniDirectionMovementX(false);
 				movement.setUniDirectionMovementY(true);
+				primary.setDy(-primary.getDy());
 			}else if(!movement.isUniDirectionMovementX() && movement.isUniDirectionMovementY()) {
 				movement.setUniDirectionMovementX(true);
 				movement.setUniDirectionMovementY(false);
+				primary.setDx(-primary.getDx());
 			}
-			primary.setX(primary.getX() - (2* primary.getDx()));
-			primary.setY(primary.getY() - (2* primary.getDy()));
+			primary.setX(primary.getX() - (3* primary.getDx()));
+			primary.setY(primary.getY() - (3* primary.getDy()));
 			
 			primary.setAutomaticMovement(movement);
 			return true;

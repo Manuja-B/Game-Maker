@@ -19,6 +19,10 @@ public abstract class Sprite implements Serializable{
 	private boolean isGamePaused = true;
 	private int dx = 1;
 	private int dy = 1;
+
+	private int previousDx = 1;
+	private int previousDy = 1;
+	
 	protected int locationX,locationY;
 	protected String name;
 	protected int height, width;
@@ -95,10 +99,12 @@ public abstract class Sprite implements Serializable{
 		return dy;
 	}
 	public void setDx(int dx) {
+		this.previousDx = this.dx;
 		this.dx = dx;
 	}
 	
 	public void setDy(int dy) {
+		this.previousDy = this.dy;
 		this.dy = dy;
 	}
 	
@@ -174,4 +180,17 @@ public abstract class Sprite implements Serializable{
 		this.shape = shape;
 	}
 	
+	public int getPreviousDx() {
+		return previousDx;
+	}
+	public void setPreviousDx(int previousDx) {
+		this.previousDx = previousDx;
+	}
+	public int getPreviousDy() {
+		return previousDy;
+	}
+	public void setPreviousDy(int previousDy) {
+		this.previousDy = previousDy;
+	}
+
 }
