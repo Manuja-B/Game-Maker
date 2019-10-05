@@ -10,6 +10,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import com.oosd.gamemaker.ComboItem;
 import com.oosd.gamemaker.behavior.BounceBack;
+import com.oosd.gamemaker.behavior.ChangeDirection;
 import com.oosd.gamemaker.behavior.Explode;
 import com.oosd.gamemaker.behavior.Sound;
 
@@ -33,7 +34,7 @@ public class NextPanel extends JPanel implements ActionListener{
 		for(int i = 0; i < spriteCount; i++) {
 			sprites[i] = new ComboItem(maker.getAllItems().getAllSprites().get(i).getName(),i);
 		}
-		addCombobox(new ComboItem[] { new ComboItem("Bounce Back", 0) , new ComboItem("Explode", 1)} , 10, 10, this);
+		addCombobox(new ComboItem[] { new ComboItem("Bounce Back", 0) , new ComboItem("Explode", 1), new ComboItem("Change Direction", 2)} , 10, 10, this);
 		addCombobox(sprites, 30, 10, this);
 		addCombobox(sprites, 50, 10, this);
 		
@@ -75,6 +76,8 @@ public class NextPanel extends JPanel implements ActionListener{
 			else if(reactionCode == 1) {
 			
 				maker.addReaction((new Explode(maker.getAllItems().getAllSprites().get(spriteCode1), maker.getAllItems().getAllSprites().get(spriteCode2), sound)));
+			}else if(reactionCode == 2) {
+				maker.addReaction(new ChangeDirection(maker.getAllItems().getAllSprites().get(spriteCode1), maker.getAllItems().getAllSprites().get(spriteCode2), sound));
 			}
 		}
 		

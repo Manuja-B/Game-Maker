@@ -15,4 +15,26 @@ public class AutomaticMovement implements Movement {
         sprite.update(positionX, positionY);
 	}
 
+	@Override
+	public void setUniDirectionMovementX(boolean uniDirectionX) {
+		throw new UnsupportedOperationException();
+		
+	}
+
+	@Override
+	public void setUniDirectionMovementY(boolean uniDirectionY) {
+		throw new UnsupportedOperationException();
+		
+	}
+
+	@Override
+	public boolean isUniDirectionMovementX() {
+		return false;
+	}
+
+	@Override
+	public boolean isUniDirectionMovementY() {
+		return false;
+	}
+
 }

@@ -64,7 +64,7 @@ public class PanelMaker extends JPanel implements ActionListener {
 	}
 	public void addCheckBox(String label, int x, int y, JPanel panel) {
 		JCheckBox checkbox = new JCheckBox(label);
-		checkbox.setBounds(x,y,150,40);
+		checkbox.setBounds(x,y,100,20);
 		checkBoxes.add(checkbox);
 		panel.add(checkbox);
 	}
