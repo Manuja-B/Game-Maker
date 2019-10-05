@@ -21,7 +21,7 @@ public class BallTest {
 	public void test() {
 		//pu.startGame();
 	
-		b.setAutomaticMovement(new AutomaticMovement());
+		b.setAutomaticMovement(new AutomaticMovement(true, true));
 		b.setBoundaryMovement(new BoundaryBounce());
 		b.setManualMovement(new ManualMovement(KeyEvent.VK_DOWN, 1));
 		b.setManualMovement(new ManualMovement(KeyEvent.VK_UP, 0));

@@ -6,7 +6,6 @@ import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseListener;
 import java.io.File;
 
 import javax.swing.JFileChooser;
@@ -18,16 +17,12 @@ import com.oosd.gamemaker.behavior.ChangeColor;
 import com.oosd.gamemaker.behavior.ClickExplode;
 import com.oosd.gamemaker.behavior.ClockTick;
 import com.oosd.gamemaker.behavior.ManualMovement;
-import com.oosd.gamemaker.behavior.MouseClickBehaviour;
 import com.oosd.gamemaker.behavior.Movement;
-import com.oosd.gamemaker.behavior.UniDirectionMovement;
 import com.oosd.gamemaker.models.Ball;
 import com.oosd.gamemaker.models.DigitalClock;
 import com.oosd.gamemaker.models.Picture;
 import com.oosd.gamemaker.models.Rectangle;
 import com.oosd.gamemaker.models.Sprite;
-
-import javafx.scene.input.MouseButton;
 
 public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 	private static final long serialVersionUID = -1605212137510886388L;
@@ -73,7 +68,6 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 		else if(spriteIndex == 2) {
 			
 			newSprite = new Picture( Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(height), Integer.parseInt(width),Integer.parseInt(dx),Integer.parseInt(dy),path);
-			newSprite.setAutomaticMovement(new AutomaticMovement());
 		}
 		
 		for(Movement manual :manualMovements) {
@@ -86,9 +80,9 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 			boolean directionX = checkBoxes.get(2).isSelected();
 			boolean directionY = checkBoxes.get(3).isSelected();
 			if(directionX || directionY) {
-				newSprite.setAutomaticMovement(new UniDirectionMovement(directionX, directionY));
+				newSprite.setAutomaticMovement(new AutomaticMovement(directionX, directionY));
 			}else {
-				newSprite.setAutomaticMovement(new AutomaticMovement());
+				newSprite.setAutomaticMovement(new AutomaticMovement(true, true));
 			}
 			if(boundaryBehavior == 0) {
 				   newSprite.setBoundaryMovement(new BoundaryBounce());
