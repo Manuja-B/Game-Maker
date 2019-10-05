@@ -5,8 +5,8 @@ import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 
 import javax.imageio.ImageIO;
+import javax.xml.bind.DatatypeConverter;
 
-import Decoder.BASE64Decoder;
 
 
 public class ImageDecoder implements Serializable{
@@ -23,8 +23,7 @@ public class ImageDecoder implements Serializable{
 		BufferedImage image = null;
 		byte[] imageByte;
 		try {
-			BASE64Decoder decoder = new BASE64Decoder();
-			imageByte = decoder.decodeBuffer(imageString);
+			imageByte = DatatypeConverter.parseBase64Binary(imageString);
 			ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
 			image = ImageIO.read(bis);
 			bis.close();

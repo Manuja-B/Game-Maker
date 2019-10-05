@@ -5,10 +5,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Base64;
 
 import javax.imageio.ImageIO;
-
-import Decoder.BASE64Encoder;
 
 public class ImageEncoder implements Serializable{
 
@@ -43,9 +42,8 @@ public class ImageEncoder implements Serializable{
             ImageIO.write(image, "PNG", bos);
             byte[] imageBytes = bos.toByteArray();
 
-            BASE64Encoder encoder = new BASE64Encoder();
-            imageString = encoder.encode(imageBytes);
-
+            imageString = Base64.getEncoder().encodeToString(imageBytes);
+         
             bos.close();
         } catch (IOException e) {
         }
