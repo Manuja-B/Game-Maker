@@ -37,11 +37,7 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 	List<Reaction> reactions; 
 	JLabel levelNumberLabel;
 	int objpos;
-<<<<<<< HEAD
-		
-=======
 
->>>>>>> 0332384e7906c3b2f7839aad4ad0967fa4477041
 	public Playground(Maker maker)  {
 		this.maker = maker;
 		this.allItems = new Composite();
@@ -130,9 +126,6 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 				}
 			}
 		}
-<<<<<<< HEAD
-		
-=======
 
 		int startX = e.getX();
 		int startY = e.getY();
@@ -148,7 +141,6 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 				break;
 			}
 		}
->>>>>>> 0332384e7906c3b2f7839aad4ad0967fa4477041
 	}
 
 	@Override
@@ -162,16 +154,8 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 				break;
 			}
 		}
-<<<<<<< HEAD
 		((Sprite) allItems.getAllSprites().get(objpos)).setX(startX);
 		((Sprite) allItems.getAllSprites().get(objpos)).setY(startY);
-				
-=======
-		((Sprite) allItems.getAllSprites().get(objpos)).setX(e.getX());
-		((Sprite) allItems.getAllSprites().get(objpos)).setY(e.getY());
-
-
->>>>>>> 0332384e7906c3b2f7839aad4ad0967fa4477041
 	}
 
 	@Override
