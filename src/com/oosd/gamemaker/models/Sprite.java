@@ -173,5 +173,5 @@ public abstract class Sprite implements Serializable{
 	public void setShape(Shape shape) {
 		this.shape = shape;
 	}
-	
+
 }

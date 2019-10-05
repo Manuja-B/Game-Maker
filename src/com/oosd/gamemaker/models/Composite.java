@@ -47,7 +47,7 @@ public class Composite extends Sprite implements Serializable {
 		for( Sprite sprite: sprites) {
 			if(sprite.isWillShoot()) {
 				Sprite bullet = new Ball(Color.BLACK,sprite.getX(),sprite.getY()-1,10,10,0,-3);
-				bullet.setAutomaticMovement(new AutomaticMovement());
+				bullet.setAutomaticMovement(new AutomaticMovement(true, true));
 				bullet.play();
 				getBullets().add(bullet);
 			}	

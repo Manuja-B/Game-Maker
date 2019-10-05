@@ -6,7 +6,6 @@ import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseListener;
 import java.io.File;
 
 import javax.swing.JFileChooser;
@@ -18,15 +17,12 @@ import com.oosd.gamemaker.behavior.ChangeColor;
 import com.oosd.gamemaker.behavior.ClickExplode;
 import com.oosd.gamemaker.behavior.ClockTick;
 import com.oosd.gamemaker.behavior.ManualMovement;
-import com.oosd.gamemaker.behavior.MouseClickBehaviour;
 import com.oosd.gamemaker.behavior.Movement;
 import com.oosd.gamemaker.models.Ball;
 import com.oosd.gamemaker.models.DigitalClock;
 import com.oosd.gamemaker.models.Picture;
 import com.oosd.gamemaker.models.Rectangle;
 import com.oosd.gamemaker.models.Sprite;
-
-import javafx.scene.input.MouseButton;
 
 public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 	private static final long serialVersionUID = -1605212137510886388L;
@@ -72,7 +68,6 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 		else if(spriteIndex == 2) {
 			
 			newSprite = new Picture( Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(height), Integer.parseInt(width),Integer.parseInt(dx),Integer.parseInt(dy),path);
-			newSprite.setAutomaticMovement(new AutomaticMovement());
 		}
 		
 		for(Movement manual :manualMovements) {
@@ -82,7 +77,13 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 			newSprite.setAutomaticMovement(new ClockTick());
 		}
 		else {
-			newSprite.setAutomaticMovement(new AutomaticMovement());
+			boolean directionX = checkBoxes.get(2).isSelected();
+			boolean directionY = checkBoxes.get(3).isSelected();
+			if(directionX || directionY) {
+				newSprite.setAutomaticMovement(new AutomaticMovement(directionX, directionY));
+			}else {
+				newSprite.setAutomaticMovement(new AutomaticMovement(true, true));
+			}
 			if(boundaryBehavior == 0) {
 				   newSprite.setBoundaryMovement(new BoundaryBounce());
 			}
@@ -131,8 +132,8 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 		addTextBox(200,90, this); //10
 		maker.addLabel("dy", 250, 90, this); //11
 		addTextBox(270,90, this); //12
-		maker.addLabel("Boundary Reaction", 10, 110, this); //13
-		addCombobox(new ComboItem[] { new ComboItem("Bounce", 0) , new ComboItem("Rotate", 1) , new ComboItem("Vanish", 2)}, 200, 110,this); //2
+		maker.addLabel("Boundary Reaction", 10, 150, this); //13
+		addCombobox(new ComboItem[] { new ComboItem("Bounce", 0) , new ComboItem("Rotate", 1) , new ComboItem("Vanish", 2)}, 200, 150,this); //2
 		
 		maker.addLabel("Keypress", 10, 170, this); //15
 		addCombobox(new ComboItem[] { new ComboItem("Up", KeyEvent.VK_UP) , new ComboItem("Down", KeyEvent.VK_DOWN) , new ComboItem("Left",  KeyEvent.VK_LEFT), new ComboItem("Right", KeyEvent.VK_RIGHT)}, 200, 170,this); //2
@@ -146,6 +147,8 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 		
 		addCheckBox("Will Shoot?", 10, 280, this);
 		addCheckBox("Shoot Affect?", 200, 280, this);
+		addCheckBox("X", 10, 120, this);
+		addCheckBox("Y", 200, 120, this);
 		
 		addButtonToPanel("Add Component", 10, 320,this);//24 //button 6
 		if(currentIndex == 2) {

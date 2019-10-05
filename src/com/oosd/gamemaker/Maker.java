@@ -227,7 +227,7 @@ public class Maker extends PanelMaker implements ActionListener {
             ex.printStackTrace();
         }
     }
-	
+		
 	public void ReadObjectFromFile(String filename) {
 		path = System.getProperty("user.dir");
 		try(FileInputStream fi = new FileInputStream(new File(path+"/test")); ObjectInputStream oi =new ObjectInputStream(fi); ) {

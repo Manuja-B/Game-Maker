@@ -31,6 +31,26 @@ public class ClockTick implements Movement {
 		((DigitalClock) sprite).update(minutes, seconds);
 		
 	}
+
+	@Override
+	public void setUniDirectionMovementX(boolean uniDirectionX) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setUniDirectionMovementY(boolean uniDirectionY) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean isUniDirectionMovementX() {
+		return false;
+	}
+
+	@Override
+	public boolean isUniDirectionMovementY() {
+		return false;
+	}
 	
 	
 

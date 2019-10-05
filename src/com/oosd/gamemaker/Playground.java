@@ -23,19 +23,15 @@ import com.oosd.gamemaker.models.Sprite;
 
 public class Playground extends JPanel implements ActionListener, MouseListener, MouseMotionListener {
 
-	/**
-	 * 
-	 */
 	private Point mousePt;
 	private static final long serialVersionUID = 2376859069846492382L;
-	Maker maker;
-	JPanel controller;
-	Image image;
-	String selectedpath;
-	Composite allItems = new Composite();
-	JButton startButton;
-	List<Reaction> reactions; 
-	JLabel levelNumberLabel;
+	private Maker maker;
+	private Image image;
+	private String selectedpath;
+	private Composite allItems = new Composite();
+	private JButton startButton;
+	private List<Reaction> reactions; 
+	private JLabel levelNumberLabel;
 	int objpos;
 
 	public Playground(Maker maker)  {
