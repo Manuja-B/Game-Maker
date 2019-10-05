@@ -101,5 +101,71 @@ public class ManualMovement implements Movement, KeyEventDispatcher {
 		return false;
 	}
 
+	public Boolean getIsLeft() {
+		return isLeft;
+	}
+
+	public void setIsLeft(Boolean isLeft) {
+		this.isLeft = isLeft;
+	}
+
+	public Boolean getIsRight() {
+		return isRight;
+	}
+
+	public void setIsRight(Boolean isRight) {
+		this.isRight = isRight;
+	}
+
+	public Boolean getIsDown() {
+		return isDown;
+	}
+
+	public void setIsDown(Boolean isDown) {
+		this.isDown = isDown;
+	}
+
+	public Boolean getIsUp() {
+		return isUp;
+	}
+
+	public void setIsUp(Boolean isUp) {
+		this.isUp = isUp;
+	}
+
+	public Boolean getIsLeftCode() {
+		return isLeftCode;
+	}
+
+	public void setIsLeftCode(Boolean isLeftCode) {
+		this.isLeftCode = isLeftCode;
+	}
+
+	public Boolean getIsRightCode() {
+		return isRightCode;
+	}
+
+	public void setIsRightCode(Boolean isRightCode) {
+		this.isRightCode = isRightCode;
+	}
+
+	public Boolean getIsDownCode() {
+		return isDownCode;
+	}
+
+	public void setIsDownCode(Boolean isDownCode) {
+		this.isDownCode = isDownCode;
+	}
+
+	public Boolean getIsUpCode() {
+		return isUpCode;
+	}
+
+	public void setIsUpCode(Boolean isUpCode) {
+		this.isUpCode = isUpCode;
+	}
+	
+	
+
 
 }
