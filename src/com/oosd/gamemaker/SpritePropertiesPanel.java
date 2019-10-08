@@ -1,8 +1,6 @@
 package com.oosd.gamemaker;
 
 import java.awt.Color;
-import java.awt.KeyEventDispatcher;
-import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -171,8 +169,7 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 			int itemCode = ((ComboItem)actionItem).getValue();
 
 			spriteManual = new ManualMovement(keyCode,itemCode);
-			KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
-	        manager.addKeyEventDispatcher((KeyEventDispatcher) spriteManual);	
+				
 	        manualMovements.add(spriteManual);
 		}
 		else if(arg0.getSource() == buttons.get(2)) {

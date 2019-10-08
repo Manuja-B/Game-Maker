@@ -1,6 +1,7 @@
 package com.oosd.gamemaker.behavior;
 
 import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
 import javax.swing.JPanel;
 
@@ -42,10 +43,16 @@ public class ManualMovement implements Movement, KeyEventDispatcher {
 			default:
 				System.out.println("No code is set");
 		}
+		
+		
 	}
 	
 	@Override
 	public void move(Sprite sprite, JPanel playground) {
+		
+		KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+        manager.addKeyEventDispatcher((KeyEventDispatcher) this);
+        
 		int positionY = sprite.getY();
 		int positionX = sprite.getX();
 		
