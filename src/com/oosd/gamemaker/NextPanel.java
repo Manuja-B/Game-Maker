@@ -90,8 +90,6 @@ public class NextPanel extends JPanel implements ActionListener{
 			Object spriteItem2 = comboBoxes.get(2).getSelectedItem();
 			int spriteCode2 = ((ComboItem)spriteItem2).getValue();
 			
-			System.out.println(comboBoxes.size());
-			
 			String winLooseFlags = comboBoxes.get(3).getSelectedItem().toString();
 			String anyAllFlags = comboBoxes.get(4).getSelectedItem().toString();
 			

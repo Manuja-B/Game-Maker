@@ -30,11 +30,11 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 	private Maker maker;
 	private Image image;
 	private String selectedpath;
-	private Composite allItems = new Composite();
+	private Composite allItems;
 	private JButton startButton;
 	private List<Reaction> reactions; 
 	private JLabel levelNumberLabel;
-	private Composite deadSprites = new Composite();
+	private Composite deadSprites;
 	private List<Sprite> reactedSprites;
 	private boolean startGame;
 	
@@ -46,6 +46,7 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 		this.startGame = true;
 		this.allItems = new Composite();
 		this.reactions=new ArrayList<Reaction>();
+		deadSprites = new Composite();
 		this.setLayout(null);
 		this.setFocusable(true);
 		this.addMouseListener(this);
