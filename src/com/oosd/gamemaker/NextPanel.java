@@ -92,8 +92,8 @@ public class NextPanel extends JPanel implements ActionListener{
 			
 			System.out.println(comboBoxes.size());
 			
-			String gameCondition1 = comboBoxes.get(3).getSelectedItem().toString();
-			String gameCondition2 = comboBoxes.get(4).getSelectedItem().toString();
+			String winLooseFlags = comboBoxes.get(3).getSelectedItem().toString();
+			String anyAllFlags = comboBoxes.get(4).getSelectedItem().toString();
 			
 			Reaction reaction = null; 
 			
@@ -108,28 +108,7 @@ public class NextPanel extends JPanel implements ActionListener{
 			
 			maker.addReaction(reaction);
 			
-			if(gameCondition2.equals("Any"))
-			{
-				if(gameCondition1.equals("Win"))
-				{
-					anyWinReactions.add(reaction);
-				}
-				else
-				{
-					anyLooseReactions.add(reaction);
-				}
-			}
-			else
-			{
-				if(gameCondition1.equals("Win"))
-				{
-					allWinReactions.add(reaction);
-				}
-				else
-				{
-					allLooseReactions.add(reaction);
-				}
-			}
+			addRectionToList(anyAllFlags,winLooseFlags, reaction);
 			
 			maker.getAllItems().getWinMap().put("Any",anyWinReactions);
 			maker.getAllItems().getWinMap().put("All",allWinReactions);
@@ -150,6 +129,32 @@ public class NextPanel extends JPanel implements ActionListener{
 				 File selectedFile = jfc.getSelectedFile();
 				 this.audiopath = selectedFile.getAbsolutePath();
 				 sound = new Sound(audiopath);
+			}
+		}
+	}
+	
+	public void addRectionToList(String anyAllCondition, String winLooseCondition, Reaction reaction)
+	{
+		if(anyAllCondition.equals("Any"))
+		{
+			if(winLooseCondition.equals("Win"))
+			{
+				anyWinReactions.add(reaction);
+			}
+			else
+			{
+				anyLooseReactions.add(reaction);
+			}
+		}
+		else
+		{
+			if(winLooseCondition.equals("Win"))
+			{
+				allWinReactions.add(reaction);
+			}
+			else
+			{
+				allLooseReactions.add(reaction);
 			}
 		}
 	}

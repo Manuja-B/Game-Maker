@@ -280,6 +280,7 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 		return false;
 	}
 
+
 	public void setStartGame(boolean startGame) {
 		this.startGame = startGame;
 	}
