@@ -171,8 +171,6 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 			int itemCode = ((ComboItem)actionItem).getValue();
 
 			spriteManual = new ManualMovement(keyCode,itemCode);
-			KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
-	        manager.addKeyEventDispatcher((KeyEventDispatcher) spriteManual);	
 	        manualMovements.add(spriteManual);
 		}
 		else if(arg0.getSource() == buttons.get(2)) {

@@ -23,7 +23,6 @@ import com.oosd.gamemaker.models.Sprite;
 
 public class Playground extends JPanel implements ActionListener, MouseListener, MouseMotionListener {
 
-	private Point mousePt;
 	private static final long serialVersionUID = 2376859069846492382L;
 	private Maker maker;
 	private Image image;
@@ -32,10 +31,16 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 	private JButton startButton;
 	private List<Reaction> reactions; 
 	private JLabel levelNumberLabel;
+	private Composite deadSprites = new Composite();
+	private List<Sprite> reactedSprites;
+	private boolean startGame;
+	
 	int objpos;
 
 	public Playground(Maker maker)  {
+		reactedSprites = new ArrayList<Sprite>();
 		this.maker = maker;
+		this.startGame = true;
 		this.allItems = new Composite();
 		this.reactions=new ArrayList<Reaction>();
 		this.setLayout(null);
@@ -69,17 +74,38 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 		startButton.setVisible(true);
 		startButton.setBounds(200, 10, 200, 20);
 		this.add(startButton);
-		while(true){
+		while(isStartGame()){
 
 			this.setBackgroundImage();
 			this.allItems = maker.getLevelObjects().get(maker.getCurrentLevel()).getSprites();
 			this.reactions = maker.getLevelObjects().get(maker.getCurrentLevel()).getReactions();
+			
 			for(Sprite sprite: allItems.getAllSprites()) {
 				sprite.move(this);
 			}
+			
 			for(Reaction reaction: reactions) {
-				reaction.react();
+				boolean flag = reaction.react();
+				if(flag)
+				{
+					reactedSprites.add(reaction.getSecondary());
+				}
 			}
+			
+			for(Sprite sprite: allItems.getAllSprites()) {
+				if(sprite.getStatus() == "Dead")
+				{
+					deadSprites.add(sprite);
+				}
+			}
+			
+			
+			for(Sprite sprite: deadSprites.getAllSprites())
+			{
+				checkWinLoose(sprite);
+				allItems.remove(sprite);
+			}
+			
 			try {
 				Thread.sleep(10);
 			} catch (InterruptedException e1) {
@@ -88,6 +114,66 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 			}
 			repaint();
 		}
+	}
+	
+
+	public void checkWinLoose(Sprite sprite)
+	{
+		List<Reaction> tempAnyWinList = allItems.getWinMap().get("Any");
+		List<Reaction> tempAllWinList = allItems.getWinMap().get("All");
+		List<Reaction> tempAnyLooseList = allItems.getLooseMap().get("Any");
+		List<Reaction> tempAllLooseList = allItems.getLooseMap().get("All");
+		
+		int tempAnyWinListSize = allItems.getWinMap().get("Any").size();
+		int tempAllWinListSize = allItems.getWinMap().get("All").size();
+		int tempAnyLooseListSize = allItems.getLooseMap().get("Any").size();
+		int tempAllLooseListSize = allItems.getLooseMap().get("All").size();
+		
+		
+		List<Reaction> updatedAllWinReactions = checkSprite(tempAllWinList, sprite);
+		List<Reaction> updatedAllLooseReactions = checkSprite(tempAllLooseList, sprite);
+		
+		List<Reaction> updatedAnyWinReactions = checkSprite(tempAnyWinList, sprite);
+		List<Reaction> updatedAnyLooseReactions = checkSprite(tempAnyLooseList, sprite);
+		
+		if(tempAnyWinListSize != updatedAnyWinReactions.size()) {
+			setStartGame(false);
+		}
+		if(tempAnyLooseListSize != updatedAnyLooseReactions.size()) {
+			setStartGame(false);
+		}
+			
+		if(tempAllLooseListSize != updatedAllLooseReactions.size() && updatedAllLooseReactions.size() == 0) {
+			setStartGame(false);
+		}
+		
+		if(tempAllWinListSize != updatedAllWinReactions.size() && updatedAllWinReactions.size() == 0) {
+			setStartGame(false);
+		}
+		
+		allItems.getWinMap().put("Any", updatedAnyWinReactions);
+		allItems.getLooseMap().put("Any", updatedAnyLooseReactions);
+		
+		allItems.getWinMap().put("All", updatedAllWinReactions);
+		
+		allItems.getLooseMap().put("All", updatedAllLooseReactions);	
+	}
+	
+	public List<Reaction> checkSprite(List<Reaction> reactions, Sprite sprite)
+	{
+		int counter = 0;
+		
+		for(Reaction reaction:reactions) 
+		{
+			if(reaction.getSecondary() == sprite)
+			{
+				reactions.remove(counter);
+				break;
+			}		
+			counter++;
+		}
+		
+		return reactions;
 	}
 
 	public void paintComponent(Graphics g) {
@@ -179,7 +265,13 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 
 	}
 
+	public boolean isStartGame() {
+		return startGame;
+	}
 
+	public void setStartGame(boolean startGame) {
+		this.startGame = startGame;
+	}
 
 
 
