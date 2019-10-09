@@ -47,7 +47,7 @@ public class AutomaticMovement implements Movement {
 			positionX = sprite.getX() + sprite.getDx();
 			positionY = sprite.getY()+ sprite.getDy();
 		}
-       
+
 		sprite.update(positionX, positionY);
 	}
 

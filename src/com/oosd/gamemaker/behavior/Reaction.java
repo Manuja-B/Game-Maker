@@ -9,6 +9,11 @@ public abstract class Reaction implements Serializable{
 	
 	Sprite primary;
 	Sprite secondary;
+	
+	public Sprite getSecondary() {
+		return secondary;
+	}
+	
 	transient Sound sound;
 	
 	public Reaction(Sprite primary, Sprite secondary, Sound sound) {
@@ -17,6 +22,7 @@ public abstract class Reaction implements Serializable{
 		this.secondary = secondary;
 		this.sound = sound;
 	}
+	
 	public abstract boolean react();
 	public boolean doesReact(Sprite primary, Sprite secondary) {
 		return primary.getShape().getBounds2D().intersects(secondary.getShape().getBounds2D());		
