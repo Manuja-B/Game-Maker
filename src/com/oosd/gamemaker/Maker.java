@@ -18,12 +18,6 @@ import com.oosd.gamemaker.models.Composite;
 import com.oosd.gamemaker.models.Sprite;
 import javax.swing.JFileChooser;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 public class Maker extends PanelMaker implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -40,11 +34,15 @@ public class Maker extends PanelMaker implements ActionListener {
 	Image image;
 	private ArrayList<LevelObject> levelObjects=new ArrayList<LevelObject>();
 	int currentLevel=0;
-	int currentSpriteIndex=-1;	
+	int currentSpriteIndex=-1;
+	
+	private DataOperations dataOperations;
+	private SaveObject saveObject;
 	
 	public Maker() {
 		allItems = new Composite();
 		this.setLayout(null);
+		dataOperations = new DataOperations();
 	}
 	public JPanel getListPanel() {
 		return listPanel;
@@ -182,11 +180,12 @@ public class Maker extends PanelMaker implements ActionListener {
 			labels.get(0).setText("You are on level "+currentLevel);
 		}
 		else if(arg0.getSource() == getButtons().get(7)) {
-			SaveObject saveobject = new SaveObject(levelObjects);
-			WriteObjectToFile(saveobject);
+			saveObject = new SaveObject(levelObjects);
+			dataOperations.writeObjectToFile(saveObject);
 		}
 		else if(arg0.getSource() == getButtons().get(8)) {
-			ReadObjectFromFile("test");
+			saveObject = dataOperations.readObjectFromFile();
+			this.levelObjects = saveObject.getLevelObjects();
 		}
 		else if(arg0.getSource() == getButtons().get(9)) {
 			String goToLevel = textboxes.get(0).getText().isEmpty()?"0":textboxes.get(0).getText();
@@ -216,33 +215,6 @@ public class Maker extends PanelMaker implements ActionListener {
 		return buttons;
 	}
 	
-	public void WriteObjectToFile(Object serObj) {
-		path = System.getProperty("user.dir");
-        try(FileOutputStream fileOut = new FileOutputStream(path+"/test"); ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
- 
-            objectOut.writeObject(serObj);
-            objectOut.close();
-            fileOut.close();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-		
-	public void ReadObjectFromFile(String filename) {
-		path = System.getProperty("user.dir");
-		try(FileInputStream fi = new FileInputStream(new File(path+"/test")); ObjectInputStream oi =new ObjectInputStream(fi); ) {
-			SaveObject so = (SaveObject)oi.readObject();
-			this.levelObjects = so.getLevelObjects();
-		} catch (FileNotFoundException e) {
-			System.out.println("File Not found"+e.getMessage());
-		}
-		 catch (IOException e) {
-			 System.out.println("IO Exception"+e.getMessage());
-		}
-		catch (ClassNotFoundException e) {
-			System.out.println("Class not found"+e.getMessage());
-		}
-	}
 }
 
 class ComboItem

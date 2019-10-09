@@ -2,9 +2,12 @@ package com.oosd.gamemaker;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -21,7 +24,7 @@ import com.oosd.gamemaker.behavior.ShootBehavior;
 import com.oosd.gamemaker.models.Composite;
 import com.oosd.gamemaker.models.Sprite;
 
-public class Playground extends JPanel implements ActionListener, MouseListener, MouseMotionListener {
+public class Playground extends JPanel implements ActionListener, MouseListener, MouseMotionListener, KeyEventDispatcher {
 
 	private static final long serialVersionUID = 2376859069846492382L;
 	private Maker maker;
@@ -47,6 +50,8 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 		this.setFocusable(true);
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
+		KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+		manager.addKeyEventDispatcher((KeyEventDispatcher) this);
 	}
 
 	public void setBackgroundImage()
@@ -198,17 +203,6 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 		}
 	}
 	public void mouseClicked(MouseEvent e) {
-		allItems.shoot();
-		List<Sprite> bullets = maker.getLevelObjects().get(maker.getCurrentLevel()).getSprites().getBullets();
-		for (Sprite bullet: bullets) {
-			for (Sprite component: allItems.getAllSprites()) {
-				if (component.isShootEffect()) {
-					maker.getLevelObjects().get(maker.getCurrentLevel()).addReaction(new ShootBehavior(bullet, component, null));
-
-				}
-			}
-		}
-
 		int startX = e.getX();
 		int startY = e.getY();
 
@@ -267,6 +261,23 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 
 	public boolean isStartGame() {
 		return startGame;
+	}
+
+	@Override
+	public boolean dispatchKeyEvent(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_F) {
+			allItems.shoot();
+			List<Sprite> bullets = maker.getLevelObjects().get(maker.getCurrentLevel()).getSprites().getBullets();
+			for (Sprite bullet: bullets) {
+				for (Sprite component: allItems.getAllSprites()) {
+					if (component.isShootEffect()) {
+						maker.getLevelObjects().get(maker.getCurrentLevel()).addReaction(new ShootBehavior(bullet, component, null));
+
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	public void setStartGame(boolean startGame) {
