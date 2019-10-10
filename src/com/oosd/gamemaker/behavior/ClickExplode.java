@@ -13,8 +13,7 @@ public class ClickExplode implements MouseClickBehaviour {
 	
 	@Override
 	public void respondToClick() {
-		sprite.setLocationX(-100);
-		sprite.setLocationY(-100);
+		this.sprite.setStatus("Dead");
 	}
 
 }

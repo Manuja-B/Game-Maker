@@ -19,13 +19,17 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import org.apache.log4j.Logger;
+
 import com.oosd.gamemaker.behavior.Reaction;
 import com.oosd.gamemaker.behavior.ShootBehavior;
 import com.oosd.gamemaker.models.Composite;
 import com.oosd.gamemaker.models.Sprite;
 
 public class Playground extends JPanel implements ActionListener, MouseListener, MouseMotionListener, KeyEventDispatcher {
-
+	
+	final static Logger logger = Logger.getLogger(Playground.class);
 	private static final long serialVersionUID = 2376859069846492382L;
 	private Maker maker;
 	private Image image;
@@ -107,8 +111,12 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 			
 			
 			for(Sprite sprite: deadSprites.getAllSprites())
-			{
-				checkWinLoose(sprite);
+			{	
+				try {
+					checkWinLoose(sprite);
+				}catch (Exception exception) {
+					logger.debug("Exceptione when there is issue with Win/Loose conditions " + exception.getMessage());
+				}
 				allItems.remove(sprite);
 			}
 			
