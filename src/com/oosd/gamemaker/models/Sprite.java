@@ -29,6 +29,13 @@ public abstract class Sprite implements Serializable{
 	protected Color color; 
 	protected MouseClickBehaviour mouseClickBehaviour;
 	private boolean hasMouseBehaviour = false;
+	private String status;
+	
+	public Sprite()
+	{
+		this.status = "created";
+	}
+	
 	
 	public abstract void draw(Graphics2D g2d);
 	public int getLocationX() {
@@ -172,6 +179,13 @@ public abstract class Sprite implements Serializable{
 	}
 	public void setShape(Shape shape) {
 		this.shape = shape;
+	}
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

@@ -13,7 +13,7 @@ public class Explode extends Reaction {
 	public boolean react() {
 		if(doesReact(primary, secondary))
 		{
-			secondary.update(-100, -100);
+			secondary.setStatus("Dead");
 			secondary.setDx(0);
 			secondary.setDy(0);
 			if(sound != null) {

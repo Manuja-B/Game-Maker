@@ -169,7 +169,6 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 			int itemCode = ((ComboItem)actionItem).getValue();
 
 			spriteManual = new ManualMovement(keyCode,itemCode);
-				
 	        manualMovements.add(spriteManual);
 		}
 		else if(arg0.getSource() == buttons.get(2)) {
