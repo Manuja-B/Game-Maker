@@ -15,7 +15,7 @@ public class Rectangle extends Sprite{
 	Boolean flag = false;
 	private static int counter = 0;
 	public Rectangle(Color color, int initialPositionX, int initialPositionY, int width, int height, int dx, int dy) {
-		color = color;
+		this.color = color;
 		this.initialPositionX = initialPositionX;
 		this.initialPositionY = initialPositionY;
 		this.width = width;
