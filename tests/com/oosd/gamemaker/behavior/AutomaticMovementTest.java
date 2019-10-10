@@ -15,6 +15,8 @@ import com.oosd.gamemaker.models.Sprite;
 
 public class AutomaticMovementTest {
 	
+	private AutomaticMovement automaticMovement;
+	
 	@Mock
 	Playground playground;
 	
@@ -23,7 +25,10 @@ public class AutomaticMovementTest {
 		playground = Mockito.mock(Playground.class);
 	}
 	
-	private AutomaticMovement automaticMovement = new AutomaticMovement(true, true);
+	public AutomaticMovementTest()
+	{
+		automaticMovement = new AutomaticMovement(true, true);
+	}
 	
 	@Test
 	public void testUnidirectionalXY() {
