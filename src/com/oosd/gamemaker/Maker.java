@@ -40,7 +40,8 @@ public class Maker extends PanelMaker implements ActionListener {
 	Image image;
 	private ArrayList<LevelObject> levelObjects=new ArrayList<LevelObject>();
 	int currentLevel=0;
-	int currentSpriteIndex=-1;	
+	int currentSpriteIndex=-1;
+	JFrame frame1 = new JFrame();
 	
 	public Maker() {
 		allItems = new Composite();
@@ -115,7 +116,7 @@ public class Maker extends PanelMaker implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		if(arg0.getSource()==buttons.get(0) || arg0.getSource()==buttons.get(1) ||arg0.getSource()==buttons.get(2) ||arg0.getSource()==buttons.get(3))
 		{	
-			JFrame frame1 = new JFrame();
+			
 			if(arg0.getSource()==buttons.get(0))
 			{
 				frame1.setTitle("New Circle");
@@ -243,6 +244,9 @@ public class Maker extends PanelMaker implements ActionListener {
 			System.out.println("Class not found"+e.getMessage());
 		}
 	}
+	public void closeFrame() {
+		frame1.dispose();
+	}
 }
 
 class ComboItem
@@ -272,4 +276,5 @@ class ComboItem
     {
         return value;
     }
+        
 }

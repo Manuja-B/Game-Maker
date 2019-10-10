@@ -157,8 +157,9 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == buttons.get(1)) {
-			
 			addSprite(maker.getCurrentSpriteIndex());
+			maker.closeFrame();
+			
 		}
 		else if(arg0.getSource() == buttons.get(0)) {
 			Object keyItem = comboBoxes.get(1).getSelectedItem();
