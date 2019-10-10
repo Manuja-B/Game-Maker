@@ -186,6 +186,16 @@ public class Maker extends PanelMaker implements ActionListener {
 		else if(arg0.getSource() == getButtons().get(8)) {
 			saveObject = dataOperations.readObjectFromFile();
 			this.levelObjects = saveObject.getLevelObjects();
+			this.allItems = this.levelObjects.get(currentLevel).getSprites();
+			JPanel listPanel = new ListPanel(this.allItems, this);
+			listPanel.setSize(200, 200);
+			listPanel.setLocation(10, 500);
+			this.setListPanel(listPanel);
+			this.remove(this.getListPanel());
+			this.setListPanel(listPanel);
+			this.add(listPanel);
+			this.setVisible(false);
+			this.setVisible(true);
 		}
 		else if(arg0.getSource() == getButtons().get(9)) {
 			String goToLevel = textboxes.get(0).getText().isEmpty()?"0":textboxes.get(0).getText();

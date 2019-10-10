@@ -14,20 +14,20 @@ public class ChangeDirection extends Reaction {
 	public boolean react() {
 		if(doesReact(primary, secondary))
 		{
-			Movement movement = primary.getAutomaticMovement();
+			Movement movement = secondary.getAutomaticMovement();
 			if(movement.isUniDirectionMovementX() && !movement.isUniDirectionMovementY()) {
 				movement.setUniDirectionMovementX(false);
 				movement.setUniDirectionMovementY(true);
-				primary.setDy(-primary.getDy());
+				secondary.setDy(-secondary.getDy());
 			}else if(!movement.isUniDirectionMovementX() && movement.isUniDirectionMovementY()) {
 				movement.setUniDirectionMovementX(true);
 				movement.setUniDirectionMovementY(false);
-				primary.setDx(-primary.getDx());
+				secondary.setDx(-secondary.getDx());
 			}
-			primary.setX(primary.getX() - (3* primary.getDx()));
-			primary.setY(primary.getY() - (3* primary.getDy()));
+			secondary.setX(secondary.getX() - (3* secondary.getDx()));
+			secondary.setY(secondary.getY() - (3* secondary.getDy()));
 			
-			primary.setAutomaticMovement(movement);
+			secondary.setAutomaticMovement(movement);
 			return true;
 		}
 		
