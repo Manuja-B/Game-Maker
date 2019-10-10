@@ -7,9 +7,6 @@ import com.oosd.gamemaker.models.Sprite;
 
 public class ClockTick implements Movement {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8622346125852620161L;
 	private double milliSeconds;
 	private int seconds;
