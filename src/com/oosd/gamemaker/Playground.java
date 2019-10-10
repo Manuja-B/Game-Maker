@@ -29,7 +29,7 @@ import com.oosd.gamemaker.models.Sprite;
 
 public class Playground extends JPanel implements ActionListener, MouseListener, MouseMotionListener, KeyEventDispatcher {
 	
-	final static Logger logger = Logger.getLogger(Playground.class);
+	static final Logger logger = Logger.getLogger(Playground.class);
 	private static final long serialVersionUID = 2376859069846492382L;
 	private Maker maker;
 	private Image image;

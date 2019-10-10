@@ -4,10 +4,10 @@ import com.oosd.gamemaker.models.Sprite;
 
 public class Explode extends Reaction {
 	
+	private static final long serialVersionUID = -6234868905842258823L;
 	public Explode(Sprite primary, Sprite secondary, Sound sound) {
 		super(primary, secondary, sound);
 	}
-	private static final long serialVersionUID = -6234868905842258823L;
 	
 	@Override
 	public boolean react() {

@@ -24,6 +24,7 @@ public abstract class Reaction implements Serializable{
 	}
 	
 	public abstract boolean react();
+	
 	public boolean doesReact(Sprite primary, Sprite secondary) {
 		return primary.getShape().getBounds2D().intersects(secondary.getShape().getBounds2D());		
 	}
