@@ -19,6 +19,9 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import org.apache.log4j.Logger;
+
 import com.oosd.gamemaker.behavior.Reaction;
 import com.oosd.gamemaker.behavior.ShootBehavior;
 import com.oosd.gamemaker.models.Composite;
@@ -26,6 +29,7 @@ import com.oosd.gamemaker.models.Sprite;
 
 public class Playground extends JPanel implements ActionListener, MouseListener, MouseMotionListener, KeyEventDispatcher {
 
+	static final Logger logger = Logger.getLogger(Playground.class); 
 	private static final long serialVersionUID = 2376859069846492382L;
 	private Maker maker;
 	private Image image;
@@ -79,6 +83,10 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 		startButton.addActionListener(this);
 		startButton.setVisible(true);
 		startButton.setBounds(200, 10, 200, 20);
+		for(Sprite sprite: maker.getLevelObjects().get(maker.getCurrentLevel()).getSprites().getAllSprites())
+		{
+			sprite.play();
+		}
 		this.add(startButton);
 		while(isStartGame()){
 
@@ -89,13 +97,18 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 			for(Sprite sprite: allItems.getAllSprites()) {
 				sprite.move(this);
 			}
-			
-			for(Reaction reaction: reactions) {
-				boolean flag = reaction.react();
-				if(flag)
-				{
-					reactedSprites.add(reaction.getSecondary());
+			try
+			{
+				for(Reaction reaction: reactions) {
+					boolean flag = reaction.react();
+					if(flag)
+					{
+						reactedSprites.add(reaction.getSecondary());
+					}
 				}
+			}
+			catch (Exception e) {
+				logger.debug("Exception occured when checking reactions " + e.getMessage());
 			}
 			
 			for(Sprite sprite: allItems.getAllSprites()) {
