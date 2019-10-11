@@ -19,10 +19,6 @@ public class Picture extends Sprite{
 		this.setDy(dy);
 		ImageEncoder imageEncodeObj = new ImageEncoder(fileName);
 		this.imageString = imageEncodeObj.encodeToString(imageEncodeObj.getBufferedImage());
-		this.height = imageHeight;
-		this.width = imageWidth;
-		this.setDx(dx);
-		this.setDy(dy);
 		StringBuilder strName = new StringBuilder("Picture ");
 		strName.append(++counter);
 		this.name = strName.toString();

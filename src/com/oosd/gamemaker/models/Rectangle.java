@@ -9,11 +9,11 @@ import java.util.List;
 public class Rectangle extends Sprite{
 	private static final long serialVersionUID = -1245882985717282226L;
 	int initialPositionX, initialPositionY;
-	int paddleWidth, paddleHeight;
 	List<Integer> historyX = new ArrayList<Integer>();
 	int countX = 0, totalCount = 0;
 	Boolean flag = false;
 	private static int counter = 0;
+	
 	public Rectangle(Color color, int initialPositionX, int initialPositionY, int width, int height, int dx, int dy) {
 		this.color = color;
 		this.initialPositionX = initialPositionX;

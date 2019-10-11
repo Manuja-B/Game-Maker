@@ -4,17 +4,16 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.io.Serializable;
 import java.util.ArrayList;
+
 import com.oosd.gamemaker.Playground;
 import com.oosd.gamemaker.behavior.BoundaryBehavior;
 import com.oosd.gamemaker.behavior.MouseClickBehaviour;
 import com.oosd.gamemaker.behavior.Movement;
-import com.oosd.gamemaker.behavior.Reaction;
 
 public abstract class Sprite implements Serializable{
 	private static final long serialVersionUID = 8440651746666951358L;
 	protected Shape shape;
 	protected ArrayList<Movement>  manualMovements = new ArrayList<Movement>();
-	protected ArrayList<Reaction> reactions;
 	private Movement automaticMovement;
 	private boolean isGamePaused = true;
 	private int dx = 1;
@@ -62,6 +61,7 @@ public abstract class Sprite implements Serializable{
 	public void setWillShoot(boolean willShoot) {
 		this.willShoot = willShoot;
 	}
+	
 	public void update(int x, int y ) {
 		if(!isGamePaused() || firstUpdate) {
 			this.locationX = x;
@@ -119,10 +119,6 @@ public abstract class Sprite implements Serializable{
 		this.manualMovements.add(movement);
 	}
 	
-	public void setReaction(Reaction reaction) {
-		this.reactions.add(reaction);
-	}
-
 	public void move(Playground playground) {
 		for(Movement movement : getManualMovements()) {
 			movement.move(this, playground);
@@ -142,6 +138,12 @@ public abstract class Sprite implements Serializable{
 	public void setBoundaryMovement(BoundaryBehavior boundaryBehavior) {
 		this.boundaryBehavior = boundaryBehavior;
 	}
+	
+	public BoundaryBehavior getBoundaryMovement()
+	{
+		return this.boundaryBehavior;
+	}
+	
 	public ArrayList<Movement> getManualMovements() {
 		return manualMovements;
 	}
