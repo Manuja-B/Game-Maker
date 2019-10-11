@@ -78,11 +78,13 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 
 	private static Graphics2D graphobj = null;
 	public void startGame() {
-		startButton = new JButton("Play/ Pause");
+		startButton = new JButton("Play / Pause");
 		levelNumberLabel=new JLabel(""+LevelObject.getLevel());
 		startButton.addActionListener(this);
 		startButton.setVisible(true);
 		startButton.setBounds(200, 10, 200, 20);
+		startButton.setLayout(null);
+		startButton.setLocation(330,620);
 		for(Sprite sprite: maker.getLevelObjects().get(maker.getCurrentLevel()).getSprites().getAllSprites())
 		{
 			sprite.play();
