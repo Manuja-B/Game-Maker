@@ -67,6 +67,7 @@ public class Composite extends Sprite implements Serializable {
 			}
 		}
 	}
+	
 	public void shoot() {
 		bullets = new ArrayList<Sprite>();
 		for( Sprite sprite: sprites) {
