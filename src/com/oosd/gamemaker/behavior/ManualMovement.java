@@ -61,7 +61,7 @@ public class ManualMovement implements Movement, KeyEventDispatcher {
 		int positionX = sprite.getX();
 		
 		int maxRight = playground.getWidth();
-		int maxBottom = playground.getHeight();
+		int maxBottom = playground.getHeight() - 20;
 		
 		
 		int endpositionX = positionX + sprite.getWidth();
