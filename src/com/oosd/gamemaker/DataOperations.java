@@ -22,8 +22,6 @@ public class DataOperations {
 	public void writeObjectToFile(SaveObject serObj) {
         try(FileOutputStream fileOut = new FileOutputStream(path+"/test"); ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
             objectOut.writeObject(serObj);
-            objectOut.close();
-            fileOut.close();
         } catch (Exception ex) {
             logger.debug("Exception while saving to file: " + ex.getMessage());
         }
@@ -32,8 +30,6 @@ public class DataOperations {
 	public SaveObject readObjectFromFile() {
 		try(FileInputStream fi = new FileInputStream(new File(path+"/test")); ObjectInputStream oi = new ObjectInputStream(fi); ) {
 			SaveObject saveObject = (SaveObject)oi.readObject();
-			oi.close();
-			fi.close();
 			return saveObject;
 		} catch (FileNotFoundException e) {
 			logger.debug("File Not found: " + e.getMessage());
