@@ -16,11 +16,4 @@ public class SaveObject implements Serializable {
 	public List<LevelObject> getLevelObjects() {
 		return levelObjects;
 	}
-<<<<<<< HEAD
-	
-	public void setLevelObjects(List<LevelObject> levelObjects) {
-		this.levelObjects = levelObjects;
-	}
-=======
->>>>>>> 7265382676d2a4490d74437e4a42294bc4a498e3
 }
