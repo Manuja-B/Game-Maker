@@ -5,11 +5,15 @@ import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
 import javax.swing.JPanel;
 
+import org.apache.log4j.Logger;
+
 import com.oosd.gamemaker.models.Sprite;
 
 public class ManualMovement implements Movement, KeyEventDispatcher {
 
 	private static final long serialVersionUID = 8062557088943136222L;
+	
+	static final Logger logger = Logger.getLogger(ManualMovement.class);
 	
 	private Boolean isLeft = false;
 	private Boolean isRight = false;
@@ -41,7 +45,7 @@ public class ManualMovement implements Movement, KeyEventDispatcher {
 				this.isRightCode = true;
 				break;
 			default:
-				System.out.println("No code is set");
+				logger.debug("Invalid direction code: " + directionCode);
 		}
 		
 		
@@ -57,7 +61,7 @@ public class ManualMovement implements Movement, KeyEventDispatcher {
 		int positionX = sprite.getX();
 		
 		int maxRight = playground.getWidth();
-		int maxBottom = playground.getHeight()-220;
+		int maxBottom = playground.getHeight();
 		
 		
 		int endpositionX = positionX + sprite.getWidth();
@@ -186,12 +190,12 @@ public class ManualMovement implements Movement, KeyEventDispatcher {
 
 	@Override
 	public boolean isUniDirectionMovementX() {
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean isUniDirectionMovementY() {
-		return false;
+		throw new UnsupportedOperationException();
 	}
 	
 	
