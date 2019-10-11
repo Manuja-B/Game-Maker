@@ -114,7 +114,7 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 			}
 
 			for(Sprite sprite: allItems.getAllSprites()) {
-				if(sprite.getStatus() == "Dead")
+				if(sprite.getStatus().equals("Dead"))
 				{
 					deadSprites.add(sprite);
 				}
