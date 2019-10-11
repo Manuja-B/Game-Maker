@@ -8,9 +8,9 @@ public class SaveObject implements Serializable {
 	private static final long serialVersionUID = -2701683955089965424L;
 	List<LevelObject> levelObjects = new ArrayList<LevelObject>();
 	
-	public SaveObject(List<LevelObject> levelObjects2) {
+	public SaveObject(List<LevelObject> levelObjects) {
 		super();
-		this.levelObjects = levelObjects2;
+		this.levelObjects = levelObjects;
 	}
 	
 	public List<LevelObject> getLevelObjects() {
