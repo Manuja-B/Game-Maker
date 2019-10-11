@@ -3,16 +3,12 @@ package com.oosd.gamemaker.models;
 import static org.junit.Assert.assertEquals;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Shape;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 
 import com.oosd.gamemaker.behavior.Reaction;
 
@@ -73,7 +69,7 @@ public class CompositeTest {
 		sprite.setWillShoot(true);
 		composite.add(sprite);
 		composite.shoot();
-		System.out.println(composite.getAllSprites().size());
+		assertEquals(2, composite.getAllSprites().size());
 		
 	}
 }

@@ -31,7 +31,6 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 	private static final long serialVersionUID = 2376859069846492382L;
 	private Maker maker;
 	private Image image;
-	private String selectedpath;
 	private Composite allItems;
 	private JButton startButton;
 	private List<Reaction> reactions;
@@ -40,7 +39,7 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 	private boolean startGame;
 
 	int objpos;
-
+	
 	public Playground(Maker maker)  {
 		reactedSprites = new ArrayList<>();
 		this.maker = maker;
@@ -58,14 +57,14 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 
 	public void setBackgroundImage()
 	{
-		this.selectedpath = maker.getLevelObjects().get(maker.getCurrentLevel()).getSelectedPath();
+		String selectedpath = maker.getLevelObjects().get(maker.getCurrentLevel()).getSelectedPath();
 		if(selectedpath != null)
 		{
 			File sourceimage = new File(selectedpath);
 			try {
 				image = ImageIO.read(sourceimage);
 			} catch (IOException e) {
-				e.printStackTrace();
+				logger.debug("Path not foound exception");
 			}
 		}
 		else {
@@ -253,27 +252,27 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		
+		//Not implemented
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-
+		//Not implemented
 	}
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-
+		//Not implemented
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-
+		//Not implemented
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-
+		//Not implemented
 	}
 
 	public boolean isStartGame() {

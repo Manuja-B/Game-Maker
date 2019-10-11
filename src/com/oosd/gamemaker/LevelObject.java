@@ -8,10 +8,9 @@ import com.oosd.gamemaker.behavior.Reaction;
 import com.oosd.gamemaker.models.Composite;
 
 public class LevelObject implements Serializable {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 8142107465518012231L;
+	
 	private static int level=0;
 	private String selectedPath;
 	private List<Reaction> reactions = new ArrayList<>();

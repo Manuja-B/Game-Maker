@@ -29,8 +29,8 @@ public class DataOperations {
 		
 	public SaveObject readObjectFromFile() {
 		try(FileInputStream fi = new FileInputStream(new File(path+"/test")); ObjectInputStream oi = new ObjectInputStream(fi); ) {
-			SaveObject saveObject = (SaveObject)oi.readObject();
-			return saveObject;
+			return (SaveObject)oi.readObject();
+			
 		} catch (FileNotFoundException e) {
 			logger.debug("File Not found: " + e.getMessage());
 		}

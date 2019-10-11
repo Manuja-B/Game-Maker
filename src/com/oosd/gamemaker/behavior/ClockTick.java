@@ -9,14 +9,13 @@ public class ClockTick implements Movement {
 	
 	private static final long serialVersionUID = 8622346125852620161L;
 	private double milliSeconds;
-	private int seconds;
-	private int minutes;
+	
 	
 	@Override
 	public void move(Sprite sprite, JPanel playground) {
 		milliSeconds += 0.01;
-		seconds = ((DigitalClock) sprite).getCurrSeconds();
-		minutes = ((DigitalClock) sprite).getCurrMinutes();
+		int seconds = ((DigitalClock) sprite).getCurrSeconds();
+		int minutes = ((DigitalClock) sprite).getCurrMinutes();
 		if (milliSeconds >= 1) {
 			seconds++;
 			milliSeconds = 0;

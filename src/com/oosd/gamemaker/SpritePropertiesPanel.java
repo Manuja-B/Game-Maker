@@ -26,7 +26,11 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 	private static final long serialVersionUID = -1605212137510886388L;
 	Maker maker;
 	Sprite newSprite;
-	int x,y,dx,dy, index;
+	int spritePropertyX;
+	int spritePropertyY;
+	int dx;
+	int dy; 
+	int index;
 	String boundaryReaction;
 	String path;
 	public SpritePropertiesPanel(Maker maker)
@@ -47,16 +51,16 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 		String y = textboxes.get(1).getText().isEmpty()?"0":textboxes.get(1).getText();
 		String height = textboxes.get(2).getText().isEmpty()?"0":textboxes.get(2).getText();
 		String width = textboxes.get(3).getText().isEmpty()?"0":textboxes.get(3).getText();
-		String dx = textboxes.get(4).getText().isEmpty()?"0":textboxes.get(4).getText();
-		String dy = textboxes.get(5).getText().isEmpty()?"0":textboxes.get(5).getText();
+		String spriteDx = textboxes.get(4).getText().isEmpty()?"0":textboxes.get(4).getText();
+		String spriteDy = textboxes.get(5).getText().isEmpty()?"0":textboxes.get(5).getText();
 		int boundaryBehavior = comboBoxes.get(0).getSelectedIndex();
 		int mouseEvent = comboBoxes.get(3).getSelectedIndex();
 		if(spriteIndex == 0) {
-			newSprite = new Ball(Color.BLUE, Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(height), Integer.parseInt(width),Integer.parseInt(dx),Integer.parseInt(dy));
+			newSprite = new Ball(Color.BLUE, Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(height), Integer.parseInt(width),Integer.parseInt(spriteDx),Integer.parseInt(spriteDy));
 		}
 		
 		else if(spriteIndex == 1) {
-			newSprite = new Rectangle(Color.RED, Integer.parseInt(x), Integer.parseInt(y),  Integer.parseInt(width),Integer.parseInt(height),Integer.parseInt(dx),Integer.parseInt(dy) );
+			newSprite = new Rectangle(Color.RED, Integer.parseInt(x), Integer.parseInt(y),  Integer.parseInt(width),Integer.parseInt(height),Integer.parseInt(spriteDx),Integer.parseInt(spriteDy) );
 			
 		}
 		else if(spriteIndex == 3) {
@@ -65,7 +69,7 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 		
 		else if(spriteIndex == 2) {
 			
-			newSprite = new Picture( Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(height), Integer.parseInt(width),Integer.parseInt(dx),Integer.parseInt(dy),path);
+			newSprite = new Picture( Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(height), Integer.parseInt(width),Integer.parseInt(spriteDx),Integer.parseInt(spriteDy),path);
 		}
 		
 		for(Movement manual :manualMovements) {

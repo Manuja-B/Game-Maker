@@ -7,11 +7,15 @@ import java.io.Serializable;
 import javax.imageio.ImageIO;
 import javax.xml.bind.DatatypeConverter;
 
+import org.apache.log4j.Logger;
+
 
 
 public class ImageDecoder implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
+	
+	static final Logger logger = Logger.getLogger(ImageDecoder.class);
 
 	public ImageDecoder()
 	{
@@ -28,7 +32,7 @@ public class ImageDecoder implements Serializable{
 			image = ImageIO.read(bis);
 			bis.close();
 		} catch (Exception e) {
-			
+			logger.debug("Decode image exception");
 		}
 		return image;
 	}

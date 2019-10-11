@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.oosd.gamemaker.Playground;
 import com.oosd.gamemaker.behavior.BoundaryBehavior;
@@ -13,14 +14,16 @@ import com.oosd.gamemaker.behavior.Movement;
 public abstract class Sprite implements Serializable{
 	private static final long serialVersionUID = 8440651746666951358L;
 	protected Shape shape;
-	protected ArrayList<Movement>  manualMovements = new ArrayList<Movement>();
+	protected ArrayList<Movement>  manualMovements = new ArrayList<>();
 	private Movement automaticMovement;
 	private boolean isGamePaused = true;
 	private int dx = 1;
 	private int dy = 1;
-	protected int locationX,locationY;
+	protected int locationX;
+	protected int locationY;
 	protected String name;
-	protected int height, width;
+	protected int height;
+	protected int width;
 	protected BoundaryBehavior boundaryBehavior;
 	private boolean firstUpdate = true;
 	private boolean willShoot = false;
@@ -144,7 +147,7 @@ public abstract class Sprite implements Serializable{
 		return this.boundaryBehavior;
 	}
 	
-	public ArrayList<Movement> getManualMovements() {
+	public List<Movement> getManualMovements() {
 		return manualMovements;
 	}
 	public Movement getAutomaticMovement() {

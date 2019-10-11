@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 import com.oosd.gamemaker.behavior.AutomaticMovement;
 import com.oosd.gamemaker.behavior.Reaction;
 public class Composite extends Sprite implements Serializable {
@@ -16,10 +18,12 @@ public class Composite extends Sprite implements Serializable {
 	Map<String,List<Reaction>> winMap;
 	Map<String,List<Reaction>> looseMap;
 	
+	static final Logger logger = Logger.getLogger(Composite.class);
+	
 	public Composite() {
-		 sprites = new ArrayList<Sprite>();
-		 this.winMap = new HashMap<String, List<Reaction>>();
-		 this.looseMap = new HashMap<String, List<Reaction>>();
+		 sprites = new ArrayList<>();
+		 this.winMap = new HashMap<>();
+		 this.looseMap = new HashMap<>();
 	}
 	
 	public Map<String, List<Reaction>> getWinMap() {
@@ -40,7 +44,7 @@ public class Composite extends Sprite implements Serializable {
 
 	@Override
 	public void draw(Graphics2D g2d) {
-		System.out.println("Composite can't be drawn");
+		logger.debug("Composite doesn't draw anything");
 	}
 	public void add(Sprite sprite) {
 		sprites.add(sprite);
@@ -69,7 +73,7 @@ public class Composite extends Sprite implements Serializable {
 	}
 	
 	public void shoot() {
-		bullets = new ArrayList<Sprite>();
+		bullets = new ArrayList<>();
 		for( Sprite sprite: sprites) {
 			if(sprite.isWillShoot()) {
 				Sprite bullet = new Ball(Color.BLACK,sprite.getX(),sprite.getY()-15,10,10,0,-3);

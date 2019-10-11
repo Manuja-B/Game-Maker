@@ -1,6 +1,7 @@
 package com.oosd.gamemaker.behavior;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -8,7 +9,6 @@ import java.awt.event.KeyEvent;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.experimental.categories.Categories.ExcludeCategory;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.when;
@@ -35,8 +35,7 @@ public class ManualMovementTest {
 		graphics2D = Mockito.mock(Graphics2D.class);
 		
 		sprite = new Ball(Color.gray, 10, 10, 10, 10, 0, 0);
-		sprite.draw(graphics2D);
-		
+		sprite.draw(graphics2D); 		
 		when(playground.getHeight()).thenReturn(100);
 		when(playground.getWidth()).thenReturn(100);
 		
@@ -46,12 +45,13 @@ public class ManualMovementTest {
 	@Test
 	public void testInvalidDirectionCode() {
 		manualMovement = new ManualMovement(KeyEvent.VK_UP, 1000);
-		assertEquals(manualMovement.getIsUpCode(), false);
-		assertEquals(manualMovement.getIsDownCode(), false);
-		assertEquals(manualMovement.getIsLeftCode(), false);
-		assertEquals(manualMovement.getIsRightCode(), false);
+		assertFalse(manualMovement.getIsUpCode());
+		assertFalse(manualMovement.getIsDownCode());
+		assertFalse(manualMovement.getIsLeftCode());
+		assertFalse(manualMovement.getIsRightCode());
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testDispatcherKeyEventUp() {
 		manualMovement = new ManualMovement(KeyEvent.VK_UP, 0);
@@ -63,6 +63,7 @@ public class ManualMovementTest {
 		assertEquals(false, manualMovement.getIsUp());
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testDispatcherKeyEventDown() {
 		manualMovement = new ManualMovement(KeyEvent.VK_DOWN, 1);
@@ -74,6 +75,7 @@ public class ManualMovementTest {
 		assertEquals(false, manualMovement.getIsDown());
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testDispatcherKeyEventLeft() {
 		manualMovement = new ManualMovement(KeyEvent.VK_LEFT, 2);
@@ -85,6 +87,7 @@ public class ManualMovementTest {
 		assertEquals(false, manualMovement.getIsLeft());
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testDispatcherKeyEventRight() {
 		manualMovement = new ManualMovement(KeyEvent.VK_RIGHT, 3);

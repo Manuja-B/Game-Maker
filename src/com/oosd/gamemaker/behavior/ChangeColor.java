@@ -6,6 +6,7 @@ import com.oosd.gamemaker.models.Sprite;
 
 public class ChangeColor implements MouseClickBehaviour{
 	
+	private static final long serialVersionUID = 1L;
 	private Sprite sprite;
 	private Color color;
 	

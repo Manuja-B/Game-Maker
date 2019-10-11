@@ -10,7 +10,8 @@ public class DigitalClock extends Sprite{
 	private int positionX;
 	private int positionY;
 	private static int counter = 0;
-	int currMinutes, currSeconds;
+	int currMinutes;
+	int currSeconds;
 	
 	public DigitalClock(int positionX, int positionY)
 	{
