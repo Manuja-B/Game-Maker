@@ -138,7 +138,7 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 		maker.addLabel("Movement", 10, 190, this); //17 
 		
 		addCombobox(new ComboItem[] { new ComboItem("Up", 0) , new ComboItem("Down", 1) , new ComboItem("Left", 2), new ComboItem("Right", 3)}, 200, 190,this); //2
-		addButtonToPanel("Add Manual Movement", 10, 210,this); //19 //button 5
+		addButtonToPanel("Add Manual Movement", 10, 220,this); //19 //button 5
 		
 		maker.addLabel("On Click", 10, 250, this);
 		addCombobox(new ComboItem[] {new ComboItem("None", 0), new ComboItem("Change Color", 1), new ComboItem("Explode", 2)}, 200, 250,this); //2
@@ -150,7 +150,7 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 		
 		addButtonToPanel("Add Component", 10, 320,this);//24 //button 6
 		if(currentIndex == 2) {
-			addButtonToPanel("Choose Image", 10, 150,this);
+			addButtonToPanel("Choose Image", 10, 20,this);
 		}
 		
 	}
