@@ -19,6 +19,9 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import org.apache.log4j.Logger;
+
 import com.oosd.gamemaker.behavior.Reaction;
 import com.oosd.gamemaker.behavior.ShootBehavior;
 import com.oosd.gamemaker.models.Composite;
@@ -26,18 +29,19 @@ import com.oosd.gamemaker.models.Sprite;
 
 public class Playground extends JPanel implements ActionListener, MouseListener, MouseMotionListener, KeyEventDispatcher {
 
+	static final Logger logger = Logger.getLogger(Playground.class);
 	private static final long serialVersionUID = 2376859069846492382L;
 	private Maker maker;
 	private Image image;
 	private String selectedpath;
 	private Composite allItems;
 	private JButton startButton;
-	private List<Reaction> reactions; 
+	private List<Reaction> reactions;
 	private JLabel levelNumberLabel;
 	private Composite deadSprites;
 	private List<Sprite> reactedSprites;
 	private boolean startGame;
-	
+
 	int objpos;
 
 	public Playground(Maker maker)  {
@@ -65,7 +69,7 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 				image = ImageIO.read(sourceimage);
 			} catch (IOException e) {
 				e.printStackTrace();
-			}	
+			}
 		}
 		else {
 			image = null;
@@ -79,39 +83,52 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 		startButton.addActionListener(this);
 		startButton.setVisible(true);
 		startButton.setBounds(200, 10, 200, 20);
+		for(Sprite sprite: maker.getLevelObjects().get(maker.getCurrentLevel()).getSprites().getAllSprites())
+		{
+			sprite.play();
+		}
 		this.add(startButton);
 		while(isStartGame()){
 
 			this.setBackgroundImage();
 			this.allItems = maker.getLevelObjects().get(maker.getCurrentLevel()).getSprites();
 			this.reactions = maker.getLevelObjects().get(maker.getCurrentLevel()).getReactions();
-			
+
 			for(Sprite sprite: allItems.getAllSprites()) {
 				sprite.move(this);
 			}
-			
-			for(Reaction reaction: reactions) {
-				boolean flag = reaction.react();
-				if(flag)
-				{
-					reactedSprites.add(reaction.getSecondary());
+			try
+			{
+				for(Reaction reaction: reactions) {
+					boolean flag = reaction.react();
+					if(flag)
+					{
+						reactedSprites.add(reaction.getSecondary());
+					}
 				}
 			}
-			
+			catch (Exception e) {
+				logger.debug("Exception occured when checking reactions " + e.getMessage());
+			}
+
 			for(Sprite sprite: allItems.getAllSprites()) {
 				if(sprite.getStatus() == "Dead")
 				{
 					deadSprites.add(sprite);
 				}
 			}
-			
-			
+
+
 			for(Sprite sprite: deadSprites.getAllSprites())
 			{
-				checkWinLoose(sprite);
+				try {
+					checkWinLoose(sprite);
+				}catch (Exception exception) {
+					logger.debug("Exceptione when there is issue with Win/Loose conditions " + exception.getMessage());
+				}
 				allItems.remove(sprite);
 			}
-			
+
 			try {
 				Thread.sleep(10);
 			} catch (InterruptedException e1) {
@@ -121,7 +138,7 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 			repaint();
 		}
 	}
-	
+
 
 	public void checkWinLoose(Sprite sprite)
 	{
@@ -129,62 +146,62 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 		List<Reaction> tempAllWinList = allItems.getWinMap().get("All");
 		List<Reaction> tempAnyLooseList = allItems.getLooseMap().get("Any");
 		List<Reaction> tempAllLooseList = allItems.getLooseMap().get("All");
-		
+
 		int tempAnyWinListSize = allItems.getWinMap().get("Any").size();
 		int tempAllWinListSize = allItems.getWinMap().get("All").size();
 		int tempAnyLooseListSize = allItems.getLooseMap().get("Any").size();
 		int tempAllLooseListSize = allItems.getLooseMap().get("All").size();
-		
-		
+
+
 		List<Reaction> updatedAllWinReactions = checkSprite(tempAllWinList, sprite);
 		List<Reaction> updatedAllLooseReactions = checkSprite(tempAllLooseList, sprite);
-		
+
 		List<Reaction> updatedAnyWinReactions = checkSprite(tempAnyWinList, sprite);
 		List<Reaction> updatedAnyLooseReactions = checkSprite(tempAnyLooseList, sprite);
-		
+
 		if(tempAnyWinListSize != updatedAnyWinReactions.size()) {
 			setStartGame(false);
 		}
 		if(tempAnyLooseListSize != updatedAnyLooseReactions.size()) {
 			setStartGame(false);
 		}
-			
+
 		if(tempAllLooseListSize != updatedAllLooseReactions.size() && updatedAllLooseReactions.size() == 0) {
 			setStartGame(false);
 		}
-		
+
 		if(tempAllWinListSize != updatedAllWinReactions.size() && updatedAllWinReactions.size() == 0) {
 			setStartGame(false);
 		}
-		
+
 		allItems.getWinMap().put("Any", updatedAnyWinReactions);
 		allItems.getLooseMap().put("Any", updatedAnyLooseReactions);
-		
+
 		allItems.getWinMap().put("All", updatedAllWinReactions);
-		
-		allItems.getLooseMap().put("All", updatedAllLooseReactions);	
+
+		allItems.getLooseMap().put("All", updatedAllLooseReactions);
 	}
-	
+
 	public List<Reaction> checkSprite(List<Reaction> reactions, Sprite sprite)
 	{
 		int counter = 0;
-		
-		for(Reaction reaction:reactions) 
+
+		for(Reaction reaction:reactions)
 		{
 			if(reaction.getSecondary() == sprite)
 			{
 				reactions.remove(counter);
 				break;
-			}		
+			}
 			counter++;
 		}
-		
+
 		return reactions;
 	}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		graphobj = (Graphics2D) g; 
+		graphobj = (Graphics2D) g;
 		if(image!=null)
 		{
 			graphobj.drawImage(image,0,0,800,800,this);
@@ -207,7 +224,7 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 		int startX = e.getX();
 		int startY = e.getY();
 
-		for(int i=0; i<allItems.getAllSprites().size(); i++) {			
+		for(int i=0; i<allItems.getAllSprites().size(); i++) {
 			if((startX >= allItems.getAllSprites().get(i).getX()-allItems.getAllSprites().get(i).getWidth())&&(startX <=allItems.getAllSprites().get(i).getX()+allItems.getAllSprites().get(i).getWidth())&&
 					(startY <= allItems.getAllSprites().get(i).getY()+allItems.getAllSprites().get(i).getHeight())&&(startY >= allItems.getAllSprites().get(i).getY()-allItems.getAllSprites().get(i).getHeight()) ) {
 				Sprite sprite = allItems.getAllSprites().get(i);
@@ -225,7 +242,7 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 
 		int startX = e.getX();
 		int startY = e.getY();
-		for(int i=0; i<allItems.getAllSprites().size(); i++) {			
+		for(int i=0; i<allItems.getAllSprites().size(); i++) {
 			if((startX >= allItems.getAllSprites().get(i).getX()-allItems.getAllSprites().get(i).getWidth())&&(startX <= allItems.getAllSprites().get(i).getX()+allItems.getAllSprites().get(i).getWidth())&&(startY <= allItems.getAllSprites().get(i).getY()+allItems.getAllSprites().get(i).getHeight())&&(startY >= allItems.getAllSprites().get(i).getY()-allItems.getAllSprites().get(i).getHeight())) {
 				objpos=i;
 				break;

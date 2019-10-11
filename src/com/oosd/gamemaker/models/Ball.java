@@ -12,7 +12,7 @@ public class Ball extends Sprite {
 	
 	
 	public Ball(Color color, int initialPositionX, int initialPositionY, int ballWidth, int ballHeight,int dx, int dy) {
-		color = color;
+		this.color = color;
 		this.update(initialPositionX, initialPositionY);
 		this.height = ballHeight;
 		this.width = ballWidth;

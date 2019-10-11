@@ -7,9 +7,6 @@ import com.oosd.gamemaker.models.Sprite;
 
 public class ClockTick implements Movement {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8622346125852620161L;
 	private double milliSeconds;
 	private int seconds;
@@ -44,12 +41,12 @@ public class ClockTick implements Movement {
 
 	@Override
 	public boolean isUniDirectionMovementX() {
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean isUniDirectionMovementY() {
-		return false;
+		throw new UnsupportedOperationException();
 	}
 	
 	

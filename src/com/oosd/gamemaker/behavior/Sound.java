@@ -4,12 +4,18 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
+import org.apache.log4j.Logger;
+
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
+
 public class Sound {
-	String audiopath;
-	AudioStream audio;
-	InputStream music;
+	
+	static final Logger logger = Logger.getLogger(Sound.class);
+	private String audiopath;
+	private AudioStream audio;
+	private InputStream music;
 	
 	public Sound(String audiopath)
 	{
@@ -23,7 +29,7 @@ public class Sound {
 				audio = new AudioStream(music);
 				AudioPlayer.player.start(audio);
 			} catch (IOException e) {
-				System.out.println("Error playing sound"+e.getMessage());
+				logger.debug("Exception occured while playing sound: " + e.getMessage());
 			}		
 		
 	}

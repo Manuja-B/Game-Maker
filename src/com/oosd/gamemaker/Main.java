@@ -3,10 +3,17 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import org.apache.log4j.PropertyConfigurator;
+
 public class Main extends JPanel {
 	private static final long serialVersionUID = 5099005057795504559L;
 
 	public static void main(String[] args) {
+		
+		// Configuring log4j
+		String path = System.getProperty("user.dir"); 
+		PropertyConfigurator.configure(path + "/resources/log4j.properties");
+		
 		final int frameWidth = 1200;
 		final int frameHeight = 800;
 		JFrame frame = new JFrame();
