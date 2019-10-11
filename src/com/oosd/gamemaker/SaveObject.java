@@ -15,8 +15,4 @@ public class SaveObject implements Serializable {
 	public ArrayList<LevelObject> getLevelObjects() {
 		return levelObjects;
 	}
-	
-	public void setLevelObjects(ArrayList<LevelObject> levelObjects) {
-		this.levelObjects = levelObjects;
-	}
 }
