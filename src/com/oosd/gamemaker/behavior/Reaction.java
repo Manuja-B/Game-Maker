@@ -14,7 +14,7 @@ public abstract class Reaction implements Serializable{
 		return secondary;
 	}
 	
-	transient Sound sound;
+	Sound sound;
 	
 	public Reaction(Sprite primary, Sprite secondary, Sound sound) {
 		super();

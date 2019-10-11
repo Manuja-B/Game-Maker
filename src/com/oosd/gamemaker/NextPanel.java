@@ -115,7 +115,7 @@ public class NextPanel extends JPanel implements ActionListener{
 		
 		else if(e.getSource()==buttons.get(0))
 		{
-			String path = "Music";
+			String path = System.getProperty("user.dir");
 			JFileChooser jfc = new JFileChooser(new File(path));
 			jfc.setDialogTitle("Choose Background Sound");
 			jfc.setMultiSelectionEnabled(true);

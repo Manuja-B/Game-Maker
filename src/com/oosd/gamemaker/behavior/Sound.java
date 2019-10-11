@@ -4,13 +4,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 
 import org.apache.log4j.Logger;
 
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 
-public class Sound {
+public class Sound implements Serializable {
 	
 	static final Logger logger = Logger.getLogger(Sound.class);
 	private String audiopath;
