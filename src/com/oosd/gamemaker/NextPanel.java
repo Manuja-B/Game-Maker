@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
-import com.oosd.gamemaker.ComboItem;
 import com.oosd.gamemaker.behavior.BounceBack;
 import com.oosd.gamemaker.behavior.ChangeDirection;
 import com.oosd.gamemaker.behavior.Explode;
@@ -25,13 +24,12 @@ public class NextPanel extends JPanel implements ActionListener{
 	 * 
 	 */
 	private static final long serialVersionUID = -6529035796591203451L;
-	ArrayList<JComboBox<ComboItem>> comboBoxes = new ArrayList<JComboBox<ComboItem>>() ;
-	ArrayList<JButton> buttons = new ArrayList<JButton>();
+	private ArrayList<JComboBox<ComboItem>> comboBoxes = new ArrayList<>() ;
+	private ArrayList<JButton> buttons = new ArrayList<>();
 	Maker maker;
-	Sound sound;
+	transient Sound sound;
 	String audiopath;
-	AudioStream audio = null;
-	private Checkbox checkbox;
+	transient AudioStream audio = null;
 	
 	private List<Reaction> anyWinReactions;
 	private List<Reaction> anyLooseReactions;
@@ -42,11 +40,11 @@ public class NextPanel extends JPanel implements ActionListener{
 		int spriteCount = maker.getAllItems().getAllSprites().size();
 		ComboItem[] sprites = new ComboItem[spriteCount];
 		
-		anyLooseReactions = new ArrayList<Reaction>();
-		anyWinReactions = new ArrayList<Reaction>();
+		anyLooseReactions = new ArrayList<>();
+		anyWinReactions = new ArrayList<>();
 		
-		allWinReactions = new ArrayList<Reaction>();
-		allLooseReactions =  new ArrayList<Reaction>();
+		allWinReactions = new ArrayList<>();
+		allLooseReactions =  new ArrayList<>();
 		
 		for(int i = 0; i < spriteCount; i++) {
 			sprites[i] = new ComboItem(maker.getAllItems().getAllSprites().get(i).getName(),i);
@@ -64,7 +62,7 @@ public class NextPanel extends JPanel implements ActionListener{
 	}
 	
 	public void addCombobox(ComboItem items[], int x, int y, JPanel panel) {
-		JComboBox<ComboItem> combo = new JComboBox<ComboItem>(items);
+		JComboBox<ComboItem> combo = new JComboBox<>(items);
 		combo.setBounds(x, y, 100, 20);
 		combo.setMaximumSize(combo.getPreferredSize());
 		comboBoxes.add(combo);

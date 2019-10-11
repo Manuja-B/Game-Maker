@@ -31,13 +31,14 @@ public class Maker extends PanelMaker implements ActionListener {
 	String path ;
 	private  String selectedpath;
 	JPanel listPanel = new JPanel();
-	Image image;
-	private ArrayList<LevelObject> levelObjects=new ArrayList<LevelObject>();
+	transient Image image;
+	private List<LevelObject> levelObjects=new ArrayList<>();
 	int currentLevel=0;
 	int currentSpriteIndex=-1;
+	JFrame frame1 = new JFrame();
 	
-	private DataOperations dataOperations;
-	private SaveObject saveObject;
+	transient private DataOperations dataOperations;
+	
 	
 	public Maker() {
 		allItems = new Composite();
@@ -50,16 +51,16 @@ public class Maker extends PanelMaker implements ActionListener {
 	public void setListPanel(JPanel listPanel) {
 		this.listPanel = listPanel;
 	}
-	public ArrayList<LevelObject> getLevelObjects() {
+	public List<LevelObject> getLevelObjects() {
 		return levelObjects;
 	}
-	public void setLevelObjects(ArrayList<LevelObject> levelObjects) {
+	public void setLevelObjects(List<LevelObject> levelObjects) {
 		this.levelObjects = levelObjects;
 	}
 	public void addReaction(Reaction reaction) {
 		this.reactions.add(reaction);
 	}
-	public ArrayList<Reaction> getReactions() {
+	public List<Reaction> getReactions() {
 		return reactions;
 	}
 
@@ -83,7 +84,8 @@ public class Maker extends PanelMaker implements ActionListener {
 		addTextBox(60,410, this);
 		addButtonToPanel("Go To Level", 120,400, this);
 	}
-		
+	
+	@Override
 	public void addTextBox(int x, int y, JPanel panel) {
 		JTextField  textbox = new JTextField();
 		textbox.setBounds(x,y,50,20);
@@ -111,9 +113,9 @@ public class Maker extends PanelMaker implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		SaveObject saveObject;
 		if(arg0.getSource()==buttons.get(0) || arg0.getSource()==buttons.get(1) ||arg0.getSource()==buttons.get(2) ||arg0.getSource()==buttons.get(3))
 		{	
-			JFrame frame1 = new JFrame();
 			if(arg0.getSource()==buttons.get(0))
 			{
 				frame1.setTitle("New Circle");
@@ -153,9 +155,7 @@ public class Maker extends PanelMaker implements ActionListener {
 			nextPanel.setBackground(Color.decode("#ADD8E6"));
 			nextFrame.setVisible(true);
 		}
-		else if(arg0.getSource() == getButtons().get(2)) {
-			
-		}
+	
 		else if(arg0.getSource() == getButtons().get(5)) {
 			
 			path = System.getProperty("user.dir");
@@ -194,6 +194,9 @@ public class Maker extends PanelMaker implements ActionListener {
 		}
 	}
 	
+	public void closeFrame() {
+		frame1.dispose();
+	}
 	public int getCurrentLevel() {
 		return currentLevel;
 	}
@@ -211,7 +214,7 @@ public class Maker extends PanelMaker implements ActionListener {
 		return manualMovements;
 	}
 
-	public ArrayList<JButton> getButtons() {
+	public List<JButton> getButtons() {
 		return buttons;
 	}
 	

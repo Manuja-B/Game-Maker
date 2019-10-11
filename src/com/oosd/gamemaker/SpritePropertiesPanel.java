@@ -150,7 +150,7 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 		
 		addButtonToPanel("Add Component", 10, 320,this);//24 //button 6
 		if(currentIndex == 2) {
-			addButtonToPanel("Choose Image", 10, 150,this);
+			addButtonToPanel("Choose Image", 10, 20,this);
 		}
 		
 	}
@@ -160,6 +160,7 @@ public class SpritePropertiesPanel extends PanelMaker implements ActionListener{
 		if (arg0.getSource() == buttons.get(1)) {
 			
 			addSprite(maker.getCurrentSpriteIndex());
+			maker.closeFrame();
 		}
 		else if(arg0.getSource() == buttons.get(0)) {
 			Object keyItem = comboBoxes.get(1).getSelectedItem();
