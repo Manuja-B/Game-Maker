@@ -119,8 +119,12 @@ public class RectangleTest {
 	public void testUpdate()
 	{
 		rectangle.play();
+		assertEquals(false, rectangle.isGamePaused());
 		rectangle.update(100, 100);
+		assertEquals(100, rectangle.getLocationX());
+		assertEquals(100, rectangle.getLocationY());
 		rectangle.pause();
+		assertEquals(true, rectangle.isGamePaused());
 	}
 	
 	@Test
