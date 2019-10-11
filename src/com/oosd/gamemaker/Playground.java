@@ -4,7 +4,6 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -37,7 +36,6 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 	private Composite allItems;
 	private JButton startButton;
 	private List<Reaction> reactions;
-	private JLabel levelNumberLabel;
 	private Composite deadSprites;
 	private List<Sprite> reactedSprites;
 	private boolean startGame;
@@ -45,11 +43,11 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 	int objpos;
 
 	public Playground(Maker maker)  {
-		reactedSprites = new ArrayList<Sprite>();
+		reactedSprites = new ArrayList<>();
 		this.maker = maker;
 		this.startGame = true;
 		this.allItems = new Composite();
-		this.reactions=new ArrayList<Reaction>();
+		this.reactions=new ArrayList<>();
 		deadSprites = new Composite();
 		this.setLayout(null);
 		this.setFocusable(true);
@@ -76,10 +74,9 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 		}
 	}
 
-	private static Graphics2D graphobj = null;
 	public void startGame() {
 		startButton = new JButton("Play / Pause");
-		levelNumberLabel=new JLabel(""+LevelObject.getLevel());
+		new JLabel(""+LevelObject.getLevel());
 		startButton.addActionListener(this);
 		startButton.setVisible(true);
 		startButton.setBounds(200, 10, 200, 20);
@@ -135,7 +132,7 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 				Thread.sleep(10);
 			} catch (InterruptedException e1) {
 				Thread.currentThread().interrupt();
-				System.out.println("Interrupted exception");
+				logger.error("Interrupted exception");
 			}
 			repaint();
 		}
@@ -168,11 +165,11 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 			setStartGame(false);
 		}
 
-		if(tempAllLooseListSize != updatedAllLooseReactions.size() && updatedAllLooseReactions.size() == 0) {
+		if(tempAllLooseListSize != updatedAllLooseReactions.size() && updatedAllLooseReactions.isEmpty()) {
 			setStartGame(false);
 		}
 
-		if(tempAllWinListSize != updatedAllWinReactions.size() && updatedAllWinReactions.size() == 0) {
+		if(tempAllWinListSize != updatedAllWinReactions.size() && updatedAllWinReactions.isEmpty()) {
 			setStartGame(false);
 		}
 
@@ -201,7 +198,9 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 		return reactions;
 	}
 
+	@Override
 	public void paintComponent(Graphics g) {
+		Graphics2D graphobj = null;
 		super.paintComponent(g);
 		graphobj = (Graphics2D) g;
 		if(image!=null)
@@ -219,7 +218,7 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 			allItems.pause();
 		}
 		else {
-			System.out.println("yo");
+			logger.info("yo");
 		}
 	}
 	public void mouseClicked(MouseEvent e) {
@@ -250,13 +249,13 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 				break;
 			}
 		}
-		((Sprite) allItems.getAllSprites().get(objpos)).setX(startX);
-		((Sprite) allItems.getAllSprites().get(objpos)).setY(startY);
+		(allItems.getAllSprites().get(objpos)).setX(startX);
+		(allItems.getAllSprites().get(objpos)).setY(startY);
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-
+		
 	}
 
 	@Override

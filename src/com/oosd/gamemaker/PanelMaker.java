@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import org.apache.log4j.Logger;
+
 import com.oosd.gamemaker.behavior.Movement;
 import com.oosd.gamemaker.behavior.Reaction;
 
@@ -54,7 +56,6 @@ public class PanelMaker extends JPanel implements ActionListener {
 		buttons.add(button);
 	}
 
-	
 	public void addCombobox(ComboItem []items, int x, int y, JPanel panel) {
 		JComboBox<ComboItem> combo = new JComboBox<>(items);
 		combo.setBounds(x, y, 100, 20);
@@ -67,5 +68,11 @@ public class PanelMaker extends JPanel implements ActionListener {
 		checkbox.setBounds(x,y,100,20);
 		checkBoxes.add(checkbox);
 		panel.add(checkbox);
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 	}
 }
