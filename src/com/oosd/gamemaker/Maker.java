@@ -219,7 +219,7 @@ public class Maker extends PanelMaker implements ActionListener {
 		return manualMovements;
 	}
 
-	public ArrayList<JButton> getButtons() {
+	public List<JButton> getButtons() {
 		return buttons;
 	}
 	
