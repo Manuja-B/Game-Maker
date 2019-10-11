@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import com.oosd.gamemaker.models.Sprite;
 
-public class ChangeColor implements MouseClickBehaviour {
+public class ChangeColor implements MouseClickBehaviour{
 	
 	private Sprite sprite;
 	private Color color;

@@ -1,5 +1,7 @@
 package com.oosd.gamemaker.behavior;
 
-public interface MouseClickBehaviour {
+import java.io.Serializable;
+
+public interface MouseClickBehaviour extends Serializable{
 	public void respondToClick();
 }

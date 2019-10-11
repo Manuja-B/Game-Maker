@@ -6,6 +6,8 @@ import java.awt.Image;
 import com.oosd.gamemaker.behavior.ImageDecoder;
 import com.oosd.gamemaker.behavior.ImageEncoder;
 
+import javafx.geometry.Rectangle2D;
+
 public class Picture extends Sprite{
 	private static final long serialVersionUID = 6449562524584478972L;
 	private String imageString;
@@ -27,6 +29,7 @@ public class Picture extends Sprite{
 
 	@Override
 	public void draw(Graphics2D g2d) {
+		super.shape = new java.awt.geom.Rectangle2D.Double(locationX, locationY, width, height);
 		ImageDecoder imageDecodeObj = new ImageDecoder();
 		Image image = imageDecodeObj.decodeToImage(this.imageString);
         g2d.drawImage(image,locationX,locationY,width,height,null);
