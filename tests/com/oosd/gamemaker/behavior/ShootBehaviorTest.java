@@ -22,10 +22,10 @@ public class ShootBehaviorTest {
 	private Sprite secondary;
 	
 	@Mock
-	Graphics2D graphics2d;
+	private Graphics2D graphics2d;
 	
 	@Mock
-	Sound sound;
+	private Sound sound;
 	
 	@Before
 	public void setup() {

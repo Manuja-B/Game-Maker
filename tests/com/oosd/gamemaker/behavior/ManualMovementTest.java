@@ -24,10 +24,10 @@ public class ManualMovementTest {
 	private Sprite sprite;
 	
 	@Mock
-	Playground playground;
+	private Playground playground;
 	
 	@Mock
-	Graphics2D graphics2D;
+	private Graphics2D graphics2D;
 	
 	@Before
 	public void setup() {
