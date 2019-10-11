@@ -41,12 +41,12 @@ public class ClockTick implements Movement {
 
 	@Override
 	public boolean isUniDirectionMovementX() {
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean isUniDirectionMovementY() {
-		return false;
+		throw new UnsupportedOperationException();
 	}
 	
 	
