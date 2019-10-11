@@ -17,9 +17,6 @@ import com.oosd.gamemaker.behavior.Movement;
 import com.oosd.gamemaker.behavior.Reaction;
 
 public class PanelMaker extends JPanel implements ActionListener {
-	/**
-	 * 
-	 */
 	static final Logger logger = Logger.getLogger(PanelMaker.class);
 	private static final long serialVersionUID = 3231287640255472209L;
 	protected ArrayList<String> keys = new ArrayList<>() ;
@@ -74,7 +71,6 @@ public class PanelMaker extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		logger.debug("Action Performed");
 	}
 }

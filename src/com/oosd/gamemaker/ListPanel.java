@@ -11,10 +11,9 @@ import com.oosd.gamemaker.models.Composite;
 import com.oosd.gamemaker.models.Sprite;
 
 public class ListPanel extends JPanel implements ActionListener {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 7675156536260347672L;
+
 	Composite allSprites;
 	JButton buttonDelete;
 	JList<String> listSprite;

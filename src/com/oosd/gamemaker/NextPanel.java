@@ -1,6 +1,5 @@
 package com.oosd.gamemaker;
 
-import java.awt.Checkbox;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -19,16 +18,16 @@ import com.oosd.gamemaker.behavior.Sound;
 
 import sun.audio.AudioStream;
 
+@SuppressWarnings("restriction")
 public class NextPanel extends JPanel implements ActionListener{
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -6529035796591203451L;
 	ArrayList<JComboBox<ComboItem>> comboBoxes = new ArrayList<>() ;
 	private ArrayList<JButton> buttons = new ArrayList<>();
 	Maker maker;
 	Sound sound;
 	String audiopath;
+	
 	AudioStream audio = null;
 	
 	private List<Reaction> anyWinReactions;

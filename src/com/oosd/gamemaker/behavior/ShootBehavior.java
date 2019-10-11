@@ -3,14 +3,13 @@ package com.oosd.gamemaker.behavior;
 import com.oosd.gamemaker.models.Sprite;
 
 public class ShootBehavior extends Reaction {
+	
+	private static final long serialVersionUID = -1317140047103260576L;
+	
 	public ShootBehavior(Sprite primary, Sprite secondary, Sound sound) {
 		super(primary, secondary, sound);
 		
 	}
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -1317140047103260576L;
 	
 	@Override
 	public boolean react() {

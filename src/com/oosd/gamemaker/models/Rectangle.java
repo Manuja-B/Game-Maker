@@ -8,9 +8,11 @@ import java.util.List;
 
 public class Rectangle extends Sprite{
 	private static final long serialVersionUID = -1245882985717282226L;
-	int initialPositionX, initialPositionY;
-	List<Integer> historyX = new ArrayList<Integer>();
-	int countX = 0, totalCount = 0;
+	int initialPositionX;
+	int initialPositionY;
+	List<Integer> historyX = new ArrayList<>();
+	int countX = 0;
+	int totalCount = 0;
 	Boolean flag = false;
 	private static int counter = 0;
 	

@@ -11,7 +11,7 @@ public class Main extends JPanel {
 	public static void main(String[] args) {
 		
 		// Configuring log4j
-		String path = System.getProperty("user.dir"); 
+		String path = System.getProperty("user.dir");
 		PropertyConfigurator.configure(path + "/resources/log4j.properties");
 		
 		final int frameWidth = 1200;

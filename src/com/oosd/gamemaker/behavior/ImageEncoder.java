@@ -9,11 +9,15 @@ import java.util.Base64;
 
 import javax.imageio.ImageIO;
 
+import org.apache.log4j.Logger;
+
 public class ImageEncoder implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
 	private transient BufferedImage bimage;
+	
+	static final Logger logger = Logger.getLogger(ImageEncoder.class);
 	
 	public ImageEncoder(String fileName)
 	{
@@ -23,7 +27,7 @@ public class ImageEncoder implements Serializable{
 		} 
 		catch (IOException e) 
 		{
-			e.printStackTrace();
+			logger.debug("Encode image exception");
 		}	
 	}
 	
@@ -46,6 +50,7 @@ public class ImageEncoder implements Serializable{
          
             bos.close();
         } catch (IOException e) {
+        	logger.debug("Encode image string exception");
         }
         return imageString;
     }

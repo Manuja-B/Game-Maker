@@ -3,9 +3,6 @@ import com.oosd.gamemaker.Playground;
 import com.oosd.gamemaker.models.Sprite;
 public class BoundaryRotate implements BoundaryBehavior{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 898256384686592638L;
 
 	@Override
@@ -26,8 +23,6 @@ public class BoundaryRotate implements BoundaryBehavior{
 		}
 		if(yMax>playground.getHeight())
 			sprite.update(sprite.getX(),sprite.getHeight());
-		System.out.println(sprite.getHeight());
-		System.out.println(sprite.getWidth());
 	}
 
 }
