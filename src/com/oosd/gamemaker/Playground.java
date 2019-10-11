@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.apache.log4j.Logger;
@@ -76,7 +75,6 @@ public class Playground extends JPanel implements ActionListener, MouseListener,
 
 	public void startGame() {
 		startButton = new JButton("Play / Pause");
-		new JLabel(""+LevelObject.getLevel());
 		startButton.addActionListener(this);
 		startButton.setVisible(true);
 		startButton.setBounds(200, 10, 200, 20);
