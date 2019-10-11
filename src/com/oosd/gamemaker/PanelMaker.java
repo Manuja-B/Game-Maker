@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import org.apache.log4j.Logger;
+
 import com.oosd.gamemaker.behavior.Movement;
 import com.oosd.gamemaker.behavior.Reaction;
 
@@ -18,15 +20,16 @@ public class PanelMaker extends JPanel implements ActionListener {
 	/**
 	 * 
 	 */
+	static final Logger logger = Logger.getLogger(PanelMaker.class);
 	private static final long serialVersionUID = 3231287640255472209L;
-	protected ArrayList<String> keys = new ArrayList<String>() ;
-	protected ArrayList<Movement> manualMovements = new ArrayList<Movement>() ;
-	protected ArrayList<JTextField> textboxes = new ArrayList<JTextField>() ;
-	protected ArrayList<JComboBox<ComboItem>> comboBoxes = new ArrayList<JComboBox<ComboItem>>() ;
-	protected ArrayList<JButton> buttons = new ArrayList<JButton>();
-	protected ArrayList<Reaction> reactions = new ArrayList<Reaction>();
-	protected ArrayList<JLabel> labels=new ArrayList<JLabel>();
-	protected ArrayList<JCheckBox> checkBoxes = new ArrayList<JCheckBox>();
+	protected ArrayList<String> keys = new ArrayList<>() ;
+	protected ArrayList<Movement> manualMovements = new ArrayList<>() ;
+	protected ArrayList<JTextField> textboxes = new ArrayList<>() ;
+	protected ArrayList<JComboBox<ComboItem>> comboBoxes = new ArrayList<>() ;
+	protected ArrayList<JButton> buttons = new ArrayList<>();
+	protected ArrayList<Reaction> reactions = new ArrayList<>();
+	protected ArrayList<JLabel> labels=new ArrayList<>();
+	protected ArrayList<JCheckBox> checkBoxes = new ArrayList<>();
 	
 	public void addLabel(String message, int x, int y, JPanel panel) {
 		JLabel label = new JLabel(message);
@@ -54,9 +57,8 @@ public class PanelMaker extends JPanel implements ActionListener {
 		buttons.add(button);
 	}
 
-	
-	public void addCombobox(ComboItem items[], int x, int y, JPanel panel) {
-		JComboBox<ComboItem> combo = new JComboBox<ComboItem>(items);
+	public void addCombobox(ComboItem []items, int x, int y, JPanel panel) {
+		JComboBox<ComboItem> combo = new JComboBox<>(items);
 		combo.setBounds(x, y, 100, 20);
 		combo.setMaximumSize(combo.getPreferredSize());
 		comboBoxes.add(combo);
@@ -73,6 +75,6 @@ public class PanelMaker extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		logger.debug("Action Performed");
 	}
 }
